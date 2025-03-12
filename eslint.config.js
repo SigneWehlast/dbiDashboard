@@ -21,6 +21,23 @@ export default [
     },
   },
 
+  {
+    rules: {
+      'comma-dangle': ["error", "never"],
+      'eqeqeq': ["error", "always"],
+      'indent': ["error", 2],
+      'no-eval': ["error"],
+      'no-trailing-spaces': ["error"],
+      'no-unused-vars': ["error"],
+      'no-var': ["error"],
+      'prefer-const': ["error"],
+      'quotes': ["error", "double"],
+      'semi': ["error", "always"],
+    },
+  },
+
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
 ]
+
+

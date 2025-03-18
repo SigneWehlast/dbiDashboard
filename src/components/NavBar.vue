@@ -25,7 +25,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="ForsideHoverIcon"
         imgAlt="forside icon"
       >
-        <p>Forside</p>
+        <p class="body-text">Forside</p>
       </NavBarButton>
 
       <NavBarButton
@@ -33,7 +33,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="SkemaerHoverIcon"
         imgAlt="skemaer icon"
       >
-        <p>Skemaer</p>
+        <p class="body-text">Skemaer</p>
       </NavBarButton>
 
       <NavBarButton
@@ -41,7 +41,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="ObjekterHoverIcon"
         imgAlt="objekter icon"
       >
-        <p>Objekter</p>
+        <p class="body-text">Objekter</p>
       </NavBarButton>
 
       <NavBarButton
@@ -49,7 +49,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="RapporterHoverIcon"
         imgAlt="rapporter icon"
       >
-        <p>Rapporter</p>
+        <p class="body-text">Rapporter</p>
       </NavBarButton>
 
       <NavBarButton
@@ -57,7 +57,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="DokumenterHoverIcon"
         imgAlt="dokumenter icon"
       >
-        <p>Dokumenter</p>
+        <p class="body-text">Dokumenter</p>
       </NavBarButton>
 
       <NavBarButton
@@ -65,7 +65,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="PlanlægningHoverIcon"
         imgAlt="planlægning icon"
       >
-        <p>Planlægning</p>
+        <p class="body-text">Planlægning</p>
       </NavBarButton>
 
       <NavBarButton
@@ -73,7 +73,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="BrugereHoverIcon"
         imgAlt="brugere icon"
       >
-        <p>Brugere</p>
+        <p class="body-text">Brugere</p>
       </NavBarButton>
     </nav>
   </div>
@@ -89,6 +89,7 @@ nav {
 
 .logo {
   width: 200px;
+  margin-bottom: 40px;
 }
 
 .nav-bar {
@@ -99,6 +100,10 @@ nav {
 .button-icon {
   width: 24px;
   height: 24px;
+}
+
+:deep(button:hover) .body-text {
+  color: #FFFFFF;
 }
 
 </style>

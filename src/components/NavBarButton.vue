@@ -45,9 +45,6 @@ button {
   display: flex;
   align-items: center;
   gap: 24px;
-  font-size: 25px;
-  font-weight: 100;
-  color: #707070;
   cursor: pointer;
 }
 

@@ -1,18 +1,28 @@
 <script setup>
+
+import NavBarButton from "./NavBarButton.vue";
 </script>
 
 <template>
   <div class="nav-bar">
-    <NavBarButton />
+    <img src="../assets/icons/DBI_logo.svg" alt="logo" class="logo">
+
+    <NavBarButton>
+
+      <p>Forside</p>
+    </NavBarButton>
   </div>
 </template>
 
 <style scoped lang="scss">
 
+.logo {
+  width: 200px;
+}
+
 .nav-bar {
-  height: 100px;
-  width: 100%;
-  background-color: aqua;
+  width: 300px;
+  height: 100%;
 }
 
 </style>

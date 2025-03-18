@@ -14,5 +14,7 @@ import NavBar from "../components/NavBar.vue";
 
 .home-view {
   display: flex;
+  gap: 80px;
 }
+
 </style>

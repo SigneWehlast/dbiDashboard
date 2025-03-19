@@ -1,20 +1,26 @@
 <script setup>
+import OverviewWidget from "./OverviewWidget.vue";
+
 
 </script>
 
 <template>
-  <div class="profile-bar">
-    <div class="search-wrapper">
-      <img src="../assets/icons/magnifying-glass-solid.svg" alt="search icon" class="search-icon">
-      <input type="text" placeholder="Tryk for at søge" class="search-input">
-    </div>
-    <div class="profile-wrapper">
-      <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-icon">
-      <div class="profile-name-wrapper">
-        <p class="heading-medium">Allan Rasmussen</p>
-        <p class="profile-company">Salling Group</p>
+<div class="right-view">
+    <div class="profile-bar">
+      <div class="search-wrapper">
+        <img src="../assets/icons/magnifying-glass-solid.svg" alt="search icon" class="search-icon">
+        <input type="text" placeholder="Tryk for at søge" class="search-input">
+      </div>
+      <div class="profile-wrapper">
+        <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-icon">
+        <div class="profile-name-wrapper">
+          <p class="heading-medium">Allan Rasmussen</p>
+          <p class="profile-company">Salling Group</p>
+        </div>
       </div>
     </div>
+  
+  <OverviewWidget />
   </div>
 </template>
 
@@ -72,4 +78,8 @@
   color: #5F6B6C;
 }
 
+.right-view{
+  display: flex;
+  flex-direction: column;
+}
 </style>

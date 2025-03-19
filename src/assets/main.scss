@@ -55,3 +55,33 @@ body {
   margin: 40px 80px;
   background-color: #F4F5F5;
 }
+
+.h2-global {
+  font-size: 50px;
+  color: #2b7393;
+}
+
+//OverviewWidget.vue//
+.WidgetMenu {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 25px;
+  display: flex;
+  height: 153px;
+  justify-content: space-between;
+  width: 1372px;
+}
+
+.WidgetMenuBox {
+  align-items: center;
+  display: flex;
+  gap: 2.5em;
+  height: 77px;
+  justify-content: center;
+  text-align: center;
+  width: 343px;
+
+  &:not(:last-child) {
+      border-right: 1px solid #DADCDC;
+  }
+}

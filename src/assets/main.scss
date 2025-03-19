@@ -67,9 +67,9 @@ body {
   background-color: #fff;
   border-radius: 25px;
   display: flex;
-  height: 153px;
+  height: 153px; //25% minus er 114.75px
   justify-content: space-between;
-  width: 1372px;
+  width: 1372px; //25% minus er 1029px
 }
 
 .WidgetMenuBox {

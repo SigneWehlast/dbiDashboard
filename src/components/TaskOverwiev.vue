@@ -10,30 +10,46 @@ const tasks = ref([
 <template>
     <div class="Task-Overwiev">
         <div class="Task-Overwiev__Infomation">
-            <div class="Task-Overwiev__Menubar">
+            <!-- Navigation øverst -->
+            <div class="Task-Infomation__nav">
                 <p class="body-text">Opgaveoverblik</p>
                 <p class="body-text">...</p>
             </div>
 
-            <div class="Task-Overwiev__Infomation-Head">
-                <p class="body-text">Titel</p>
-                <p class="body-text">Deadline</p>
-                <p class="body-text">Status</p>
-            </div>
+            <!-- Indhold opdelt i tre kolonner -->
+            <div class="Task-Overwiev__Infomation-Content">
+                <!-- Navne Kolonne -->
+                <div class="Task-Infomation__Name">
+                    <p class="body-text heading-bar">Titel</p>
+                    <div v-for="task in tasks" :key="task.title">
+                        <p>{{ task.title }}</p>
+                    </div>
+                </div>
 
-            <div v-for="task in tasks" :key="task.title" class="Task-Overwiev__Infomation-Field">
-                <p>{{ task.title }}</p>
-                <p>{{ task.deadline }}</p>
-                <p>
-                    <span class="status-indicator"
-                        :class="{ 'status-done': task.status === 'Udført', 'status-overdue': task.status === 'Overskredet' }">
-                    </span>
-                    {{ task.status }}
-                </p>
+                <!-- Deadline Kolonne -->
+                <div class="Task-Overwiev__Infomation-Deadline">
+                    <p class="body-text heading-bar">Deadline</p>
+                    <div v-for="task in tasks" :key="task.deadline">
+                        <p>{{ task.deadline }}</p>
+                    </div>
+                </div>
+
+                <!-- Status Kolonne -->
+                <div class="Task-Overwiev__Infomation-Status">
+                    <p class="body-text heading-bar">Status</p>
+                    <div v-for="task in tasks" :key="task.title" class="status-container">
+                        <span class="status-indicator"
+                            :class="{ 'status-done': task.status === 'Udført', 'status-overdue': task.status === 'Overskredet' }">
+                        </span>
+                        <p>{{ task.status }}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
+
+
 
 <style scoped lang="scss">
 @import '../assets/main.scss';

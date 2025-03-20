@@ -91,10 +91,10 @@ body {
   background-color: #ffffff;
   border-radius: 25px;
   display: flex;
-  height: 523px; //25% minus er 114.75px
+  height: 523px;
   justify-content: center;
   align-items: center;
-  width: 1372px; //25% minus er 1029px
+  width: 100%;
 }
 
 .Task-Overwiev__Infomation {
@@ -102,39 +102,62 @@ body {
   display: flex;
   flex-direction: column;
   height: 314px;
-  width: 1239px; //25% minus er 1029px
+  width: 90%;
 }
-
-.Task-Overwiev__Menubar {
+.Task-Infomation__nav{
   display: flex;
   justify-content: space-between;
+  padding-bottom: 10px;
 }
 
-.Task-Overwiev__Infomation-Head{
+.Task-Overwiev__Infomation-Content {
   display: flex;
-  justify-content: space-between;
-  border-top: 1px solid #DADCDC;
-  border-bottom: 1px solid #DADCDC;    
-  padding: 10px 0;
+  flex-direction: row;
+  flex: 1;
 }
 
-.Task-Overwiev__Infomation-Field {
+.Task-Infomation__Name {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  width: 55%;
+}
+
+.Task-Overwiev__Infomation-Deadline{
+  display: flex;
+  flex-direction: column;  
+  width: 30%;
+}
+
+.Task-Overwiev__Infomation-Status {
+  display: flex;
+  flex-direction: column; 
+  width: 15%;
+}
+
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
 }
 
 .status-indicator {
-  display: inline-block;
-  width: 10px; // Størrelsen på bolden
+  width: 10px; 
   height: 10px;
-  border-radius: 50%; // Gør den rund
-  margin-right: 8px; // Lidt afstand til teksten
+  border-radius: 50%; 
+  flex-shrink: 0; /* Sikrer, at ikonet ikke ændrer størrelse */
 }
 
 .status-done {
-  background-color: green; // Grøn cirkel for "Udført"
+  background-color: #5AEA62; // Grøn cirkel for "Udført"
 }
 
 .status-overdue {
-  background-color: red; // Rød cirkel for "Overskredet"
+  background-color: #FF3838; // Rød cirkel for "Overskredet"
+}
+
+.heading-bar{
+  border-top: 1px solid #DADCDC;
+  border-bottom: 1px solid #DADCDC;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }

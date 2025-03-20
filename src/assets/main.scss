@@ -85,3 +85,56 @@ body {
       border-right: 1px solid #DADCDC;
   }
 }
+
+//TaskOverwiev.vue//
+.Task-Overwiev {
+  background-color: #ffffff;
+  border-radius: 25px;
+  display: flex;
+  height: 523px; //25% minus er 114.75px
+  justify-content: center;
+  align-items: center;
+  width: 1372px; //25% minus er 1029px
+}
+
+.Task-Overwiev__Infomation {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 314px;
+  width: 1239px; //25% minus er 1029px
+}
+
+.Task-Overwiev__Menubar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Task-Overwiev__Infomation-Head{
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #DADCDC;
+  border-bottom: 1px solid #DADCDC;    
+  padding: 10px 0;
+}
+
+.Task-Overwiev__Infomation-Field {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 10px; // Størrelsen på bolden
+  height: 10px;
+  border-radius: 50%; // Gør den rund
+  margin-right: 8px; // Lidt afstand til teksten
+}
+
+.status-done {
+  background-color: green; // Grøn cirkel for "Udført"
+}
+
+.status-overdue {
+  background-color: red; // Rød cirkel for "Overskredet"
+}

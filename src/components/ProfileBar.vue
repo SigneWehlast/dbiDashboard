@@ -1,6 +1,6 @@
 <script setup>
 import OverviewWidget from "./OverviewWidget.vue";
-
+import TaskOverwiev from "./TaskOverwiev.vue";
 
 </script>
 
@@ -21,6 +21,8 @@ import OverviewWidget from "./OverviewWidget.vue";
     </div>
   
   <OverviewWidget />
+  <br>
+  <TaskOverwiev />
   </div>
 </template>
 

@@ -18,7 +18,6 @@ const tasks = ref([
 
             <!-- Indhold opdelt i tre kolonner -->
             <div class="Task-Overwiev__Infomation-Content">
-                <!-- Navne Kolonne -->
                 <div class="Task-Infomation__Name">
                     <p class="body-text heading-bar">Titel</p>
                     <div v-for="task in tasks" :key="task.title">
@@ -26,7 +25,6 @@ const tasks = ref([
                     </div>
                 </div>
 
-                <!-- Deadline Kolonne -->
                 <div class="Task-Overwiev__Infomation-Deadline">
                     <p class="body-text heading-bar">Deadline</p>
                     <div v-for="task in tasks" :key="task.deadline">
@@ -34,7 +32,6 @@ const tasks = ref([
                     </div>
                 </div>
 
-                <!-- Status Kolonne -->
                 <div class="Task-Overwiev__Infomation-Status">
                     <p class="body-text heading-bar">Status</p>
                     <div v-for="task in tasks" :key="task.title" class="status-container">

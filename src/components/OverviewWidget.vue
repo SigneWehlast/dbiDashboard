@@ -30,8 +30,6 @@
 </template>
 
 <style scoped lang="scss">
-@import '../assets/main.scss';
-
 .WidgetMenu {
   align-items: center;
   background-color: #fff;

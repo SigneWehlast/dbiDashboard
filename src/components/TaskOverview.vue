@@ -49,8 +49,6 @@ const tasks = ref([
 
 
 <style scoped lang="scss">
-@import '../assets/main.scss';
-
 .Task-Overwiev {
   background-color: #ffffff;
   border-radius: 25px;

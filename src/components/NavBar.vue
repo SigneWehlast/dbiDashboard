@@ -80,7 +80,6 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
 </template>
 
 <style scoped lang="scss">
-
 nav {
   display: flex;
   flex-direction: column;

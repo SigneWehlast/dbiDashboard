@@ -7,7 +7,7 @@
     <div class="profile-bar">
       <div class="search-wrapper">
         <img src="../assets/icons/magnifying-glass-solid.svg" alt="search icon" class="search-icon">
-        <input type="text" placeholder="Tryk for at søge" class="search-input">
+        <input type="text" placeholder="Tryk for at søge" class="search-input p1">
       </div>
       <div class="profile-wrapper">
         <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-icon">
@@ -21,8 +21,6 @@
 </template>
 
 <style scoped lang="scss">
-@import '../assets/main.scss';
-
 .profile-bar {
   display: flex;
   justify-content: space-between;
@@ -47,11 +45,6 @@
   background: none;
   outline: none;
   width: 100%;
-  @include body-text;
-
-  &::placeholder {
-    @include body-text;
-  }
 }
 
 .profile-wrapper {

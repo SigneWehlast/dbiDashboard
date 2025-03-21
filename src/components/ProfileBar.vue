@@ -12,7 +12,7 @@
       <div class="profile-wrapper">
         <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-icon">
         <div class="profile-name-wrapper">
-          <p class="heading-medium">Allan Rasmussen</p>
+          <p class="h3">Allan Rasmussen</p>
           <p class="profile-company">Salling Group</p>
         </div>
       </div>

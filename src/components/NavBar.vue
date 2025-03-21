@@ -25,7 +25,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="ForsideHoverIcon"
         imgAlt="forside icon"
       >
-        <p class="body-text">Forside</p>
+        <p class="p1">Forside</p>
       </NavBarButton>
 
       <NavBarButton
@@ -33,7 +33,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="SkemaerHoverIcon"
         imgAlt="skemaer icon"
       >
-        <p class="body-text">Skemaer</p>
+        <p class="p1">Skemaer</p>
       </NavBarButton>
 
       <NavBarButton
@@ -41,7 +41,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="ObjekterHoverIcon"
         imgAlt="objekter icon"
       >
-        <p class="body-text">Objekter</p>
+        <p class="p1">Objekter</p>
       </NavBarButton>
 
       <NavBarButton
@@ -49,7 +49,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="RapporterHoverIcon"
         imgAlt="rapporter icon"
       >
-        <p class="body-text">Rapporter</p>
+        <p class="p1">Rapporter</p>
       </NavBarButton>
 
       <NavBarButton
@@ -57,7 +57,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="DokumenterHoverIcon"
         imgAlt="dokumenter icon"
       >
-        <p class="body-text">Dokumenter</p>
+        <p class="p1">Dokumenter</p>
       </NavBarButton>
 
       <NavBarButton
@@ -65,7 +65,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="PlanlægningHoverIcon"
         imgAlt="planlægning icon"
       >
-        <p class="body-text">Planlægning</p>
+        <p class="p1">Planlægning</p>
       </NavBarButton>
 
       <NavBarButton
@@ -73,7 +73,7 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         :hoverImgSrc="BrugereHoverIcon"
         imgAlt="brugere icon"
       >
-        <p class="body-text">Brugere</p>
+        <p class="p1">Brugere</p>
       </NavBarButton>
     </nav>
   </div>

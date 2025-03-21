@@ -1,3 +1,5 @@
+$background-color: #F4F5F5;
+
 .h1 {
   font-size: 90px;
   font-weight: 700;
@@ -46,6 +48,6 @@
 body {
   font-family: 'D-DIN', sans-serif;
   margin: 40px 80px;
-  background-color: #F4F5F5;
+  background-color: $background-color;
 }
 

@@ -4,7 +4,8 @@ import { ref } from 'vue';
 const tasks = ref([
     { title: 'ABA anlæg (Månedlig egenkontrol) BR18/7.5.1.3', deadline: '23.03.2025', status: 'Udført' },
     { title: 'ABA Månedskontrol 6.1', deadline: '19.02.2025', status: 'Overskredet' },
-    { title: 'ABV anlæg (Månedlig egenkontrol) BR18/7.5.8.1', deadline: '28.02.2025', status: 'Overskredet' }
+    { title: 'ABV anlæg (Månedlig egenkontrol) BR18/7.5.8.1', deadline: '28.02.2025', status: 'Overskredet' },
+    { title: 'Tjek ventilationssystem (Ugentlig rutine)', deadline: '30.04.2025', status: 'Igangværende' }
 ]);
 </script>
 <template>
@@ -36,7 +37,7 @@ const tasks = ref([
                     <p class="p2 heading-bar">Status</p>
                     <div v-for="task in tasks" :key="task.title" class="status-container">
                         <span class="status-indicator"
-                            :class="{ 'status-done': task.status === 'Udført', 'status-overdue': task.status === 'Overskredet' }">
+                            :class="{ 'status-done': task.status === 'Udført', 'status-overdue': task.status === 'Overskredet', 'status-todo': task.status === 'Igangværende' }">
                         </span>
                         <p class="p1">{{ task.status }}</p>
                     </div>
@@ -119,6 +120,10 @@ const tasks = ref([
 
 .status-overdue {
   background-color: #FF3838;
+}
+
+.status-todo{
+  background-color: #FFF081;
 }
 
 .heading-bar{

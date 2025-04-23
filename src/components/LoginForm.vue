@@ -10,33 +10,33 @@ const password = ref("");
 const router = useRouter();
 
 const handleLogin = async () => {
-    if (!email.value || !password.value) {
-        alert("Indtast venligst email og adgangskode");
-        return;
+  if (!email.value || !password.value) {
+    alert("Indtast venligst email og adgangskode");
+    return;
+  }
+
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
+    const user = userCredential.user;
+
+    // Hent brugerens data
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) {
+      console.log("Brugerdata:", userDoc.data());
+    } else {
+      console.error("Brugerdokument ikke fundet!");
     }
 
-    try {
-        const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
-        const user = userCredential.user;
-
-        // Hent brugerens data
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists()) {
-            console.log("Brugerdata:", userDoc.data());
-        } else {
-            console.error("Brugerdokument ikke fundet!");
-        }
-
-        alert("Login succesfuld!");
-        router.push("/");
-    } catch (error) {
-        console.error("Fejl ved login:", error);
-        alert("Fejl: " + error.message);
-    }
+    alert("Login succesfuld!");
+    router.push("/");
+  } catch (error) {
+    console.error("Fejl ved login:", error);
+    alert("Fejl: " + error.message);
+  }
 };
 
 const goToRegister = () => {
-    router.push("/Signup");
+  router.push("/Signup");
 };
 </script>
 

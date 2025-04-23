@@ -2,11 +2,8 @@
 import { ref, onMounted } from 'vue'
 import { onAuthStateChanged } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
-
-// Import shared Firebase instances from your config file
 import { auth, db } from '@/configs/firebase'
 
-// Refs for user data
 const firstName = ref('')
 const lastName = ref('')
 const companyName = ref('')

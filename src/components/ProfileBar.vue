@@ -1,5 +1,36 @@
 <script setup>
+import { ref, onMounted } from 'vue'
+import { onAuthStateChanged } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
 
+// Import shared Firebase instances from your config file
+import { auth, db } from '@/configs/firebase'
+
+// Refs for user data
+const firstName = ref('')
+const lastName = ref('')
+const companyName = ref('')
+
+onMounted(() => {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const uid = user.uid
+      const userDocRef = doc(db, 'users', uid)
+      const userDocSnap = await getDoc(userDocRef)
+
+      if (userDocSnap.exists()) {
+        const data = userDocSnap.data()
+        firstName.value = data.firstName || ''
+        lastName.value = data.lastName || ''
+        companyName.value = data.companyName || ''
+      } else {
+        console.log('No such user document!')
+      }
+    } else {
+      console.log('User not logged in')
+    }
+  })
+})
 </script>
 
 <template>
@@ -12,8 +43,8 @@
       <div class="profile-wrapper">
         <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-icon">
         <div class="profile-name-wrapper">
-          <p class="h3">Allan Rasmussen</p>
-          <p class="profile-company">Salling Group</p>
+          <p class="h3">{{ firstName }} {{ lastName }}</p>
+          <p class="profile-company">{{ companyName }}</p>
         </div>
       </div>
     </div>

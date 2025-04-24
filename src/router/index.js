@@ -21,6 +21,11 @@ const router = createRouter({
       name: 'Signup',
       component: () => import('../views/SignupView.vue'),
     },
+    {
+      path: '/Skemaer',
+      name: 'skemaer',
+      component: () => import('../views/SkemaView.vue'),
+    },
 
   ]
 });

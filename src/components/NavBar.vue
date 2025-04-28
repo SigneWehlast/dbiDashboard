@@ -28,13 +28,15 @@ import BrugereHoverIcon from "../assets/icons/user-group-solid.svg";
         <p class="p1">Forside</p>
       </NavBarButton>
 
-      <NavBarButton
-        :imgSrc="SkemaerIcon"
-        :hoverImgSrc="SkemaerHoverIcon"
-        imgAlt="skemaer icon"
-      >
-        <p class="p1">Skemaer</p>
-      </NavBarButton>
+      <router-link to="/Skemaer">
+        <NavBarButton
+          :imgSrc="SkemaerIcon"
+          :hoverImgSrc="SkemaerHoverIcon"
+          imgAlt="skemaer icon"
+        >
+          <p class="p1">Skemaer</p>
+        </NavBarButton>
+      </router-link>
 
       <NavBarButton
         :imgSrc="ObjekterIcon"
@@ -104,5 +106,4 @@ nav {
 :deep(button:hover) .body-text {
   color: #FFFFFF;
 }
-
 </style>

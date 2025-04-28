@@ -26,6 +26,11 @@ const router = createRouter({
       name: 'NewSchedule',
       component: () => import('../views/NewSchedule.vue'),
     },
+    {
+      path: '/Skemaer',
+      name: 'skemaer',
+      component: () => import('../views/SkemaView.vue'),
+    },
 
   ]
 });

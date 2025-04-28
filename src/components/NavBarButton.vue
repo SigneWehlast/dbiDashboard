@@ -57,4 +57,9 @@ button:hover {
   width: 24px;
   height: 24px;
 }
+
+a.nav-button {
+  text-decoration: none;
+  color: inherit;
+}
 </style>

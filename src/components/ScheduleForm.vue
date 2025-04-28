@@ -90,7 +90,7 @@ label {
         appearance: none;
         border: 2px solid #2B7393;
         border-radius: 50%;
-        height: 1.5em;       
+        height: 1.5em;
         width: 1.5em;
     }
 

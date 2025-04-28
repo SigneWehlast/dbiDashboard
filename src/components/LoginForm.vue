@@ -43,7 +43,7 @@ const goToRegister = () => {
 <template>
     <div class="auth-wrapper">
       <div class="auth-container">
-        <h2 class="h2">Velkommen!</h2>
+        <h2>Velkommen!</h2>
         <form @submit.prevent="handleLogin" class="auth-form">
           <input
             type="email"

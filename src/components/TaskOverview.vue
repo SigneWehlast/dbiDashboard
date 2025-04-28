@@ -6,7 +6,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
         <div class="Task-Overwiev__Infomation">
             <!-- Navigation øverst -->
             <div class="Task-Infomation__nav">
-                <p class="h3">Opgaveoverblik</p>
+                <h3>Opgaveoverblik</h3>
                 <p class="p2">...</p>
             </div>
 

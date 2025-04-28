@@ -8,22 +8,22 @@
     <div class="WidgetMenu">
         <div class="WidgetMenuBox">
             <p class="p1">Opgaver</p>
-            <h2 class="h2">3</h2>
+            <h2>3</h2>
         </div>
 
         <div class="WidgetMenuBox">
             <p class="p1">Deadlines</p>
-            <h2 class="h2">2</h2>
+            <h2>2</h2>
         </div>
 
         <div class="WidgetMenuBox">
             <p class="p1">Rapporter</p>
-            <h2 class="h2">172</h2>
+            <h2>172</h2>
         </div>
 
         <div class="WidgetMenuBox">
             <p class="p1">Objekter</p>
-            <h2 class="h2">19</h2>
+            <h2>19</h2>
         </div>
 
     </div>

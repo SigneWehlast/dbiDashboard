@@ -4,7 +4,7 @@
 
 <template>
     <div class="schedule-form">
-        <h3 class="h3">Overordnet egenkontrol af ABA-anlæg</h3>
+        <h3>Overordnet egenkontrol af ABA-anlæg</h3>
         <form class="schedule-form__formular">
             <p class="p1">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</p>
             <label class="p1">
@@ -88,8 +88,7 @@ label {
 
 .checkbox-input {
         appearance: none;
-        background-color: #fff;
-        border: 2px solid #ccc;
+        border: 2px solid #2B7393;
         border-radius: 50%;
         height: 1.5em;
         width: 1.5em;

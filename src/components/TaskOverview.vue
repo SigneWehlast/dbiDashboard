@@ -2,7 +2,7 @@
 import TaskOverviewData from '@/components/TaskOverviewData.vue';
 </script>
 <template>
-    <div class="Task-Overwiev">
+  <div class="Task-Overwiev">
         <div class="Task-Overwiev__Infomation">
             <!-- Navigation øverst -->
             <div class="Task-Infomation__nav">

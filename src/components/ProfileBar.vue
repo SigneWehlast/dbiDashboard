@@ -1,37 +1,37 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { onAuthStateChanged } from 'firebase/auth'
-import { doc, getDoc } from 'firebase/firestore'
-import { auth, db } from '@/configs/firebase'
+import { ref, onMounted } from 'vue';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '@/configs/firebase';
 
-const firstName = ref('')
-const lastName = ref('')
-const companyName = ref('')
+const firstName = ref('');
+const lastName = ref('');
+const companyName = ref('');
 
 onMounted(() => {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      const uid = user.uid
-      const userDocRef = doc(db, 'users', uid)
-      const userDocSnap = await getDoc(userDocRef)
+      const uid = user.uid;
+      const userDocRef = doc(db, 'users', uid);
+      const userDocSnap = await getDoc(userDocRef);
 
       if (userDocSnap.exists()) {
-        const data = userDocSnap.data()
-        firstName.value = data.firstName || ''
-        lastName.value = data.lastName || ''
-        companyName.value = data.companyName || ''
+        const data = userDocSnap.data();
+        firstName.value = data.firstName || '';
+        lastName.value = data.lastName || '';
+        companyName.value = data.companyName || '';
       } else {
-        console.log('No such user document!')
+        console.log('No such user document!');
       }
     } else {
-      console.log('User not logged in')
+      console.log('User not logged in');
     }
-  })
-})
+  });
+});
 </script>
 
 <template>
-<div class="right-view">
+  <div class="right-view">
     <div class="profile-bar">
       <div class="search-wrapper">
         <img src="../assets/icons/magnifying-glass-solid.svg" alt="search icon" class="search-icon">

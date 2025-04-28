@@ -1,6 +1,6 @@
-import js from '@eslint/js'
-import pluginVue from 'eslint-plugin-vue'
-import globals from 'globals'
+import js from '@eslint/js';
+import pluginVue from 'eslint-plugin-vue';
+import globals from 'globals';
 
 export default [
   {
@@ -16,10 +16,10 @@ export default [
   {
     languageOptions: {
       globals: {
-        ...globals.browser,
-      },
-    },
-  },
+        ...globals.browser
+      }
+    }
+  }
 
   {
     rules: {
@@ -31,7 +31,7 @@ export default [
       'no-unused-vars': ["error"],
       'no-var': ["error"],
       'prefer-const': ["error"],
-      'quotes': ["error", "double"],
+      'quotes': ["error", "single"],
       'semi': ["error", "always"],
     },
   },

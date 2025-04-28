@@ -1,53 +1,53 @@
 <script setup>
-import { ref } from "vue";
-import { auth, db } from "@/configs/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { useRouter } from "vue-router";
+import { ref } from 'vue';
+import { auth, db } from '@/configs/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { useRouter } from 'vue-router';
 
-const email = ref("");
-const password = ref("");
-const confirmPassword = ref("");
-const firstName = ref("");
-const lastName = ref("");
-const companyName = ref("");
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+const firstName = ref('');
+const lastName = ref('');
+const companyName = ref('');
 const router = useRouter();
 
 const handleRegister = async () => {
   if (password.value !== confirmPassword.value) {
-    alert("Adgangskoderne stemmer ikke overens.");
+    alert('Adgangskoderne stemmer ikke overens.');
     return;
   }
 
   try {
-    console.log("Starter brugeroprettelse...");
+    console.log('Starter brugeroprettelse...');
     const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
     const user = userCredential.user;
 
-    console.log("Bruger oprettet:", user.uid);
+    console.log('Bruger oprettet:', user.uid);
 
     // Gem brugerdata i Firestore
-    await setDoc(doc(db, "users", user.uid), {
+    await setDoc(doc(db, 'users', user.uid), {
       uid: user.uid,
       email: email.value,
       firstName: firstName.value,
       lastName: lastName.value,
       companyName: companyName.value,
-      createdAt: new Date(),
+      createdAt: new Date()
     });
 
-    console.log("Brugerdata gemt i Firestore");
+    console.log('Brugerdata gemt i Firestore');
 
-    alert("Bruger oprettet!");
-    router.push("/");
+    alert('Bruger oprettet!');
+    router.push('/');
   } catch (error) {
-    console.error("Fejl ved registrering:", error);
-    alert("Fejl: " + error.message);
+    console.error('Fejl ved registrering:', error);
+    alert('Fejl: ' + error.message);
   }
 };
 
 const goToLogin = () => {
-  router.push("/");
+  router.push('/');
 };
 </script>
 

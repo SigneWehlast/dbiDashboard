@@ -32,17 +32,17 @@ import SearchBar from '@/components/SearchBar.vue';
   background-color: #ffffff;
   border-radius: 25px;
   display: flex;
-  height: 523px;
+  height: 100%;
   justify-content: center;
-  align-items: center;
   width: 100%;
+  padding-top: 2em;
 }
 
 .Task-Overwiev__Infomation {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  height: 314px;
+  height: 100%;
   width: 90%;
 }
 

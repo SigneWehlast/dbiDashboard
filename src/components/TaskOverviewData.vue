@@ -51,13 +51,19 @@ const fetchTasks = async () => {
 }
 
 // Kør når komponenten loader
-onMounted(() => {
-  fetchTasks()
+onMounted(async () => {
+  await fetchTasks()
 
-  // Emit taskCount og deadlineCount når data er hentet
+  console.log('taskCount (direkte på tasks):', tasks.value.length)
+
+  // Hvis du vil regne deadlineCount uden filteredTasks:
+  let today = formatDate(new Date())
+  const todaysTasks = tasks.value.filter(task => task.deadline === today)
+  console.log('deadlineCount (manuelt filtreret):', todaysTasks.length)
+
   emit('updateData', {
     taskCount: tasks.value.length,
-    deadlineCount: filteredTasks.value.length
+    deadlineCount: todaysTasks.length
   })
 })
 

@@ -13,19 +13,27 @@ const errorComment = ref("")
 
 // Gem funktioner
 const saveForm = async (type) => {
-  let status = type === 'save' ? 'Udført' : 'Igangværende'
+  let status = ''
+
+  // Sæt status baseret på om det er gem og luk, eller gem midlertidig
+  if (type === 'save') {
+    status = 'Udført' // For gem og luk
+  } else {
+    status = 'Igangværende' // For midlertidig gemning
+  }
 
   const today = new Date()
   const deadlineDate = new Date(deadline.value)
 
-  if (status !== "Udført" && deadlineDate < today) {
-    status = "Overskredet"
+  // Hvis deadline er overskredet, opdater status til 'Overskredet'
+  if (deadlineDate < today) {
+    status = 'Overskredet'
   }
 
   const formData = {
     title: title.value,
     deadline: deadline.value,
-    status,
+    status: status,
     systemStatus: systemStatus.value,
     systemComment: systemComment.value,
     errorStatus: errorStatus.value,
@@ -34,9 +42,10 @@ const saveForm = async (type) => {
   }
 
   try {
+    // Tilføj data til Firebase
     await addDoc(collection(db, "ScheduleForm"), formData)
     alert("Data gemt!")
-    resetForm()
+    resetForm() // Nulstil formularen efter gemning
   } catch (error) {
     console.error("Fejl ved gemning:", error)
     alert("Noget gik galt, prøv igen.")

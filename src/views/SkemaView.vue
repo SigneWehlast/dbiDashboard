@@ -4,7 +4,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
 
 <template>
     <div class="Skema-Overwiev">
-    <h1 class="h1">Skemaer</h1>
+    <h1>Skemaer</h1>
     <button class="p2 btn-skema">+ Nyt Skema</button>
     </div>
 
@@ -12,7 +12,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
         <div class="Task-Overwiev__Infomation">
             <!-- Navigation øverst -->
             <div class="Task-Infomation__nav">
-                <p class="h3">Indsæt search comp her</p>
+                <h3>Indsæt search comp her</h3>
                 <p class="p2">Filtre</p>
             </div>
 

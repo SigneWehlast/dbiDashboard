@@ -3,7 +3,7 @@ import ScheduleForm from "@/components/ScheduleForm.vue";
 </script>
 
 <template>
-    <h1 class="h1">Skemaer</h1>
+    <h1>Skemaer</h1>
     <ScheduleForm />
 
 </template>

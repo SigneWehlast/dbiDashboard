@@ -91,7 +91,7 @@ label {
         background-color: #fff;
         border: 2px solid #ccc;
         border-radius: 50%;
-        height: 1.5em;       
+        height: 1.5em;
         width: 1.5em;
     }
 

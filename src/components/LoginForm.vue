@@ -1,17 +1,17 @@
 <script setup>
-import { ref } from "vue";
-import { auth, db } from "@/configs/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { useRouter } from "vue-router";
+import { ref } from 'vue';
+import { auth, db } from '@/configs/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { useRouter } from 'vue-router';
 
-const email = ref("");
-const password = ref("");
+const email = ref('');
+const password = ref('');
 const router = useRouter();
 
 const handleLogin = async () => {
   if (!email.value || !password.value) {
-    alert("Indtast venligst email og adgangskode");
+    alert('Indtast venligst email og adgangskode');
     return;
   }
 
@@ -20,23 +20,23 @@ const handleLogin = async () => {
     const user = userCredential.user;
 
     // Hent brugerens data
-    const userDoc = await getDoc(doc(db, "users", user.uid));
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
     if (userDoc.exists()) {
-      console.log("Brugerdata:", userDoc.data());
+      console.log('Brugerdata:', userDoc.data());
     } else {
-      console.error("Brugerdokument ikke fundet!");
+      console.error('Brugerdokument ikke fundet!');
     }
 
-    alert("Login succesfuld!");
-    router.push("/");
+    alert('Login succesfuld!');
+    router.push('/');
   } catch (error) {
-    console.error("Fejl ved login:", error);
-    alert("Fejl: " + error.message);
+    console.error('Fejl ved login:', error);
+    alert('Fejl: ' + error.message);
   }
 };
 
 const goToRegister = () => {
-  router.push("/Signup");
+  router.push('/Signup');
 };
 </script>
 

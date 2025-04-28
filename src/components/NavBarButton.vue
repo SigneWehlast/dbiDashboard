@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 
 defineProps({
   imgSrc: {
@@ -12,7 +12,7 @@ defineProps({
   },
   imgAlt: {
     type: String,
-    default: "icon"
+    default: 'icon'
   }
 });
 

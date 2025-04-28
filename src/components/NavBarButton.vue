@@ -51,7 +51,7 @@ button {
   align-items: center;
   gap: 24px;
   cursor: pointer;
-  color: #000000;
+  color: #707070;
 }
 
 button:hover {

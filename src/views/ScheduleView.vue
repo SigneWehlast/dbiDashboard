@@ -1,5 +1,6 @@
 <script setup>
 import TaskOverviewData from '@/components/TaskOverviewData.vue';
+import SearchBar from '@/components/SearchBar.vue';
 </script>
 
 <template>
@@ -12,7 +13,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
         <div class="Task-Overwiev__Infomation">
             <!-- Navigation øverst -->
             <div class="Task-Infomation__nav">
-                <h3>Indsæt search comp her</h3>
+            <SearchBar />
                 <p class="p2">Filtre</p>
             </div>
 

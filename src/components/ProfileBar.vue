@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '@/configs/firebase';
+import SearchBar from '@/components/SearchBar.vue';
 
 const firstName = ref('');
 const lastName = ref('');
@@ -33,10 +34,7 @@ onMounted(() => {
 <template>
   <div class="right-view">
     <div class="profile-bar">
-      <div class="search-wrapper">
-        <img src="../assets/icons/magnifying-glass-solid.svg" alt="search icon" class="search-icon">
-        <input type="text" placeholder="Tryk for at søge" class="search-input p1">
-      </div>
+   <SearchBar />
       <div class="profile-wrapper">
         <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-icon">
         <div class="profile-name-wrapper">
@@ -55,24 +53,6 @@ onMounted(() => {
   align-items: center;
   width: 100%;
   height: fit-content;
-}
-
-.search-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.search-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.search-input {
-  border: none;
-  background: none;
-  outline: none;
-  width: 100%;
 }
 
 .profile-wrapper {

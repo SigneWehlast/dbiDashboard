@@ -39,6 +39,7 @@
   display: flex;
   height: 153px; //25% minus er 114.75px
   justify-content: space-between;
+  padding: 0 70px;
 }
 
 .WidgetMenuBox {
@@ -48,8 +49,6 @@
   height: 1rem;
   justify-content: center;
   text-align: center;
-  padding: 2rem;
-
 }
 
 .divider {

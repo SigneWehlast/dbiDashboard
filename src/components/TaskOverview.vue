@@ -28,6 +28,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
   height: 523px;
   justify-content: center;
   align-items: center;
+  padding: 70px;
 
 }
 
@@ -35,8 +36,8 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  height: 314px;
-  width: 90%;
+  height: 100%;
+  width: 100%;
 }
 
 .Task-Infomation__nav {

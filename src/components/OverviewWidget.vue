@@ -10,16 +10,18 @@
             <p class="p1">Opgaver</p>
             <h2>3</h2>
         </div>
+        <div class="divider"></div>
 
         <div class="WidgetMenuBox">
             <p class="p1">Deadlines</p>
             <h2>2</h2>
         </div>
-
+        <div class="divider"></div>
         <div class="WidgetMenuBox">
             <p class="p1">Rapporter</p>
             <h2>172</h2>
         </div>
+        <div class="divider"></div>
 
         <div class="WidgetMenuBox">
             <p class="p1">Objekter</p>
@@ -37,6 +39,7 @@
   display: flex;
   height: 153px; //25% minus er 114.75px
   justify-content: space-between;
+  padding: 0 70px;
 }
 
 .WidgetMenuBox {
@@ -46,10 +49,11 @@
   height: 1rem;
   justify-content: center;
   text-align: center;
-  padding: 2rem;
+}
 
-  &:not(:last-child) {
-      border-right: 1px solid #DADCDC;
-  }
+.divider {
+  height: 80px;
+  width: 1px;
+  background-color: #DADCDC;
 }
 </style>

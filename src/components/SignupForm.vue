@@ -52,102 +52,103 @@ const goToLogin = () => {
 </script>
 
 <template>
+  <div class="auth">
     <div class="auth-container">
       <h2>Opret bruger</h2>
       <form @submit.prevent="handleRegister">
-        <div class="input-group">
+        <div class="auth-container__input-group">
           <label for="firstName">Fornavn:</label>
           <input type="text" v-model="firstName" required />
         </div>
-        <div class="input-group">
+        <div class="auth-container__input-group">
           <label for="lastName">Efternavn:</label>
           <input type="text" v-model="lastName" required />
         </div>
-        <div class="input-group">
+        <div class="auth-container__input-group">
           <label for="companyName">Firmanavn:</label>
           <input type="text" v-model="companyName" />
         </div>
-        <div class="input-group">
+        <div class="auth-container__input-group">
           <label for="email">Email:</label>
           <input type="email" v-model="email" required />
         </div>
-        <div class="input-group">
+        <div class="auth-container__input-group">
           <label for="password">Adgangskode:</label>
           <input type="password" v-model="password" required />
         </div>
-        <div class="input-group">
+        <div class="auth-container__input-group">
           <label for="confirmPassword">Bekræft adgangskode:</label>
           <input type="password" v-model="confirmPassword" required />
         </div>
-        <button type="submit" class="btn">Opret bruger</button>
+        <button type="submit" class="auth-container__btn">Opret bruger</button>
         <p @click="goToLogin" class="toggle-text">Har du allerede en konto? Log ind her.</p>
       </form>
     </div>
+  </div>
   </template>
 
-<style scoped>
-.auth-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 25px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  color: white;
-}
+<style scoped lang="scss">
+@import "@/assets/main.scss";
 
-.input-group {
-  margin-bottom: 15px;
-  text-align: left;
+.auth {
+  display: flex;
+  justify-content: center;
+
+  &-container {
+    align-items: center;
+    background: $white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    color: $dark-grey;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    padding: 1.5em;
+    text-align: center;
+
+    &__input-group {
+      margin-bottom: 1em;
+      text-align: left;
+    }
+
+    &__btn {
+      background-color: $main-blue;
+      border: none;
+      border-radius: 6px;
+      color: $white;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0.8em;
+      width: 100%;
+
+      &:hover {
+        background-color: #A4CBE0;
+        color: $dark-grey;
+      }
+    }
+  }
 }
 
 label {
   font-size: 14px;
-  margin-bottom: 5px;
+  margin-bottom: 0.3em;
   display: block;
 }
 
 input {
-  width: 100%;
-  padding: 10px;
-  border: none;
+  border: 2px solid #2B7393;
   border-radius: 6px;
+  color: $dark-grey;
   font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
   outline: none;
-  transition: all 0.3s ease;
-}
-
-input:focus {
-  background-color: rgba(255, 255, 255, 0.4);
-}
-
-.btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #ff6b6b;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #ff4757;
+  padding: 0.7em;
 }
 
 .toggle-text {
-  margin-top: 15px;
+  margin-top: 1em;
   cursor: pointer;
   font-size: 14px;
-  color: #f8f8f8;
+  color: $dark-grey;
 }
 
-.toggle-text:hover {
-  text-decoration: underline;
-}
 </style>

@@ -66,32 +66,37 @@ const goToRegister = () => {
     </div>
   </template>
 
-<style scoped>
-.auth-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f3f5f6;
-}
+<style scoped lang="scss">
+@import "@/assets/main.scss";
 
-.auth-container {
-  width: 400px;
-  background: white;
-  padding: 3rem 2rem;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
+.auth {
 
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  &-wrapper {
+    align-items: center;
+    background-color: $background-color;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+  }
+
+  &-container {
+    background: $white;
+    border-radius: 1.25em;
+    box-shadow: 0 0 1.25em rgba(0, 0, 0, 0.05);
+    padding: 3em 2em;
+    text-align: center;
+    width: 25em;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
 }
 
 .input-field {
-  height: 50px;
+  height: 2em;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   padding: 0 1rem;
@@ -99,11 +104,12 @@ const goToRegister = () => {
 }
 
 .login-button {
-  background-color: #2B7393;
-  padding: 14px;
+  background-color: $main-blue;
   border: none;
   border-radius: 12px;
+  color: $white;
   cursor: pointer;
+  padding: 14px;
   transition: background-color 0.3s;
 }
 

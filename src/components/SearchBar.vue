@@ -9,21 +9,25 @@
   </template>
 
 <style scoped lang="scss">
-.search-icon {
-    width: 24px;
-    height: 24px;
+.search {
+
+  &-icon {
+    height: 1.5em;
+    width: 1.5em;
   }
   
-  .search-wrapper {
-    display: flex;
+  &-wrapper {
     align-items: center;
-    gap: 24px;
+    display: flex;
+    gap: 1.5em;
   }
   
-  .search-input {
-    border: none;
+  &-input {
     background: none;
+    border: none;
     outline: none;
     width: 100%;
   }
+
+}
 </style>

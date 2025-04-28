@@ -39,30 +39,33 @@ const isHovered = ref(false);
 </template>
 
 <style scoped lang="scss">
+@import "@/assets/main.scss";
+
 button {
-  width: 100%;
-  height: 70px;
+  align-items: center;
   background-color: #F4F5F5;
   border: none;
   border-radius: 25px;
-  padding: 0 28px;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 24px;
+  color: $dark-grey;
   cursor: pointer;
-  color: #707070;
+  display: flex;
+  gap: 1.5em;
+  height: 5.2em;
+  margin: 0;
+  padding: 0 2em;
+  width: 100%;
+
+  &:hover {
+    background-color: #A4CBE0;
+    color: $white;
+  }
+
+  &.active {
+    background-color: $main-blue;
+    color: $white;
+  }
 }
 
-button:hover {
-  background-color: #A4CBE0;
-  color: #FFFFFF;
-}
-
-button.active {
-  background-color: #2B7393;
-  color: #FFFFFF;
-}
 
 .button-icon {
   width: 24px;
@@ -70,8 +73,8 @@ button.active {
 }
 
 a.nav-button {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 :deep(*) {

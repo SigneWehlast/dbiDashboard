@@ -97,22 +97,22 @@ const route = useRoute();
 nav {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.6em;
 }
 
 .logo {
-  width: 200px;
-  margin-bottom: 40px;
+  margin-bottom: 2.5em;
+  width: 12.5em;
 }
 
 .nav-bar {
-  width: 300px;
   height: 100%;
+  width: 18.75em;
 }
 
 .button-icon {
-  width: 24px;
-  height: 24px;
+  height: 1.5em;
+  width: 1.5em;
 }
 
 :deep(button:hover) .body-text {

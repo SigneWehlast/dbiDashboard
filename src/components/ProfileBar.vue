@@ -35,11 +35,11 @@ onMounted(() => {
   <div class="right-view">
     <div class="profile-bar">
    <SearchBar />
-      <div class="profile-wrapper">
-        <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-icon">
-        <div class="profile-name-wrapper">
+      <div class="profile-bar__wrapper">
+        <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-bar__icon">
+        <div class="profile-bar__wrapper-name">
           <h3>{{ firstName }} {{ lastName }}</h3>
-          <p class="profile-company">{{ companyName }}</p>
+          <p class="profile-bar__wrapper-company">{{ companyName }}</p>
         </div>
       </div>
     </div>
@@ -48,31 +48,31 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .profile-bar {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  display: flex;
   height: fit-content;
-}
+  justify-content: space-between;
+  width: 100%;
 
-.profile-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
+  &__wrapper {
+    align-items: center;
+    display: flex;
+    gap: 1.5em;
+  
+    &-company {
+      color: #5F6B6C;
+      font-size: 20px;
+      font-weight: 200;
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      margin: 0;
+    }
+  }
 
-.profile-icon {
-  width: 32px;
-  height: 32px;
-}
-
-.profile-company {
-  font-size: 20px;
-  font-weight: 200;
-  line-height: 1.4;
-  margin: 0;
-  letter-spacing: 0.01em;
-  color: #5F6B6C;
+  &__icon {
+    height: 2em;
+    width: 2em;
+  }
 }
 
 .right-view{

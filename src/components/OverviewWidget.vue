@@ -1,34 +1,46 @@
 <script setup>
+import { defineProps } from 'vue'
 
+// Modtag de props (taskCount og deadlineCount) som defineret af forælderen
+const props = defineProps({
+  taskCount: {
+    type: Number,
+    required: true
+  },
+  deadlineCount: {
+    type: Number,
+    required: true
+  },
+})
 
+console.log('taskCount:', props.taskCount)
+console.log('deadlineCount:', props.deadlineCount)
 </script>
 
 <template>
-<!-- Udskift til dymanisk text i p og h2 -->
-    <div class="WidgetMenu">
-        <div class="WidgetMenuBox">
-            <p class="p1">Opgaver</p>
-            <h2>3</h2>
-        </div>
-        <div class="divider"></div>
-
-        <div class="WidgetMenuBox">
-            <p class="p1">Deadlines</p>
-            <h2>2</h2>
-        </div>
-        <div class="divider"></div>
-        <div class="WidgetMenuBox">
-            <p class="p1">Rapporter</p>
-            <h2>172</h2>
-        </div>
-        <div class="divider"></div>
-
-        <div class="WidgetMenuBox">
-            <p class="p1">Objekter</p>
-            <h2>19</h2>
-        </div>
-
+  <div class="WidgetMenu">
+    <div class="WidgetMenuBox">
+      <p class="p1">Opgaver</p>
+      <h2>{{ props.taskCount }}</h2> <!-- Bruger props.taskCount her -->
     </div>
+    <div class="divider"></div>
+
+    <div class="WidgetMenuBox">
+      <p class="p1">Deadlines</p>
+      <h2>{{ props.deadlineCount }}</h2> <!-- Bruger props.deadlineCount her -->
+    </div>
+    <div class="divider"></div>
+    <div class="WidgetMenuBox">
+      <p class="p1">Rapporter</p>
+      <h2>172</h2> <!-- Denne værdi er statisk, kan opdateres senere -->
+    </div>
+    <div class="divider"></div>
+
+    <div class="WidgetMenuBox">
+      <p class="p1">Objekter</p>
+      <h2>19</h2> <!-- Denne værdi er statisk, kan opdateres senere -->
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

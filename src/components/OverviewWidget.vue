@@ -37,17 +37,16 @@
   display: flex;
   height: 153px; //25% minus er 114.75px
   justify-content: space-between;
-  width: 1372px; //25% minus er 1029px
 }
 
 .WidgetMenuBox {
   align-items: center;
   display: flex;
   gap: 2.5em;
-  height: 77px;
+  height: 1rem;
   justify-content: center;
   text-align: center;
-  width: 343px;
+  padding: 2rem;
 
   &:not(:last-child) {
       border-right: 1px solid #DADCDC;

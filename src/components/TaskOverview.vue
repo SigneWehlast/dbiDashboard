@@ -28,7 +28,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
   height: 523px;
   justify-content: center;
   align-items: center;
-  width: 100%;
+
 }
 
 .Task-Overwiev__Infomation {

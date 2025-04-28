@@ -28,7 +28,7 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
         <p class="p1">Forside</p>
       </NavBarButton>
 
-      <router-link to="/Skemaer">
+      <router-link to="/Schedule">
         <NavBarButton
           :imgSrc="SkemaerIcon"
           :hoverImgSrc="SkemaerHoverIcon"

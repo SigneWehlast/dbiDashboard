@@ -28,6 +28,8 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
       >
         <p class="p1">Forside</p>
       </NavBarButton>
+    </router-link>
+
 
       <router-link to="/Schedule">
         <NavBarButton

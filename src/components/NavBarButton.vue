@@ -46,6 +46,7 @@ button {
   align-items: center;
   gap: 24px;
   cursor: pointer;
+  color: #000000;
 }
 
 button:hover {
@@ -61,5 +62,10 @@ button:hover {
 a.nav-button {
   text-decoration: none;
   color: inherit;
+}
+
+:deep(*) {
+  color: inherit;
+  text-decoration: none;
 }
 </style>

@@ -1,5 +1,7 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { db } from '@/configs/firebase'
+import { collection, getDocs } from 'firebase/firestore'
 import { defineProps } from 'vue'
 
 const props = defineProps({
@@ -9,16 +11,10 @@ const props = defineProps({
   }
 })
 
-const tasks = ref([
-  { title: "ABA anlæg (Månedlig egenkontrol) BR18/7.5.1.3", deadline: "23.03.2025", status: "Udført" },
-  { title: "ABA anlæg (Månedlig egenkontrol) BR18/7.5.1.3", deadline: "28.04.2025", status: "Udført" },
-  { title: "ABA Månedskontrol 6.1", deadline: "19.02.2025", status: "Overskredet" },
-  { title: "ABA Månedskontrol 6.1", deadline: "28.04.2025", status: "Overskredet" },
-  { title: "ABV anlæg (Månedlig egenkontrol) BR18/7.5.8.1", deadline: "28.02.2025", status: "Overskredet" },
-  { title: "Tjek ventilationssystem (Ugentlig rutine)", deadline: "30.04.2025", status: "Igangværende" },
-  { title: "Tjek ventilationssystem (Ugentlig rutine)", deadline: "28.04.2025", status: "Igangværende" }
-]);
+// Tasks fra Firestore
+const tasks = ref([])
 
+// Formatér dato
 function formatDate(date) {
   return date.toLocaleDateString('da-DK', {
     day: '2-digit',
@@ -36,6 +32,24 @@ const filteredTasks = computed(() => {
   return tasks.value
 })
 
+// Hent data fra Firestore
+const fetchTasks = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "ScheduleForm"))
+    tasks.value = querySnapshot.docs.map(doc => ({
+      title: doc.data().title,
+      deadline: formatDate(new Date(doc.data().deadline)),  // Sørg for korrekt datoformat
+      status: doc.data().status
+    }))
+  } catch (error) {
+    console.error("Fejl ved hentning af opgaver:", error)
+  }
+}
+
+// Kør når komponenten loader
+onMounted(() => {
+  fetchTasks()
+})
 </script>
 
 <template>

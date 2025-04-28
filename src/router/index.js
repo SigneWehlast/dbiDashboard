@@ -24,14 +24,18 @@ const router = createRouter({
     {
       path: '/NewSchedule',
       name: 'NewSchedule',
-      component: () => import('../views/NewSchedule.vue'),
+      component: () => import('../views/NewSchedule.vue')
     },
     {
       path: '/Skemaer',
       name: 'skemaer',
-      component: () => import('../views/SkemaView.vue'),
+      component: () => import('../views/SkemaView.vue')
     },
-
+    {
+      path: '/CompleteSchedule',
+      name: 'CompleteSchedule',
+      component: () => import('../views/CompleteSchedule.vue')
+    }
   ]
 });
 

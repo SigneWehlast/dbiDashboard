@@ -28,12 +28,14 @@ const isHovered = ref(false);
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
     :class="{ active: isActive }"
+    aria-label="Icon button"
   >
     <img
       :src="(isHovered || isActive) ? hoverImgSrc : imgSrc"
       :alt="imgAlt"
       class="button-icon"
-    >
+      aria-hidden="true"
+    />
     <slot></slot>
   </button>
 </template>

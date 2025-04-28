@@ -38,7 +38,7 @@ onMounted(() => {
       <div class="profile-wrapper">
         <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-icon">
         <div class="profile-name-wrapper">
-          <p class="h3">{{ firstName }} {{ lastName }}</p>
+          <h3>{{ firstName }} {{ lastName }}</h3>
           <p class="profile-company">{{ companyName }}</p>
         </div>
       </div>

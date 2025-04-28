@@ -1,6 +1,6 @@
 <script setup>
-import ProfileBar from "@/components/ProfileBar.vue";
-import NavBar from "@/components/NavBar.vue";
+import ProfileBar from '@/components/ProfileBar.vue';
+import NavBar from '@/components/NavBar.vue';
 
 </script>
 

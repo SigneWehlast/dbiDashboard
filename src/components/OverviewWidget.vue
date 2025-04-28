@@ -5,13 +5,13 @@
   <div class="WidgetMenu">
     <div class="WidgetMenuBox">
       <p class="p1">Opgaver</p>
-      <h2>3</h2> <!-- Bruger props.taskCount her -->
+      <h2>{{ taskCount }}</h2> <!-- Bruger props.taskCount her -->
     </div>
     <div class="divider"></div>
 
     <div class="WidgetMenuBox">
       <p class="p1">Deadlines</p>
-      <h2>44</h2> <!-- Bruger props.deadlineCount her -->
+      <h2>{{ deadlineCount }}</h2> <!-- Bruger props.deadlineCount her -->
     </div>
     <div class="divider"></div>
     <div class="WidgetMenuBox">

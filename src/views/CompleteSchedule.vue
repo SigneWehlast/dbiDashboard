@@ -3,9 +3,10 @@ import ScheduleForm from "@/components/ScheduleForm.vue";
 </script>
 
 <template>
-    <h1>Skemaer</h1>
-    <ScheduleForm />
-
+    <div class="schedule-container">
+        <h1>Skemaer</h1>
+        <ScheduleForm />
+    </div>
 </template>
 
 <style scoped lang="scss">

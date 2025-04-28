@@ -98,5 +98,6 @@ textarea {
     border-color: #2B7393;
     border-radius: 0.5em;
     border-style: solid;
+    resize: none;
 }
 </style>

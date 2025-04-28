@@ -5,7 +5,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
 <template>
     <div class="Skema-Overwiev">
     <h1 class="h1">Skemaer</h1>
-    <button class="p2 btn-skema">Nyt Skema</button>
+    <button class="p2 btn-skema">+ Nyt Skema</button>
     </div>
 
     <div class="Task-Overwiev">

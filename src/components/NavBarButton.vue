@@ -13,6 +13,10 @@ defineProps({
   imgAlt: {
     type: String,
     default: 'icon'
+  },
+  isActive: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -23,9 +27,10 @@ const isHovered = ref(false);
   <button
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
+    :class="{ active: isActive }"
   >
     <img
-      :src="isHovered ? hoverImgSrc : imgSrc"
+      :src="(isHovered || isActive) ? hoverImgSrc : imgSrc"
       :alt="imgAlt"
       class="button-icon"
     >
@@ -51,6 +56,11 @@ button {
 
 button:hover {
   background-color: #A4CBE0;
+  color: #FFFFFF;
+}
+
+button.active {
+  background-color: #2B7393;
   color: #FFFFFF;
 }
 

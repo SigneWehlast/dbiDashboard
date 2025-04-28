@@ -14,6 +14,9 @@ import PlanlægningIcon from '../assets/icons/calendar-days-solid-2.svg';
 import PlanlægningHoverIcon from '../assets/icons/calendar-days-solid.svg';
 import BrugereIcon from '../assets/icons/user-group-solid-2.svg';
 import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 </script>
 
 <template>
@@ -21,21 +24,22 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
     <img src="../assets/icons/DBI_logo.svg" alt="logo" class="logo">
     <nav>
       <router-link class="routerlink" to="/">
-      <NavBarButton
-        :imgSrc="ForsideIcon"
-        :hoverImgSrc="ForsideHoverIcon"
-        imgAlt="forside icon"
-      >
-        <p class="p1">Forside</p>
-      </NavBarButton>
-    </router-link>
-
+        <NavBarButton
+          :imgSrc="ForsideIcon"
+          :hoverImgSrc="ForsideHoverIcon"
+          imgAlt="forside icon"
+          :isActive="route.path === '/'"
+        >
+          <p class="p1">Forside</p>
+        </NavBarButton>
+      </router-link>
 
       <router-link class="routerlink" to="/Schedule">
         <NavBarButton
           :imgSrc="SkemaerIcon"
           :hoverImgSrc="SkemaerHoverIcon"
           imgAlt="skemaer icon"
+          :isActive="route.path === '/Schedule'"
         >
           <p class="p1">Skemaer</p>
         </NavBarButton>
@@ -45,6 +49,7 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
         :imgSrc="ObjekterIcon"
         :hoverImgSrc="ObjekterHoverIcon"
         imgAlt="objekter icon"
+        :isActive="route.path === '/Objects'"
       >
         <p class="p1">Objekter</p>
       </NavBarButton>
@@ -53,6 +58,7 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
         :imgSrc="RapporterIcon"
         :hoverImgSrc="RapporterHoverIcon"
         imgAlt="rapporter icon"
+        :isActive="route.path === '/Reports'"
       >
         <p class="p1">Rapporter</p>
       </NavBarButton>
@@ -61,6 +67,7 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
         :imgSrc="DokumenterIcon"
         :hoverImgSrc="DokumenterHoverIcon"
         imgAlt="dokumenter icon"
+        :isActive="route.path === '/Documents'"
       >
         <p class="p1">Dokumenter</p>
       </NavBarButton>
@@ -69,6 +76,7 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
         :imgSrc="PlanlægningIcon"
         :hoverImgSrc="PlanlægningHoverIcon"
         imgAlt="planlægning icon"
+        :isActive="route.path === '/Planning'"
       >
         <p class="p1">Planlægning</p>
       </NavBarButton>
@@ -77,6 +85,7 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
         :imgSrc="BrugereIcon"
         :hoverImgSrc="BrugereHoverIcon"
         imgAlt="brugere icon"
+        :isActive="route.path === '/Users'"
       >
         <p class="p1">Brugere</p>
       </NavBarButton>

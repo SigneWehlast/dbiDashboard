@@ -1,33 +1,17 @@
 <script setup>
-import { defineProps } from 'vue'
-
-// Modtag de props (taskCount og deadlineCount) som defineret af forælderen
-const props = defineProps({
-  taskCount: {
-    type: Number,
-    required: true
-  },
-  deadlineCount: {
-    type: Number,
-    required: true
-  },
-})
-
-console.log('taskCount:', props.taskCount)
-console.log('deadlineCount:', props.deadlineCount)
 </script>
 
 <template>
   <div class="WidgetMenu">
     <div class="WidgetMenuBox">
       <p class="p1">Opgaver</p>
-      <h2>{{ props.taskCount }}</h2> <!-- Bruger props.taskCount her -->
+      <h2>3</h2> <!-- Bruger props.taskCount her -->
     </div>
     <div class="divider"></div>
 
     <div class="WidgetMenuBox">
       <p class="p1">Deadlines</p>
-      <h2>{{ props.deadlineCount }}</h2> <!-- Bruger props.deadlineCount her -->
+      <h2>44</h2> <!-- Bruger props.deadlineCount her -->
     </div>
     <div class="divider"></div>
     <div class="WidgetMenuBox">

@@ -27,5 +27,6 @@ import NavBar from "@/components/NavBar.vue";
   display: flex;
   flex-direction: column;
   gap: 40px;
+  width: 100%;
 }
 </style>

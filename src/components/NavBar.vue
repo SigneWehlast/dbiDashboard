@@ -20,7 +20,7 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
   <div class="nav-bar">
     <img src="../assets/icons/DBI_logo.svg" alt="logo" class="logo">
     <nav>
-      <router-link to="/">
+      <router-link class="routerlink" to="/">
       <NavBarButton
         :imgSrc="ForsideIcon"
         :hoverImgSrc="ForsideHoverIcon"
@@ -31,7 +31,7 @@ import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
     </router-link>
 
 
-      <router-link to="/Schedule">
+      <router-link class="routerlink" to="/Schedule">
         <NavBarButton
           :imgSrc="SkemaerIcon"
           :hoverImgSrc="SkemaerHoverIcon"
@@ -108,5 +108,9 @@ nav {
 
 :deep(button:hover) .body-text {
   color: #FFFFFF;
+}
+
+.routerlink {
+  text-decoration: none;
 }
 </style>

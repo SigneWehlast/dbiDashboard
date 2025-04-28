@@ -1,9 +1,11 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, defineEmits } from 'vue'
 import { db } from '@/configs/firebase'
 import { collection, getDocs } from 'firebase/firestore'
-import { defineProps } from 'vue'
 
+const emit = defineEmits()
+
+// Props
 const props = defineProps({
   onlyToday: {
     type: Boolean,
@@ -25,9 +27,11 @@ function formatDate(date) {
 
 const today = formatDate(new Date())
 
+// Beregn de filtrerede tasks
 const filteredTasks = computed(() => {
   if (props.onlyToday) {
-    return tasks.value.filter(task => task.deadline === today)
+    const filtered = tasks.value.filter(task => task.deadline === today)
+    return filtered
   }
   return tasks.value
 })
@@ -38,7 +42,7 @@ const fetchTasks = async () => {
     const querySnapshot = await getDocs(collection(db, "ScheduleForm"))
     tasks.value = querySnapshot.docs.map(doc => ({
       title: doc.data().title,
-      deadline: formatDate(new Date(doc.data().deadline)),  // Sørg for korrekt datoformat
+      deadline: formatDate(new Date(doc.data().deadline)),
       status: doc.data().status
     }))
   } catch (error) {
@@ -49,34 +53,46 @@ const fetchTasks = async () => {
 // Kør når komponenten loader
 onMounted(() => {
   fetchTasks()
+
+  // Emit taskCount og deadlineCount når data er hentet
+  emit('updateData', {
+    taskCount: tasks.value.length,
+    deadlineCount: filteredTasks.value.length
+  })
 })
+
+// Beregn antallet af opgaver og deadlines
+const taskCount = computed(() => tasks.value.length)
+const deadlineCount = computed(() => filteredTasks.value.length)
 </script>
 
+
 <template>
-    <div class="Task-Infomation__Name">
-        <p class="p2 heading-bar">Titel</p>
-        <div v-for="task in filteredTasks" :key="task.title">
-            <p class="p1">{{ task.title }}</p>
-        </div>
+  <div class="Task-Infomation__Name">
+    <p class="p2 heading-bar">Titel</p>
+    <div v-for="task in filteredTasks" :key="task.title">
+      <p class="p1">{{ task.title }}</p>
     </div>
+  </div>
 
-    <div class="Task-Overwiev__Infomation-Deadline">
-        <p class="p2 heading-bar">Deadline</p>
-        <div v-for="task in filteredTasks" :key="task.deadline">
-            <p class="p1">{{ task.deadline }}</p>
-        </div>
+  <div class="Task-Overwiev__Infomation-Deadline">
+    <p class="p2 heading-bar">Deadline</p>
+    <div v-for="task in filteredTasks" :key="task.deadline">
+      <p class="p1">{{ task.deadline }}</p>
     </div>
+  </div>
 
-    <div class="Task-Overwiev__Infomation-Status">
-        <p class="p2 heading-bar">Status</p>
-        <div v-for="task in filteredTasks" :key="task.title" class="status-container">
-            <span class="status-indicator"
-                :class="{ 'status-done': task.status === 'Udført', 'status-overdue': task.status === 'Overskredet', 'status-todo': task.status === 'Igangværende' }">
-            </span>
-            <p class="p1">{{ task.status }}</p>
-        </div>
+  <div class="Task-Overwiev__Infomation-Status">
+    <p class="p2 heading-bar">Status</p>
+    <div v-for="task in filteredTasks" :key="task.title" class="status-container">
+      <span class="status-indicator"
+        :class="{ 'status-done': task.status === 'Udført', 'status-overdue': task.status === 'Overskredet', 'status-todo': task.status === 'Igangværende' }">
+      </span>
+      <p class="p1">{{ task.status }}</p>
     </div>
+  </div>
 </template>
+
 <style scoped lang="scss">
 .Task-Infomation__Name {
   display: flex;

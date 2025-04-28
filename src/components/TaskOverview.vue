@@ -2,16 +2,16 @@
 import TaskOverviewData from '@/components/TaskOverviewData.vue';
 </script>
 <template>
-  <div class="Task-Overwiev">
-        <div class="Task-Overwiev__Infomation">
+  <div class="task-overview">
+        <div class="task-overview__information">
             <!-- Navigation øverst -->
-            <div class="Task-Infomation__nav">
+            <div class="task-overview__information__nav">
                 <h3>Opgaveoverblik</h3>
                 <p class="p2">...</p>
             </div>
 
             <!-- Indhold opdelt i tre kolonner -->
-            <div class="Task-Overwiev__Infomation-Content">
+            <div class="task-overview__information__content">
               <TaskOverviewData :onlyToday="true" />
             </div>
         </div>
@@ -21,34 +21,34 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
 
 
 <style scoped lang="scss">
-.Task-Overwiev {
-  background-color: #ffffff;
-  border-radius: 25px;
-  display: flex;
-  height: 523px;
-  justify-content: center;
+.task-overview {
   align-items: center;
-  padding: 70px;
-
-}
-
-.Task-Overwiev__Infomation {
   background-color: #ffffff;
+  border-radius: 1.5em;
   display: flex;
-  flex-direction: column;
   height: 100%;
-  width: 100%;
-}
+  justify-content: center;
+  padding: 4.3em;
 
-.Task-Infomation__nav {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 10px;
-}
+  &__information {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 
-.Task-Overwiev__Infomation-Content {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
+    &__nav {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 0.6em;
+    }
+
+    &__content {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+    }
+  }
+
 }
 </style>

@@ -44,7 +44,7 @@ onMounted(() => {
 .home-view__overview {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 2.5em;
 }
 
 </style>

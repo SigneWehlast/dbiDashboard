@@ -19,14 +19,14 @@ import NavBar from '@/components/NavBar.vue';
 <style scoped>
 .home-view {
   display: flex;
-  gap: 80px;
+  gap: 5em;
   width: 100%;
 }
 
 .home-view-container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 2.5em;
   width: 100%;
 }
 </style>

@@ -39,21 +39,21 @@ const filteredTasks = computed(() => {
 </script>
 
 <template>
-    <div class="Task-Infomation__Name">
+    <div class="task-overview__information__name">
         <p class="p2 heading-bar">Titel</p>
         <div v-for="task in filteredTasks" :key="task.title">
             <p class="p1">{{ task.title }}</p>
         </div>
     </div>
 
-    <div class="Task-Overwiev__Infomation-Deadline">
+    <div class="task-overview__information__deadline">
         <p class="p2 heading-bar">Deadline</p>
         <div v-for="task in filteredTasks" :key="task.deadline">
             <p class="p1">{{ task.deadline }}</p>
         </div>
     </div>
 
-    <div class="Task-Overwiev__Infomation-Status">
+    <div class="task-overview__information__status">
         <p class="p2 heading-bar">Status</p>
         <div v-for="task in filteredTasks" :key="task.title" class="status-container">
             <span class="status-indicator"
@@ -64,55 +64,64 @@ const filteredTasks = computed(() => {
     </div>
 </template>
 <style scoped lang="scss">
-.Task-Infomation__Name {
-  display: flex;
-  flex-direction: column;
-  width: 55%;
-  gap: 20px;
+.task-overview {
+
+  &__information {
+  
+    &__name {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25em;
+      width: 55%;
+    }
+
+    &__deadline {
+      display: flex;
+      gap: 1.25em;
+      flex-direction: column;
+      width: 30%;
+    }
+
+    &__status {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25em;
+      width: 15%;
+    }
+  }
 }
 
-.Task-Overwiev__Infomation-Deadline {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  gap: 20px;
-}
+.status {
+  
+  &-container {
+    align-items: center;
+    display: flex;
+    gap: 0.5em;
+  }
 
-.Task-Overwiev__Infomation-Status {
-  display: flex;
-  flex-direction: column;
-  width: 15%;
-  gap: 20px;
-}
+  &-indicator {
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 0.6em;
+    width: 0.6em;
+  }
 
-.status-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+  &-done {
+    background-color: #5AEA62;
+  }
 
-.status-indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
+  &-overdue {
+    background-color: #FF3838;
+  }
 
-.status-done {
-  background-color: #5AEA62;
-}
-
-.status-overdue {
-  background-color: #FF3838;
-}
-
-.status-todo {
-  background-color: #FFF081;
+  &-todo {
+    background-color: #FFF081;
+  }
 }
 
 .heading-bar {
-  border-top: 1px solid #DADCDC;
   border-bottom: 1px solid #DADCDC;
+  border-top: 1px solid #DADCDC;
   padding-bottom: 5px;
   padding-top: 5px;
 }

@@ -4,21 +4,21 @@ import SearchBar from '@/components/SearchBar.vue';
 </script>
 
 <template>
-    <div class="Skema-Overwiev">
+    <div class="schedule-overview">
     <h1>Skemaer</h1>
     <button class="p2 btn-skema">+ Nyt Skema</button>
     </div>
 
-    <div class="Task-Overwiev">
-        <div class="Task-Overwiev__Infomation">
+    <div class="task-overview">
+        <div class="task-overview__information">
             <!-- Navigation øverst -->
-            <div class="Task-Infomation__nav">
+            <div class="task-overview__information__nav">
             <SearchBar />
                 <p class="p2">Filtre</p>
             </div>
 
             <!-- Indhold opdelt i tre kolonner -->
-            <div class="Task-Overwiev__Infomation-Content">
+            <div class="task-overview__information__content">
               <TaskOverviewData />
             </div>
         </div>
@@ -28,37 +28,40 @@ import SearchBar from '@/components/SearchBar.vue';
 
 
 <style scoped lang="scss">
-.Task-Overwiev {
-  background-color: #ffffff;
-  border-radius: 25px;
+@import "@/assets/main.scss";
+
+.task-overview{
+  background-color: $white;
+  border-radius: 1.5em;
   display: flex;
   height: 100%;
   justify-content: center;
+  padding: 4em 0em 4em 0em;
   width: 100%;
-  padding-top: 2em;
+
+
+  &__information {
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 90%;
+
+    &__nav {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 0.6em;
+    }
+
+    &__content {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+    }
+  }
 }
 
-.Task-Overwiev__Infomation {
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 90%;
-}
-
-.Task-Infomation__nav {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 10px;
-}
-
-.Task-Overwiev__Infomation-Content {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-}
-
-.Skema-Overwiev{
+.schedule-overview{
     display: flex;
     justify-content: space-between;
     padding-bottom: 5em;
@@ -66,9 +69,11 @@ import SearchBar from '@/components/SearchBar.vue';
 }
 
 .btn-skema{
-    width: 234px;
-    height: 71px;
-    background-color: #2B7393;
-    border-radius: 25px;
+    background-color: $main-blue;
+    border-style: none;
+    border-radius: 1em;
+    color: $white;
+    height: 75%;
+    width: 25%;
 }
 </style>

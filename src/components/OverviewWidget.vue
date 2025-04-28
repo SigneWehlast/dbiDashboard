@@ -5,25 +5,25 @@
 
 <template>
 <!-- Udskift til dymanisk text i p og h2 -->
-    <div class="WidgetMenu">
-        <div class="WidgetMenuBox">
+    <div class="widget-menu">
+        <div class="widget-menu__box">
             <p class="p1">Opgaver</p>
             <h2>3</h2>
         </div>
         <div class="divider"></div>
 
-        <div class="WidgetMenuBox">
+        <div class="widget-menu__box">
             <p class="p1">Deadlines</p>
             <h2>2</h2>
         </div>
         <div class="divider"></div>
-        <div class="WidgetMenuBox">
+        <div class="widget-menu__box">
             <p class="p1">Rapporter</p>
             <h2>172</h2>
         </div>
         <div class="divider"></div>
 
-        <div class="WidgetMenuBox">
+        <div class="widget-menu__box">
             <p class="p1">Objekter</p>
             <h2>19</h2>
         </div>
@@ -32,28 +32,29 @@
 </template>
 
 <style scoped lang="scss">
-.WidgetMenu {
-  align-items: center;
-  background-color: #fff;
-  border-radius: 25px;
-  display: flex;
-  height: 153px; //25% minus er 114.75px
-  justify-content: space-between;
-  padding: 0 70px;
-}
+@import "@/assets/main.scss";
 
-.WidgetMenuBox {
+.widget-menu {
   align-items: center;
+  background-color: $white;
+  border-radius: 1.5em;
   display: flex;
-  gap: 2.5em;
-  height: 1rem;
-  justify-content: center;
-  text-align: center;
+  justify-content: space-between;
+  padding: 1.5em 4.3em;
+
+  &__box {
+    align-items: center;
+    display: flex;
+    gap: 2.5em;
+    height: 1em;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .divider {
-  height: 80px;
-  width: 1px;
+  height: 5em;
+  width: 0.06em;
   background-color: #DADCDC;
 }
 </style>

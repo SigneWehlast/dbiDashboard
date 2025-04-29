@@ -4,14 +4,13 @@ import { useAuthStore } from '@/stores/AuthStore'
 
 const authStore = useAuthStore()
 
-// Fetch user count when component is mounted
 onMounted(() => {
   authStore.fetchUserCount()
 })
 
-// Computed properties to access user data from the store
-const user = computed(() => authStore.user)  // Fetching user data
-const userCount = computed(() => authStore.userCount)  // Fetching user count
+// Computed properties til at hente bruger data fra pinia store
+const user = computed(() => authStore.user)
+const userCount = computed(() => authStore.userCount)
 </script>
 
 <template>

@@ -1,38 +1,38 @@
 <script setup>
-import { onMounted, computed } from 'vue'
-import { useTaskStore } from '@/stores/ScheduleStore'
+import { onMounted, computed } from 'vue';
+import { useTaskStore } from '@/stores/ScheduleStore';
 
-const taskStore = useTaskStore()
+const taskStore = useTaskStore();
 
 onMounted(() => {
-  taskStore.fetchTasks()
-})
+  taskStore.fetchTasks();
+});
 
-const todayStr = new Date().toDateString()
+const todayStr = new Date().toDateString();
 
 function isToday(date) {
-  if (!date) return false
-  const d = date instanceof Date ? date : date.toDate?.() || new Date(date)
-  return d.toDateString() === todayStr
+  if (!date) return false;
+  const d = date instanceof Date ? date : date.toDate?.() || new Date(date);
+  return d.toDateString() === todayStr;
 }
 
 const totalTasks = computed(() =>
   taskStore.tasks.filter(task => {
-    return isToday(task.deadline) || task.status.toLowerCase() === 'overskredet'
+    return isToday(task.deadline) || task.status.toLowerCase() === 'overskredet';
   }).length
-)
+);
 
 const totalDeadlines = computed(() =>
   taskStore.tasks.filter(task => {
-    const status = task.status.toLowerCase()
-    return (isToday(task.deadline) && status === 'igangværende') || status === 'overskredet'
+    const status = task.status.toLowerCase();
+    return (isToday(task.deadline) && status === 'igangværende') || status === 'overskredet';
   }).length
-)
+);
 
-const totalReports = computed(() => taskStore.tasks.length)
+const totalReports = computed(() => taskStore.tasks.length);
 
 // Midlertidige værdier for Rapporter og Objekter
-const totalObjects = computed(() => 0)
+const totalObjects = computed(() => 0);
 </script>
 
 

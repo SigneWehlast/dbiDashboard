@@ -5,12 +5,12 @@ import globals from 'globals';
 export default [
   {
     name: 'app/files-to-lint',
-    files: ['**/*.{js,mjs,jsx,vue}'],
+    files: ['**/*.{js,mjs,jsx,vue}']
   },
 
   {
     name: 'app/files-to-ignore',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
+    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**']
   },
 
   {
@@ -23,21 +23,21 @@ export default [
 
   {
     rules: {
-      'comma-dangle': ["error", "never"],
-      'eqeqeq': ["error", "always"],
-      'indent': ["error", 2],
-      'no-eval': ["error"],
-      'no-trailing-spaces': ["error"],
-      'no-unused-vars': ["error"],
-      'no-var': ["error"],
-      'prefer-const': ["error"],
-      'quotes': ["error", "single"],
-      'semi': ["error", "always"],
-    },
+      'comma-dangle': ['error', 'never'],
+      'eqeqeq': ['error', 'always'],
+      'indent': ['error', 2],
+      'no-eval': ['error'],
+      'no-trailing-spaces': ['error'],
+      'no-unused-vars': ['error'],
+      'no-var': ['error'],
+      'prefer-const': ['error'],
+      'quotes': ['error', 'single'],
+      'semi': ['error', 'always']
+    }
   },
 
   js.configs.recommended,
-  ...pluginVue.configs['flat/essential'],
-]
+  ...pluginVue.configs['flat/essential']
+];
 
 

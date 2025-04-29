@@ -1,26 +1,26 @@
 <script setup>
-import { ref } from 'vue'
-import { useTaskStore } from '@/stores/ScheduleStore'
-import { useAuthStore } from '@/stores/AuthStore'
-import { addDoc, collection } from 'firebase/firestore'
-import { db } from '@/configs/firebase'
+import { ref } from 'vue';
+import { useTaskStore } from '@/stores/ScheduleStore';
+import { useAuthStore } from '@/stores/AuthStore';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '@/configs/firebase';
 
-const taskStore = useTaskStore()
-const authStore = useAuthStore()
-const title = ref('')
-const date = ref('')
-const errorComment = ref('')
-const errorStatus = ref('')
-const systemComment = ref('')
-const systemStatus = ref('')
+const taskStore = useTaskStore(); //fejl i ESLint, fordi den aldrig bruges
+const authStore = useAuthStore();
+const title = ref('');
+const date = ref('');
+const errorComment = ref('');
+const errorStatus = ref('');
+const systemComment = ref('');
+const systemStatus = ref('');
 
 
 const saveTemporary = async () => {
-  const uid = authStore.user?.uid 
-  console.log('authStore.user:', authStore.user)
+  const uid = authStore.user?.uid;
+  console.log('authStore.user:', authStore.user);
   if (!uid) {
-    console.error('Bruger ikke logget ind, UID ikke tilgængelig')
-    return
+    console.error('Bruger ikke logget ind, UID ikke tilgængelig');
+    return;
   }
 
   try {
@@ -34,19 +34,19 @@ const saveTemporary = async () => {
       systemComment: systemComment.value,
       systemStatus: systemStatus.value,
       uid: uid
-    })
-    console.log('Data gemt midlertidigt')
+    });
+    console.log('Data gemt midlertidigt');
   } catch (err) {
-    console.error('Fejl ved gemning:', err)
+    console.error('Fejl ved gemning:', err);
   }
-}
+};
 
 const saveAndClose = async () => {
-  const uid = authStore.user?.uid
-  console.log('authStore.user:', authStore.user) 
+  const uid = authStore.user?.uid;
+  console.log('authStore.user:', authStore.user);
   if (!uid) {
-    console.error('Bruger ikke logget ind, UID ikke tilgængelig')
-    return
+    console.error('Bruger ikke logget ind, UID ikke tilgængelig');
+    return;
   }
 
   try {
@@ -60,12 +60,12 @@ const saveAndClose = async () => {
       systemComment: systemComment.value,
       systemStatus: systemStatus.value,
       uid: uid
-    })
-    console.log('Data gemt og lukket')
+    });
+    console.log('Data gemt og lukket');
   } catch (err) {
-    console.error('Fejl ved gemning:', err)
+    console.error('Fejl ved gemning:', err);
   }
-}
+};
 </script>
 
 <template>
@@ -97,7 +97,6 @@ const saveAndClose = async () => {
       </label>
       <label class="p1" for="comment">Kommentar</label>
       <input type="text" v-model="systemComment" />
-      
       <div class="schedule-form__button">
         <button class="p1 p-white schedule-form__button__save" type="button" @click="saveAndClose">Gem og luk</button>
         <button class="p1 p-blue schedule-form__button__save-temporary" type="button" @click="saveTemporary">Gem midlertidig</button>
@@ -112,7 +111,7 @@ const saveAndClose = async () => {
 .schedule-form {
     background-color: v.$white;
     border-radius: 1.5em;
-    padding: 2em; 
+    padding: 2em;
 
     &__formular {
         display: flex;
@@ -122,7 +121,7 @@ const saveAndClose = async () => {
 
     &__button {
         display: flex;
-        gap: 1em; 
+        gap: 1em;
 
         &__save {
             background-color: v.$main-blue;

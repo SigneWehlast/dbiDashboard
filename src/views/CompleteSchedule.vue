@@ -1,5 +1,5 @@
 <script setup>
-import ScheduleForm from "@/components/ScheduleForm.vue";
+import ScheduleForm from '@/components/ScheduleForm.vue';
 </script>
 
 <template>

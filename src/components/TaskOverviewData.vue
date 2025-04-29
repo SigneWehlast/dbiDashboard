@@ -1,38 +1,39 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { defineProps } from 'vue'
-import { useTaskStore } from '@/stores/ScheduleStore'
+import { computed, onMounted } from 'vue';
+import { defineProps } from 'vue';
+import { useTaskStore } from '@/stores/ScheduleStore';
 
 const props = defineProps({
   onlyToday: {
     type: Boolean,
     default: false
   }
-})
+});
 
-const store = useTaskStore()
+const store = useTaskStore();
 
 onMounted(() => {
-  store.fetchTasks()
-})
+  store.fetchTasks();
+});
 
+//er aldrig brugt
 function formatDate(date) {
-  if (!date) return ''
+  if (!date) return '';
   return date.toLocaleDateString('da-DK', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric'
-  })
+  });
 }
 
-const today = new Date().toISOString().split('T')[0]
+const today = new Date().toISOString().split('T')[0];
 
 const filteredTasks = computed(() => {
   if (props.onlyToday) {
-    return store.tasks.filter(task => task.deadline === today)
+    return store.tasks.filter(task => task.deadline === today);
   }
-  return store.tasks
-})
+  return store.tasks;
+});
 </script>
 
 <template>
@@ -62,9 +63,7 @@ const filteredTasks = computed(() => {
 </template>
 <style scoped lang="scss">
 .task-overview {
-
   &__information {
-  
     &__name {
       display: flex;
       flex-direction: column;
@@ -89,7 +88,6 @@ const filteredTasks = computed(() => {
 }
 
 .status {
-  
   &-container {
     align-items: center;
     display: flex;

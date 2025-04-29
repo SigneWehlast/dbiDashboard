@@ -36,7 +36,7 @@ const { user } = storeToRefs(authStore);
     align-items: center;
     display: flex;
     gap: 1.5em;
-  
+
     &-company {
       color: v.$dark-grey;
       font-size: 20px;

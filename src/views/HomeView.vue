@@ -1,6 +1,6 @@
 <script setup>
-import OverviewWidget from "../components/OverviewWidget.vue";
-import TaskOverview from "../components/TaskOverview.vue";
+import OverviewWidget from '../components/OverviewWidget.vue';
+import TaskOverview from '../components/TaskOverview.vue';
 
 import { ref, onMounted } from 'vue';
 import { onAuthStateChanged } from 'firebase/auth';

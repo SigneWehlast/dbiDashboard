@@ -15,13 +15,13 @@
     height: 1.5em;
     width: 1.5em;
   }
-  
+
   &-wrapper {
     align-items: center;
     display: flex;
     gap: 1.5em;
   }
-  
+
   &-input {
     background: none;
     border: none;

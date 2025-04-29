@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia'  // Sørg for at importere defineStore
 import { ref } from 'vue'
-import { getDoc, doc } from 'firebase/firestore'
+import { getDoc, doc, collection, getDocs } from 'firebase/firestore'
 import { db } from '@/configs/firebase'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
@@ -17,6 +17,7 @@ export const useAuthStore = defineStore('auth', () => {
   })
 
   const isAuthReady = ref(false)
+  const userCount = ref(0)  // Antal brugere
 
   // Funktion til at sætte brugerdata
   const setUser = (userData) => {
@@ -52,6 +53,18 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  // Hent antal brugere fra Firestore
+  const fetchUserCount = async () => {
+    try {
+      const usersRef = collection(db, 'users')
+      const querySnapshot = await getDocs(usersRef)
+      userCount.value = querySnapshot.size
+      console.log('Antal brugere:', userCount.value)
+    } catch (err) {
+      console.error('Fejl ved hentning af brugere:', err)
+    }
+  }
+
   // Firebase Auth - overvåg loginstatus
   onAuthStateChanged(auth, (firebaseUser) => {
     if (firebaseUser) {
@@ -67,8 +80,10 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     user,
     isAuthReady,
+    userCount,
     setUser,
     clearUser,
-    fetchUserData
+    fetchUserData,
+    fetchUserCount
   }
 })

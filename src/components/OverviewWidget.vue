@@ -29,7 +29,6 @@ const totalDeadlines = computed(() =>
   }).length
 )
 
-
 const totalReports = computed(() => taskStore.tasks.length)
 
 // Midlertidige værdier for Rapporter og Objekter

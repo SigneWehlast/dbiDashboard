@@ -44,7 +44,7 @@ const totalDeadlines = computed(() =>
 
 .deviation-PerMonth {
   background-color: v.$white;
-  height: 30rem;
+  height: 25rem;
   width: 35%;
   border-radius: 1.5em;
   display: flex;
@@ -55,9 +55,9 @@ const totalDeadlines = computed(() =>
   box-sizing: border-box;
 }
   .top-section {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
   }
 
 .content {

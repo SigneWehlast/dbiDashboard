@@ -11,7 +11,7 @@
 
 .ReportPerMonth{
   background-color: v.$white;
-  height: 30rem;
+  height: 25rem;
   width: 60%;
   border-radius: 1.5em;
   }

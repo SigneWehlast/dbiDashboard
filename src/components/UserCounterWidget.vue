@@ -28,12 +28,11 @@ onMounted(() => {
 
 .Counter {
   background-color: v.$white;
-  height: 30rem;
+  height: 25rem;
   width: 35%;
   border-radius: 1.5em;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   padding: 2rem;
   box-sizing: border-box;
@@ -41,8 +40,8 @@ onMounted(() => {
 
 .top-section {
   display: flex;
-  align-items: center;
-  gap: 2rem;
+  justify-content: space-between;
+  width: 90%;
 }
 
 .content {

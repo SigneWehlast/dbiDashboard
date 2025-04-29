@@ -29,11 +29,18 @@ const filteredTasks = computed(() => {
   if (props.onlyToday) {
     return store.tasks.filter(task => {
       const taskDate = task.deadline?.split('T')[0]
-      return taskDate === today || taskDate < today
+      return taskDate === today || task.status === 'Overskredet'
     })
   }
   return store.tasks
 })
+
+//Tager dato og omskriver til DD/MM/YYYY
+function formatDate(dateString) {
+  if (!dateString) return ''
+  const [year, month, day] = dateString.split('T')[0].split('-')
+  return `${day}.${month}.${year}`
+}
 </script>
 
 <template>
@@ -48,7 +55,7 @@ const filteredTasks = computed(() => {
   <div class="task-overview__information__deadline">
     <p class="p2 heading-bar">Deadline</p>
     <div v-if="isAuthReady" v-for="task in filteredTasks" :key="task.deadline">
-      <p class="p1">{{ task.deadline }}</p>
+      <p class="p1">{{ formatDate(task.deadline) }}</p>
     </div>
     <p v-else class="p1">Indlæser...</p>
   </div>

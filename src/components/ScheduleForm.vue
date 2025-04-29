@@ -5,7 +5,6 @@ import { useAuthStore } from '@/stores/AuthStore'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '@/configs/firebase'
 
-// Brug af Pinia store
 const taskStore = useTaskStore()
 const authStore = useAuthStore()
 const title = ref('')
@@ -15,10 +14,10 @@ const errorStatus = ref('')
 const systemComment = ref('')
 const systemStatus = ref('')
 
-// Funktion til at gemme midlertidigt
+
 const saveTemporary = async () => {
-  const uid = authStore.user?.uid  // Bruger uid fra authStore
-  console.log('authStore.user:', authStore.user)  // Debug linje, kontrol af brugerdata
+  const uid = authStore.user?.uid 
+  console.log('authStore.user:', authStore.user)
   if (!uid) {
     console.error('Bruger ikke logget ind, UID ikke tilgængelig')
     return
@@ -42,10 +41,9 @@ const saveTemporary = async () => {
   }
 }
 
-// Funktion til at gemme og lukke
 const saveAndClose = async () => {
-  const uid = authStore.user?.uid  // Bruger uid fra authStore
-  console.log('authStore.user:', authStore.user)  // Debug linje, kontrol af brugerdata
+  const uid = authStore.user?.uid
+  console.log('authStore.user:', authStore.user) 
   if (!uid) {
     console.error('Bruger ikke logget ind, UID ikke tilgængelig')
     return

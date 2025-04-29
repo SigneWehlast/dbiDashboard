@@ -39,33 +39,33 @@
 </template>
 
 <style scoped lang="scss">
-
+@use "@/assets/main.scss" as v;
 
 .schedule-form {
-    background-color: #FFFFFF;
+    background-color: v.$white;
     border-radius: 1.5em;
-    padding: 2em; //ikke rigtig
+    padding: 2em; 
 
     &__formular {
         display: flex;
         flex-direction: column;
-        gap: 1.5em; //ikke rigtig
+        gap: 1.5em;
     }
 
     &__button {
         display: flex;
-        gap: 1em; //ikke rigtig
+        gap: 1em; 
 
         &__save {
-            background-color: #2B7393;
+            background-color: v.$main-blue;
             border-radius: 0.5em;
             border-style: none;
             padding: 0.5em;
         }
 
         &__save-temporary {
-            background-color: #FFFFFF;
-            border-color: #2B7393;
+            background-color: v.$white;
+            border-color: v.$main-blue;
             border-radius: 0.5em;
             border-style: solid;
             padding: 0.5em;

@@ -28,10 +28,10 @@ import SearchBar from '@/components/SearchBar.vue';
 
 
 <style scoped lang="scss">
-@import "@/assets/main.scss";
+@use "@/assets/main.scss" as v;
 
 .task-overview{
-  background-color: $white;
+  background-color: v.$white;
   border-radius: 1.5em;
   display: flex;
   height: 100%;
@@ -41,7 +41,7 @@ import SearchBar from '@/components/SearchBar.vue';
 
 
   &__information {
-    background-color: $white;
+    background-color: v.$white;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -69,10 +69,10 @@ import SearchBar from '@/components/SearchBar.vue';
 }
 
 .btn-skema{
-    background-color: $main-blue;
+    background-color: v.$main-blue;
     border-style: none;
     border-radius: 1em;
-    color: $white;
+    color: v.$white;
     height: 75%;
     width: 25%;
 }

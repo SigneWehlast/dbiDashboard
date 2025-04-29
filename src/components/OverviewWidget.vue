@@ -32,11 +32,11 @@
 </template>
 
 <style scoped lang="scss">
-@import "@/assets/main.scss";
+@use "@/assets/main.scss" as v;
 
 .widget-menu {
   align-items: center;
-  background-color: $white;
+  background-color: v.$white;
   border-radius: 1.5em;
   display: flex;
   justify-content: space-between;

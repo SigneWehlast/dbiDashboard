@@ -67,20 +67,20 @@ const goToRegister = () => {
   </template>
 
 <style scoped lang="scss">
-@import "@/assets/main.scss";
+@use "@/assets/main.scss" as v;
 
 .auth {
 
   &-wrapper {
     align-items: center;
-    background-color: $background-color;
+    background-color: v.$background-color;
     display: flex;
     height: 100vh;
     justify-content: center;
   }
 
   &-container {
-    background: $white;
+    background: v.$white;
     border-radius: 1.25em;
     box-shadow: 0 0 1.25em rgba(0, 0, 0, 0.05);
     padding: 3em 2em;
@@ -104,10 +104,10 @@ const goToRegister = () => {
 }
 
 .login-button {
-  background-color: $main-blue;
+  background-color: v.$main-blue;
   border: none;
   border-radius: 12px;
-  color: $white;
+  color: v.$white;
   cursor: pointer;
   padding: 14px;
   transition: background-color 0.3s;

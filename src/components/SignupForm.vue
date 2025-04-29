@@ -88,7 +88,7 @@ const goToLogin = () => {
   </template>
 
 <style scoped lang="scss">
-@import "@/assets/main.scss";
+@use "@/assets/main.scss" as v;
 
 .auth {
   display: flex;
@@ -96,10 +96,10 @@ const goToLogin = () => {
 
   &-container {
     align-items: center;
-    background: $white;
+    background: v.$white;
     border-radius: 12px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    color: $dark-grey;
+    color: v.$dark-grey;
     display: flex;
     flex-direction: column;
     width: 40%;
@@ -112,10 +112,10 @@ const goToLogin = () => {
     }
 
     &__btn {
-      background-color: $main-blue;
+      background-color: v.$main-blue;
       border: none;
       border-radius: 6px;
-      color: $white;
+      color: v.$white;
       cursor: pointer;
       font-size: 16px;
       padding: 0.8em;
@@ -123,7 +123,7 @@ const goToLogin = () => {
 
       &:hover {
         background-color: #A4CBE0;
-        color: $dark-grey;
+        color: v.$dark-grey;
       }
     }
   }
@@ -136,9 +136,9 @@ label {
 }
 
 input {
-  border: 2px solid #2B7393;
+  border: 2px solid v.$main-blue;
   border-radius: 6px;
-  color: $dark-grey;
+  color: v.$dark-grey;
   font-size: 16px;
   outline: none;
   padding: 0.7em;
@@ -148,7 +148,7 @@ input {
   margin-top: 1em;
   cursor: pointer;
   font-size: 14px;
-  color: $dark-grey;
+  color: v.$dark-grey;
 }
 
 </style>

@@ -47,6 +47,8 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/main.scss" as v;
+
 .profile-bar {
   align-items: center;
   display: flex;
@@ -60,7 +62,7 @@ onMounted(() => {
     gap: 1.5em;
   
     &-company {
-      color: #5F6B6C;
+      color: v.$dark-grey;
       font-size: 20px;
       font-weight: 200;
       letter-spacing: 0.01em;

@@ -39,14 +39,14 @@ const isHovered = ref(false);
 </template>
 
 <style scoped lang="scss">
-@import "@/assets/main.scss";
+@use "@/assets/main.scss" as v;
 
 button {
   align-items: center;
   background-color: #F4F5F5;
   border: none;
   border-radius: 25px;
-  color: $dark-grey;
+  color: v.$dark-grey;
   cursor: pointer;
   display: flex;
   gap: 1.5em;
@@ -57,12 +57,12 @@ button {
 
   &:hover {
     background-color: #A4CBE0;
-    color: $white;
+    color: v.$white;
   }
 
   &.active {
-    background-color: $main-blue;
-    color: $white;
+    background-color: v.$main-blue;
+    color: v.$white;
   }
 }
 

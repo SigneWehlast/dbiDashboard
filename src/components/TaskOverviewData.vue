@@ -1,6 +1,7 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { defineProps } from 'vue'
+import { useTaskStore } from '@/stores/TaskStore'
 
 const props = defineProps({
   onlyToday: {
@@ -9,17 +10,15 @@ const props = defineProps({
   }
 })
 
-const tasks = ref([
-  { title: "ABA anlæg (Månedlig egenkontrol) BR18/7.5.1.3", deadline: "23.03.2025", status: "Udført" },
-  { title: "ABA anlæg (Månedlig egenkontrol) BR18/7.5.1.3", deadline: "28.04.2025", status: "Udført" },
-  { title: "ABA Månedskontrol 6.1", deadline: "19.02.2025", status: "Overskredet" },
-  { title: "ABA Månedskontrol 6.1", deadline: "28.04.2025", status: "Overskredet" },
-  { title: "ABV anlæg (Månedlig egenkontrol) BR18/7.5.8.1", deadline: "28.02.2025", status: "Overskredet" },
-  { title: "Tjek ventilationssystem (Ugentlig rutine)", deadline: "30.04.2025", status: "Igangværende" },
-  { title: "Tjek ventilationssystem (Ugentlig rutine)", deadline: "28.04.2025", status: "Igangværende" }
-]);
+const store = useTaskStore()
+
+onMounted(() => {
+    console.log('Fetching tasks...')
+  store.fetchTasks()
+})
 
 function formatDate(date) {
+  if (!date) return ''
   return date.toLocaleDateString('da-DK', {
     day: '2-digit',
     month: '2-digit',
@@ -27,15 +26,14 @@ function formatDate(date) {
   })
 }
 
-const today = formatDate(new Date())
+const today = new Date().toISOString().split('T')[0]
 
 const filteredTasks = computed(() => {
   if (props.onlyToday) {
-    return tasks.value.filter(task => task.deadline === today)
+    return store.tasks.filter(task => task.deadline === today)
   }
-  return tasks.value
+  return store.tasks
 })
-
 </script>
 
 <template>

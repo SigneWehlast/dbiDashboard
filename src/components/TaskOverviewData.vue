@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { defineProps } from 'vue'
-import { useTaskStore } from '@/stores/TaskStore'
+import { useTaskStore } from '@/stores/ScheduleStore'
 
 const props = defineProps({
   onlyToday: {
@@ -13,7 +13,6 @@ const props = defineProps({
 const store = useTaskStore()
 
 onMounted(() => {
-    console.log('Fetching tasks...')
   store.fetchTasks()
 })
 

@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import { db } from '@/configs/firebase'
 import { collection, getDocs } from 'firebase/firestore'
 
-export const useTaskStore = defineStore('taskStore', () => {
+export const useTaskStore = defineStore('ScheduleStore', () => {
   const tasks = ref([])
 
   async function fetchTasks() {

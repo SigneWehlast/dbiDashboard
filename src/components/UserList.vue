@@ -11,10 +11,12 @@
             </tr>
         </thead>
         <tbody>
-            <td class="p1">u</td>
-            <td class="p1">u</td>
-            <td class="p1">u</td>
-            <td class="p1">u</td>
+            <tr>
+                <td class="p1">u</td>
+                <td class="p1">u</td>
+                <td class="p1">u</td>
+                <td class="p1">u</td>
+            </tr>
         </tbody>
     </table>
 </template>

@@ -1,0 +1,50 @@
+<script setup>
+</script>
+<template>
+    <table class="users-overview">
+        <thead>
+            <tr>
+                <th class="h3">Navn</th>
+                <th class="h3">E-mail</th>
+                <th class="h3">Virksomhed</th>
+                <th class="h3">Rolle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <td class="p1">u</td>
+            <td class="p1">u</td>
+            <td class="p1">u</td>
+            <td class="p1">u</td>
+        </tbody>
+    </table>
+</template>
+<style scoped lang="scss">
+@use "@/assets/main.scss" as v;
+
+table {
+    background-color: v.$white;
+  border-collapse: collapse;
+  border-left: 1px solid v.$main-blue;
+  border-right: 1px solid v.$main-blue;
+  margin-top: 1em;
+  text-align: left;
+  width: 100%;
+
+}
+
+th, td {
+  border-bottom: 1px solid v.$main-blue;
+  border-top: 1px solid v.$main-blue;
+  padding: 0.75em;
+}
+
+.h3 {
+    color: v.$dark-grey;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+</style>

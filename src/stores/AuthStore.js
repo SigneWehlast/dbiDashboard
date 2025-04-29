@@ -1,4 +1,3 @@
-// src/stores/AuthStore.js
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { getDoc, doc } from 'firebase/firestore'
@@ -16,6 +15,8 @@ export const useAuthStore = defineStore('auth', () => {
     lastName: '',
     uid: ''
   })
+
+  const isAuthReady = ref(false)
 
   // Funktion til at sætte brugerdata
   const setUser = (userData) => {
@@ -55,15 +56,17 @@ export const useAuthStore = defineStore('auth', () => {
   onAuthStateChanged(auth, (firebaseUser) => {
     if (firebaseUser) {
       console.log('Bruger er logget ind:', firebaseUser)
-      fetchUserData(firebaseUser.uid) // Hent og opdater brugerdata ved login
+      fetchUserData(firebaseUser.uid)
     } else {
       console.log('Ingen bruger logget ind')
-      clearUser() // Tøm user-data hvis ingen bruger er logget ind
+      clearUser()
     }
+    isAuthReady.value = true
   })
 
   return {
     user,
+    isAuthReady,
     setUser,
     clearUser,
     fetchUserData

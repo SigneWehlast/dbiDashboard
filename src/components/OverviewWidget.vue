@@ -1,35 +1,67 @@
 <script setup>
+import { onMounted, computed } from 'vue'
+import { useTaskStore } from '@/stores/ScheduleStore'
 
+const taskStore = useTaskStore()
 
+onMounted(() => {
+  taskStore.fetchTasks()
+})
+
+const todayStr = new Date().toDateString()
+
+function isToday(date) {
+  if (!date) return false
+  const d = date instanceof Date ? date : date.toDate?.() || new Date(date)
+  return d.toDateString() === todayStr
+}
+
+const totalTasks = computed(() =>
+  taskStore.tasks.filter(task => {
+    return isToday(task.deadline) || task.status.toLowerCase() === 'overskredet'
+  }).length
+)
+
+const totalDeadlines = computed(() =>
+  taskStore.tasks.filter(task => {
+    const status = task.status.toLowerCase()
+    return (isToday(task.deadline) && status === 'igangværende') || status === 'overskredet'
+  }).length
+)
+
+// Midlertidige værdier for Rapporter og Objekter
+const totalReports = computed(() => 172)
+const totalObjects = computed(() => 19)
 </script>
 
+
 <template>
-<!-- Udskift til dymanisk text i p og h2 -->
-    <div class="widget-menu">
-        <div class="widget-menu__box">
-            <p class="p1">Opgaver</p>
-            <h2>3</h2>
-        </div>
-        <div class="divider"></div>
-
-        <div class="widget-menu__box">
-            <p class="p1">Deadlines</p>
-            <h2>2</h2>
-        </div>
-        <div class="divider"></div>
-        <div class="widget-menu__box">
-            <p class="p1">Rapporter</p>
-            <h2>172</h2>
-        </div>
-        <div class="divider"></div>
-
-        <div class="widget-menu__box">
-            <p class="p1">Objekter</p>
-            <h2>19</h2>
-        </div>
-
+  <div class="widget-menu">
+    <div class="widget-menu__box">
+      <p class="p1">Opgaver</p>
+      <h2>{{ totalTasks }}</h2>
     </div>
+    <div class="divider"></div>
+
+    <div class="widget-menu__box">
+      <p class="p1">Deadlines</p>
+      <h2>{{ totalDeadlines }}</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="widget-menu__box">
+      <p class="p1">Rapporter</p>
+      <h2>{{ totalReports }}</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="widget-menu__box">
+      <p class="p1">Objekter</p>
+      <h2>{{ totalObjects }}</h2>
+    </div>
+  </div>
 </template>
+
 
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;

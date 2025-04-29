@@ -32,7 +32,7 @@ const totalDeadlines = computed(() =>
 const totalReports = computed(() => taskStore.tasks.length)
 
 // Midlertidige værdier for Rapporter og Objekter
-const totalObjects = computed(() => 19)
+const totalObjects = computed(() => 0)
 </script>
 
 

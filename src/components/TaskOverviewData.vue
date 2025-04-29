@@ -27,7 +27,10 @@ const today = new Date().toISOString().split('T')[0]
 
 const filteredTasks = computed(() => {
   if (props.onlyToday) {
-    return store.tasks.filter(task => task.deadline === today)
+    return store.tasks.filter(task => {
+      const taskDate = task.deadline?.split('T')[0]
+      return taskDate === today || taskDate < today
+    })
   }
   return store.tasks
 })

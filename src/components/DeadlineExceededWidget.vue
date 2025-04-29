@@ -1,28 +1,28 @@
 <script setup>
-import { onMounted, computed } from 'vue'
-import { useTaskStore } from '@/stores/ScheduleStore'
+import { onMounted, computed } from 'vue';
+import { useTaskStore } from '@/stores/ScheduleStore';
 
-const taskStore = useTaskStore()
+const taskStore = useTaskStore();
 
 onMounted(() => {
-  taskStore.fetchTasks() // Fetch tasks when component is mounted
-})
+  taskStore.fetchTasks(); // Fetch tasks when component is mounted
+});
 
-const todayStr = new Date().toDateString()
+const todayStr = new Date().toDateString();
 
 function isToday(date) {
-  if (!date) return false
-  const d = date instanceof Date ? date : date.toDate?.() || new Date(date)
-  return d.toDateString() === todayStr
+  if (!date) return false;
+  const d = date instanceof Date ? date : date.toDate?.() || new Date(date);
+  return d.toDateString() === todayStr;
 }
 
 // Computed property for overdue deadlines
 const totalDeadlines = computed(() =>
   taskStore.tasks.filter(task => {
-    const status = task.status.toLowerCase()
-    return (isToday(task.deadline) && status === 'igangværende') || status === 'overskredet'
+    const status = task.status.toLowerCase();
+    return (isToday(task.deadline) && status === 'igangværende') || status === 'overskredet';
   }).length
-)
+);
 </script>
 
 <template>

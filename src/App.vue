@@ -1,7 +1,7 @@
 <script setup>
 import ProfileBar from '@/components/ProfileBar.vue';
 import NavBar from '@/components/NavBar.vue';
-
+import PageFooter from './components/PageFooter.vue';
 </script>
 
 <template>
@@ -14,6 +14,9 @@ import NavBar from '@/components/NavBar.vue';
 
     </div>
 
+<div>
+  <PageFooter />
+</div>
 </template>
 
 <style scoped>

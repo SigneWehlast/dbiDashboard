@@ -1,12 +1,13 @@
 <script setup>
 import { ref } from 'vue'
 import { useTaskStore } from '@/stores/ScheduleStore'
-import { useAuth } from '@/stores/AuthStore'
+import { useAuthStore } from '@/stores/AuthStore'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '@/configs/firebase'
 
+// Brug af Pinia store
 const taskStore = useTaskStore()
-const authStore = useAuth()
+const authStore = useAuthStore()
 const title = ref('')
 const date = ref('')
 const errorComment = ref('')
@@ -14,10 +15,12 @@ const errorStatus = ref('')
 const systemComment = ref('')
 const systemStatus = ref('')
 
+// Funktion til at gemme midlertidigt
 const saveTemporary = async () => {
-  const uid = authStore.user?.uid
+  const uid = authStore.user?.uid  // Bruger uid fra authStore
+  console.log('authStore.user:', authStore.user)  // Debug linje, kontrol af brugerdata
   if (!uid) {
-    console.error('Bruger ikke logget ind')
+    console.error('Bruger ikke logget ind, UID ikke tilgængelig')
     return
   }
 
@@ -39,10 +42,12 @@ const saveTemporary = async () => {
   }
 }
 
+// Funktion til at gemme og lukke
 const saveAndClose = async () => {
-  const uid = authStore.user?.uid
+  const uid = authStore.user?.uid  // Bruger uid fra authStore
+  console.log('authStore.user:', authStore.user)  // Debug linje, kontrol af brugerdata
   if (!uid) {
-    console.error('Bruger ikke logget ind')
+    console.error('Bruger ikke logget ind, UID ikke tilgængelig')
     return
   }
 
@@ -103,8 +108,6 @@ const saveAndClose = async () => {
   </div>
 </template>
 
-
-
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
 
@@ -138,7 +141,6 @@ const saveAndClose = async () => {
             padding: 0.5em;
         }
     }
-
 }
 
 .p-blue {

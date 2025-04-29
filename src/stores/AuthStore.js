@@ -13,11 +13,12 @@ export const useAuthStore = defineStore('auth', () => {
     email: '',
     firstName: '',
     lastName: '',
-    uid: ''
+    uid: '',
+    role: ''
   })
 
   const isAuthReady = ref(false)
-  const userCount = ref(0)  // Antal brugere
+  const userCount = ref(0)
 
   // Funktion til at sætte brugerdata
   const setUser = (userData) => {
@@ -32,7 +33,8 @@ export const useAuthStore = defineStore('auth', () => {
       email: '',
       firstName: '',
       lastName: '',
-      uid: ''
+      uid: '',
+      role: ''
     }
   }
 
@@ -41,10 +43,21 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const userRef = doc(db, 'users', uid)
       const userSnap = await getDoc(userRef)
-
+  
       if (userSnap.exists()) {
-        setUser(userSnap.data())
-        console.log('Brugerdata hentet:', userSnap.data())
+        const userData = userSnap.data()
+        
+        console.log('Brugerdata hentet:', userData)
+  
+        setUser({
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.email,
+          companyName: userData.companyName,
+          role: userData.role,
+          uid: userData.uid,
+          createdAt: userData.createdAt
+        })
       } else {
         console.error('Bruger ikke fundet i databasen')
       }

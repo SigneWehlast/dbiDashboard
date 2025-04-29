@@ -58,7 +58,7 @@ const saveAndClose = async () => {
       createdAt: new Date(),
       errorComment: errorComment.value,
       errorStatus: errorStatus.value,
-      status: 'Done',
+      status: 'Udført',
       systemComment: systemComment.value,
       systemStatus: systemStatus.value,
       uid: uid

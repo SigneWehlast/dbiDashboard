@@ -16,7 +16,7 @@
                 Nej
             </label>
             <label class="p1" for="comment">Kommentar</label>
-            <textarea name="comment" rows="3"></textarea>
+            <input type="text">
 
             <p class="p1">Evt. fejlmeldinger er udbedret eller under udbedring?</p>
             <label class="p1">
@@ -28,8 +28,8 @@
                 Nej
             </label>
             <label class="p1" for="comment">Kommentar</label>
-            <textarea name="comment" rows="3"></textarea>
-            <div class="schedule-form__button">
+            <input type="text">
+                <div class="schedule-form__button">
                 <button class="p1 p-white schedule-form__button__save" type="button">Gem og luk</button>
                 <button class="p1 p-blue schedule-form__button__save-temporary" type="button">Gem midlertidig</button>
             </div>
@@ -94,7 +94,7 @@ label {
         width: 1.5em;
     }
 
-textarea {
+input[type="text"] {
     border-color: #2B7393;
     border-radius: 0.5em;
     border-style: solid;

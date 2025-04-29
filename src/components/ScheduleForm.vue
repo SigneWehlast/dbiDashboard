@@ -74,14 +74,6 @@
 
 }
 
-.p-blue {
-    color: #2B7393;
-}
-
-.p-white {
-    color: #FFFFFF;
-}
-
 label {
     border-radius: 50%;
 }

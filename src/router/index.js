@@ -30,7 +30,18 @@ const router = createRouter({
       path: '/CompleteSchedule',
       name: 'CompleteSchedule',
       component: () => import('../views/CompleteSchedule.vue')
+    },
+    {
+      path: '/Report',
+      name: 'Report',
+      component: () => import('@/views/ReportView.vue')
+    },
+    {
+      path: '/Users',
+      name: 'Users',
+      component: () => import('@/views/UsersView.vue')
     }
+
   ]
 });
 

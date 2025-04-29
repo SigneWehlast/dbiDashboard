@@ -5,6 +5,7 @@ $dark-grey: #707070;
 $paragraph-grey: #D1D3D4;
 $white: #ffffff;
 
+
 //font
 $main-font: 'D-DIN', sans-serif;
 
@@ -51,6 +52,14 @@ h3 {
   margin: 0;
   letter-spacing: 0.01em;
   color: $paragraph-grey;
+}
+
+.p-blue {
+  color: $main-blue;
+}
+
+.p-white {
+  color: $white;
 }
 
 body {

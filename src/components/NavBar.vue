@@ -54,14 +54,16 @@ const route = useRoute();
         <p class="p1">Objekter</p>
       </NavBarButton>
 
-      <NavBarButton
-        :imgSrc="RapporterIcon"
-        :hoverImgSrc="RapporterHoverIcon"
-        imgAlt="rapporter icon"
-        :isActive="route.path === '/Reports'"
-      >
-        <p class="p1">Rapporter</p>
-      </NavBarButton>
+      <router-link class="routerlink" to="/Report">
+        <NavBarButton
+          :imgSrc="RapporterIcon"
+          :hoverImgSrc="RapporterHoverIcon"
+          imgAlt="rapporter icon"
+          :isActive="route.path === '/Report'"
+        >
+          <p class="p1">Rapporter</p>
+        </NavBarButton>
+      </router-link>
 
       <NavBarButton
         :imgSrc="DokumenterIcon"
@@ -81,14 +83,16 @@ const route = useRoute();
         <p class="p1">Planlægning</p>
       </NavBarButton>
 
-      <NavBarButton
-        :imgSrc="BrugereIcon"
-        :hoverImgSrc="BrugereHoverIcon"
-        imgAlt="brugere icon"
-        :isActive="route.path === '/Users'"
-      >
-        <p class="p1">Brugere</p>
-      </NavBarButton>
+      <router-link class="routerlink" to="/Users">
+        <NavBarButton
+          :imgSrc="BrugereIcon"
+          :hoverImgSrc="BrugereHoverIcon"
+          imgAlt="brugere icon"
+          :isActive="route.path === '/Users'"
+        >
+          <p class="p1">Brugere</p>
+        </NavBarButton>
+      </router-link>
     </nav>
   </div>
 </template>

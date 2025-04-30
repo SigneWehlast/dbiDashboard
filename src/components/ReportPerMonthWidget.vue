@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
 import { useTaskStore } from '@/stores/ScheduleStore';
-import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip,} from 'chart.js';
+import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip } from 'chart.js';
 
-Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip,);
+Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 
 const taskStore = useTaskStore();
 const chartCanvas = ref(null);
@@ -12,6 +12,9 @@ let chartInstance = null;
 onMounted(() => {
   taskStore.fetchTasks();
 });
+
+// Definerer månederne i den korrekte rækkefølge
+const monthsOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const tasksDonePerMonth = computed(() => {
   const counts = {};
@@ -28,7 +31,13 @@ const tasksDonePerMonth = computed(() => {
     counts[label] = (counts[label] || 0) + 1;
   });
 
-  return counts;
+  // Opretter et array for at sikre at månederne vises i den rigtige rækkefølge
+  const sortedCounts = monthsOrder.reduce((acc, month) => {
+    acc[month] = counts[month] || 0;  // Sætter 0 for måneder uden data
+    return acc;
+  }, {});
+
+  return sortedCounts;
 });
 
 // Opdater chart når data ændrer sig
@@ -36,9 +45,9 @@ watch(tasksDonePerMonth, (newData) => {
   const labels = Object.keys(newData);
   const data = Object.values(newData);
 
-  if (chartInstance) chartInstance.destroy();
+  if (chartInstance) chartInstance.destroy(); // Fjern tidligere instans
 
-//Vores Chart.js style
+  // Vores Chart.js style
   chartInstance = new Chart(chartCanvas.value, {
     type: 'bar',
     data: {
@@ -132,8 +141,8 @@ watch(tasksDonePerMonth, (newData) => {
 <template>
   <div class="ReportPerMonth">
     <div class="top-section">
-    <p class="p1">Rapporter pr. måned</p>
-    <p class="p1">...</p> <!--Indsæt icon her-->
+      <p class="p1">Rapporter pr. måned</p>
+      <p class="p1">...</p> <!--Indsæt icon her-->
     </div>
     <div class="content">
       <canvas ref="chartCanvas"></canvas>
@@ -149,19 +158,19 @@ watch(tasksDonePerMonth, (newData) => {
   height: 25rem;
   width: 60%;
   border-radius: 1.5em;
-  }
+}
 
-  .top-section {
+.top-section {
   display: flex;
   justify-content: space-between;
   width: 90%;
   padding: 2em;
-  }
+}
 
-  .content{
-    display: flex;
-    justify-content: center;
-    padding-left: 2rem;
-    padding-right: 2em;
-  }
+.content{
+  display: flex;
+  justify-content: center;
+  padding-left: 2rem;
+  padding-right: 2em;
+}
 </style>

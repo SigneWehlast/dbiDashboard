@@ -150,7 +150,7 @@ function clearFilters() {
   &__button {
     display: flex;
     gap: 1em;
-    margin-top: 2em;
+    margin: 2em 0 2em 0;
 
     &__search {
       background-color: v.$main-blue;
@@ -178,12 +178,12 @@ function clearFilters() {
   &__checkbox {
     display: flex;
     flex-direction: column;
-    margin-top: 2em;
   }
 
   &__filter {
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 1em;
   }
 }
 
@@ -204,7 +204,7 @@ select {
 
 label {
   box-sizing: border-box;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   width: calc(33% - 1em);
 }
 
@@ -214,6 +214,7 @@ label {
   border-radius: 50%;
   height: 1.5em;
   width: 1.5em;
+  margin-top: 1.5em;
 }
 
 table {

@@ -44,8 +44,6 @@ export const useTaskStore = defineStore('ScheduleStore', () => {
               uid: doc.data().uid || '',
               createdAt: doc.data().createdAt?.toDate() || null, 
             }));
-
-          console.log('Tasks hentet:', tasks.value);
         } catch (err) {
           console.error('Fejl ved hentning af tasks:', err);
           isError.value = true;

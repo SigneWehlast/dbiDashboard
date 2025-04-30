@@ -73,7 +73,7 @@ const saveAndClose = async () => {
     <h3>Overordnet egenkontrol af ABA-anlæg</h3>
     <form class="schedule-form__formular">
       <label class="p1" for="title">Titel</label>
-      <input type="text" id="title" v-model="title" placeholder="Indtast titel" />
+      <input type="text" id="title" v-model="title" />
 
       <label class="p1" for="date">Dato</label>
       <input type="date" id="date" v-model="date" />
@@ -111,7 +111,7 @@ const saveAndClose = async () => {
 .schedule-form {
     background-color: v.$white;
     border-radius: 1.5em;
-    padding: 2em;
+    padding: 4.375rem;
 
     &__formular {
         display: flex;
@@ -156,5 +156,7 @@ input[type="text"] {
     border-radius: 0.5em;
     border-style: solid;
     resize: none;
+    height: 6em;
+    border-radius: 1.5em;
 }
 </style>

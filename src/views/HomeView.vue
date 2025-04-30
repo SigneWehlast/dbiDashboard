@@ -36,8 +36,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <p class="p1">Velkommen tilbage,</p>
-  <h1>{{ firstName }} {{ lastName }}</h1>
+  <div>
+    <p class="p1">Velkommen tilbage,</p>
+    <h1>{{ firstName }} {{ lastName }}</h1>
+  </div>
+
   <div class="home-view__overview">
       <OverviewWidget />
       <TaskOverview />
@@ -55,6 +58,8 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+
+
 .home-view__overview {
   display: flex;
   flex-direction: column;

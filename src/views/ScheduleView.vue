@@ -22,7 +22,9 @@ const toggleDropdown = () => {
       </div>
       <div class="dropdown__content" :style="{ display: isDropdownOpen ? 'flex' : 'none' }">
         <p class="p1 p-white">Skemabibliotek</p>
+        <router-link class="routerlink" to="/CompleteSchedule">
         <p class="p1 p-white">Nyt skema</p>
+        </router-link>
       </div>
     </div>
 
@@ -133,5 +135,8 @@ const toggleDropdown = () => {
     width: 1.5em;
     height: 1.5em;
   }
+}
+.routerlink {
+  text-decoration: none;
 }
 </style>

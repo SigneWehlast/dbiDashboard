@@ -10,5 +10,7 @@ import ScheduleForm from '@/components/ScheduleForm.vue';
 </template>
 
 <style scoped lang="scss">
-
+.routerlink {
+  text-decoration: none;
+}
 </style>

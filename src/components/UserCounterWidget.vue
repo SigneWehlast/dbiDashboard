@@ -1,13 +1,13 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useAuthStore } from '@/stores/AuthStore'
+import { onMounted } from 'vue';
+import { useAuthStore } from '@/stores/AuthStore';
 
-const authStore = useAuthStore()
+const authStore = useAuthStore();
 
 
 onMounted(() => {
-  authStore.fetchUserCount()
-})
+  authStore.fetchUserCount();
+});
 </script>
 
 <template>

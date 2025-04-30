@@ -1,16 +1,16 @@
 <script setup>
-import { onMounted, computed } from 'vue'
-import { useAuthStore } from '@/stores/AuthStore'
+import { onMounted, computed } from 'vue';
+import { useAuthStore } from '@/stores/AuthStore';
 
-const authStore = useAuthStore()
+const authStore = useAuthStore();
 
 onMounted(() => {
-  authStore.fetchUserCount()
-})
+  authStore.fetchUserCount();
+});
 
 // Computed properties til at hente bruger data fra pinia store
-const user = computed(() => authStore.user)
-const userCount = computed(() => authStore.userCount)
+const user = computed(() => authStore.user);
+const userCount = computed(() => authStore.userCount); //bliver ikke brugt
 </script>
 
 <template>

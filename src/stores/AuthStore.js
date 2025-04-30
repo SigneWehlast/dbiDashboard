@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia'  // Sørg for at importere defineStore
-import { ref } from 'vue'
-import { getDoc, doc, collection, getDocs } from 'firebase/firestore'
-import { db } from '@/configs/firebase'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { defineStore } from 'pinia';  // Sørg for at importere defineStore
+import { ref } from 'vue';
+import { getDoc, doc, collection, getDocs } from 'firebase/firestore';
+import { db } from '@/configs/firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const auth = getAuth();
 
@@ -15,10 +15,10 @@ export const useAuthStore = defineStore('auth', () => {
     lastName: '',
     uid: '',
     role: ''
-  })
+  });
 
-  const isAuthReady = ref(false)
-  const userCount = ref(0)
+  const isAuthReady = ref(false);
+  const userCount = ref(0);
 
   // Funktion til at sætte brugerdata
   const setUser = (userData) => {
@@ -35,20 +35,18 @@ export const useAuthStore = defineStore('auth', () => {
       lastName: '',
       uid: '',
       role: ''
-    }
-  }
+    };
+  };
 
   // Hent brugerdata fra Firestore
   const fetchUserData = async (uid) => {
     try {
-      const userRef = doc(db, 'users', uid)
-      const userSnap = await getDoc(userRef)
-  
+      const userRef = doc(db, 'users', uid);
+      const userSnap = await getDoc(userRef);
       if (userSnap.exists()) {
-        const userData = userSnap.data()
-        
-        console.log('Brugerdata hentet:', userData)
-  
+        const userData = userSnap.data();
+        console.log('Brugerdata hentet:', userData);
+
         setUser({
           firstName: userData.firstName,
           lastName: userData.lastName,
@@ -57,7 +55,7 @@ export const useAuthStore = defineStore('auth', () => {
           role: userData.role,
           uid: userData.uid,
           createdAt: userData.createdAt
-        })
+        });
       } else {
         console.error('Bruger ikke fundet i databasen');
       }
@@ -69,26 +67,26 @@ export const useAuthStore = defineStore('auth', () => {
   // Hent antal brugere fra Firestore
   const fetchUserCount = async () => {
     try {
-      const usersRef = collection(db, 'users')
-      const querySnapshot = await getDocs(usersRef)
-      userCount.value = querySnapshot.size
-      console.log('Antal brugere:', userCount.value)
+      const usersRef = collection(db, 'users');
+      const querySnapshot = await getDocs(usersRef);
+      userCount.value = querySnapshot.size;
+      console.log('Antal brugere:', userCount.value);
     } catch (err) {
-      console.error('Fejl ved hentning af brugere:', err)
+      console.error('Fejl ved hentning af brugere:', err);
     }
-  }
+  };
 
   // Firebase Auth - overvåg loginstatus
   onAuthStateChanged(auth, (firebaseUser) => {
     if (firebaseUser) {
-      console.log('Bruger er logget ind:', firebaseUser)
-      fetchUserData(firebaseUser.uid)
+      console.log('Bruger er logget ind:', firebaseUser);
+      fetchUserData(firebaseUser.uid);
     } else {
-      console.log('Ingen bruger logget ind')
-      clearUser()
+      console.log('Ingen bruger logget ind');
+      clearUser();
     }
-    isAuthReady.value = true
-  })
+    isAuthReady.value = true;
+  });
 
   return {
     user,
@@ -98,5 +96,5 @@ export const useAuthStore = defineStore('auth', () => {
     clearUser,
     fetchUserData,
     fetchUserCount
-  }
-})
+  };
+});

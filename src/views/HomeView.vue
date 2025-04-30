@@ -1,10 +1,10 @@
 <script setup>
-import OverviewWidget from "../components/OverviewWidget.vue";
-import TaskOverview from "../components/TaskOverview.vue";
-import DeviationPerMonthWidget from "@/components/DeviationPerMonthWidget.vue";
-import DeadlineExceededWidget from "@/components/DeadlineExceededWidget.vue"
-import UserCounterWidget from "@/components/UserCounterWidget.vue";
-import RepportPerMonthWidget from "@/components/ReportPerMonthWidget.vue";
+import OverviewWidget from '@/components/OverviewWidget.vue';
+import TaskOverview from '@/components/TaskOverview.vue';
+import DeviationPerMonthWidget from '@/components/DeviationPerMonthWidget.vue';
+import DeadlineExceededWidget from '@/components/DeadlineExceededWidget.vue';
+import UserCounterWidget from '@/components/UserCounterWidget.vue';
+import RepportPerMonthWidget from '@/components/ReportPerMonthWidget.vue';
 
 import { ref, onMounted } from 'vue';
 import { onAuthStateChanged } from 'firebase/auth';

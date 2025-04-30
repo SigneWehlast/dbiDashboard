@@ -1,12 +1,12 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
-import { defineProps } from 'vue'
-import { useTaskStore } from '@/stores/ScheduleStore'
-import { useAuthStore } from '@/stores/AuthStore'
-import { storeToRefs } from 'pinia'
+import { computed, watch } from 'vue';
+import { defineProps } from 'vue';
+import { useTaskStore } from '@/stores/ScheduleStore';
+import { useAuthStore } from '@/stores/AuthStore';
+import { storeToRefs } from 'pinia';
 
-const authStore = useAuthStore()
-const { isAuthReady } = storeToRefs(authStore)
+const authStore = useAuthStore();
+const { isAuthReady } = storeToRefs(authStore);
 
 const props = defineProps({
   onlyToday: {
@@ -19,27 +19,27 @@ const store = useTaskStore();
 
 watch(isAuthReady, (ready) => {
   if (ready) {
-    store.fetchTasks()
+    store.fetchTasks();
   }
-}, { immediate: true })
+}, { immediate: true });
 
 const today = new Date().toISOString().split('T')[0];
 
 const filteredTasks = computed(() => {
   if (props.onlyToday) {
     return store.tasks.filter(task => {
-      const taskDate = task.deadline?.split('T')[0]
-      return taskDate === today || task.status === 'Overskredet'
-    })
+      const taskDate = task.deadline?.split('T')[0];
+      return taskDate === today || task.status === 'Overskredet';
+    });
   }
-  return store.tasks
-})
+  return store.tasks;
+});
 
 //Tager dato og omskriver til DD/MM/YYYY
 function formatDate(dateString) {
-  if (!dateString) return ''
-  const [year, month, day] = dateString.split('T')[0].split('-')
-  return `${day}.${month}.${year}`
+  if (!dateString) return '';
+  const [year, month, day] = dateString.split('T')[0].split('-');
+  return `${day}.${month}.${year}`;
 }
 </script>
 

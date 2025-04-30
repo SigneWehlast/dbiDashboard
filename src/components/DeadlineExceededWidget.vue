@@ -36,8 +36,7 @@ const totalDeadlines = computed(() =>
         <p class="p1">Opgaver</p>
       </div>
     </div>
-  </template>
-  
+</template>
 
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;

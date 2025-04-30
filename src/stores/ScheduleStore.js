@@ -41,7 +41,8 @@ export const useTaskStore = defineStore('ScheduleStore', () => {
               errorStatus: doc.data().errorStatus || '',
               systemComment: doc.data().systemComment || '',
               systemStatus: doc.data().systemStatus || '',
-              uid: doc.data().uid || ''
+              uid: doc.data().uid || '',
+              createdAt: doc.data().createdAt?.toDate() || null, 
             }));
 
           console.log('Tasks hentet:', tasks.value);

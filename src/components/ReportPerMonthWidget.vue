@@ -41,24 +41,77 @@ watch(tasksDonePerMonth, (newData) => {
   if (chartInstance) chartInstance.destroy(); // Fjern tidligere instans
 
   chartInstance = new Chart(chartCanvas.value, {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [{
-        label: 'Antal udførte opgaver',
-        data,
-        backgroundColor: 'rgba(75, 192, 192, 0.6)'
-      }]
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{
+      data,
+      backgroundColor: 'rgba(42,114,146)', // Standard farve på søjler
+      borderRadius: 5,  // Border radius for søjlerne
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false, // Skjul legend (forklaring af datasæt)
+      },
+      tooltip: {
+        enabled: true, // Sørg for at tooltip er aktiveret
+        callbacks: {
+          // Tilpasset callback, som kun viser tallet på tooltip
+          label: function(tooltipItem) {
+            const value = tooltipItem.raw;
+            return `${value}`; // Vis kun tallet
+          }
+        },
+        backgroundColor: 'rgba(42,114,146)', // Baggrundsfarve på tooltip
+        titleColor: 'transparent', // Fjern titel
+        bodyColor: 'white', // Sæt tekstfarve til hvid
+        borderWidth: 1, // Borderbredde på tooltip
+        padding: 10, // Afstand fra kantene af tooltip
+        caretSize: 5, // Størrelsen af tap/spidsen i bunden
+        caretPadding: 8, // Afstand fra tap til tooltip-bunden
+        yAlign: 'bottom', // Sørg for at tooltip'en er vertikalt centreret
+        xAlign: 'left', // Juster tooltip'en lidt mod venstre i forhold til søjlen
+        displayColors: false, // Skjul den lille firkant i hover
+        bodyAlign: 'center', // Sørg for at tallet er centreret i tooltip
+      },
     },
-    options: {
-      responsive: true,
-      scales: {
-        y: { beginAtZero: true }
+    hover: {
+      mode: 'nearest', // Hover på den nærmeste søjle
+      intersect: true, // Kun når man "rører" søjlen
+      animationDuration: 200, // Hover animationstid
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false, // Fjern gridlines på X-aksen
+        },
+        // Fjern axis line på X-aksen
+        border: {
+          display: false, // Skjul axis line på X-aksen
+        }
+      },
+      y: {
+        beginAtZero: true,
+        max: 7,
+        grid: {
+          display: false, // Fjerner gridlines på Y-aksen
+        },
+        ticks: {
+          display: false // Skjuler Y-aksens tick labels (data)
+        },
+        border: {
+          display: false, // Skjul axis line på X-aksen
+        }
       }
     }
-  });
+  }
+});
 });
 </script>
+
 
 
 <template>

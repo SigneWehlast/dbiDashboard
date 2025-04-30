@@ -14,6 +14,8 @@ import PlanlægningIcon from '../assets/icons/calendar-days-solid-2.svg';
 import PlanlægningHoverIcon from '../assets/icons/calendar-days-solid.svg';
 import BrugereIcon from '../assets/icons/user-group-solid-2.svg';
 import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
+import SignOutIcon from '@/assets/icons/arrow-right-from-bracket-solid.svg';
+import SignOutHoverIcon from '@/assets/icons/arrow-right-from-bracket-solid2.svg';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -91,6 +93,17 @@ const route = useRoute();
           :isActive="route.path === '/Users'"
         >
           <p class="p1">Brugere</p>
+        </NavBarButton>
+      </router-link>
+
+      <router-link class="routerlink" to="/Login">
+        <NavBarButton
+          :imgSrc="SignOutIcon"
+          :hoverImgSrc="SignOutHoverIcon"
+          imgAlt="Sign out icon"
+          :isActive="route.path === '/Login'"
+        >
+          <p class="p1">Log ud</p>
         </NavBarButton>
       </router-link>
     </nav>

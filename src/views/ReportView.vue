@@ -1,5 +1,6 @@
 <script setup>
 import ReportForm from '@/components/ReportForm.vue';
+import AllReports from '@/components/AllReports.vue';
 </script>
 
 <template>
@@ -7,7 +8,10 @@ import ReportForm from '@/components/ReportForm.vue';
         <h1>Rapporter</h1>
         <div class="report-form">
             <ReportForm />
-            <h2 class="report-form__h2">Alle vises</h2>
+        </div>
+        <div class="report-form">
+            <h2 class="report-form__h2">Alle udførte Rapporter</h2>
+            <AllReports />
         </div>
     </div>
 </template>
@@ -22,6 +26,7 @@ import ReportForm from '@/components/ReportForm.vue';
     flex-direction: column;
     gap: 1em;
     padding: 2em;
+    margin-top: 2em;
 
     &__h2 {
         text-align: center;

@@ -1,8 +1,14 @@
 <script setup>
-import { onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { useTaskStore } from '@/stores/ScheduleStore';
+import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
+
+// Registrér nødvendige komponenter
+Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const taskStore = useTaskStore();
+const chartCanvas = ref(null);
+let chartInstance = null;
 
 onMounted(() => {
   taskStore.fetchTasks();
@@ -18,18 +24,42 @@ const tasksDonePerMonth = computed(() => {
     if (!date) return;
 
     const d = date instanceof Date ? date : date.toDate?.() || new Date(date);
-
     const month = d.toLocaleString('da-DK', { month: 'long' });
     const year = d.getFullYear();
     const label = `${month.charAt(0).toUpperCase()}${month.slice(1)} ${year}`;
-
-
     counts[label] = (counts[label] || 0) + 1;
   });
 
   return counts;
 });
+
+// Opdater chart når data ændrer sig
+watch(tasksDonePerMonth, (newData) => {
+  const labels = Object.keys(newData);
+  const data = Object.values(newData);
+
+  if (chartInstance) chartInstance.destroy(); // Fjern tidligere instans
+
+  chartInstance = new Chart(chartCanvas.value, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Antal udførte opgaver',
+        data,
+        backgroundColor: 'rgba(75, 192, 192, 0.6)'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+});
 </script>
+
 
 <template>
   <div class="ReportPerMonth">
@@ -38,11 +68,7 @@ const tasksDonePerMonth = computed(() => {
     <p class="p1">...</p> <!--Indsæt icon her-->
     </div>
     <div class="content">
-      <ul>
-  <li v-for="(count, month) in tasksDonePerMonth" :key="month">
-    {{ month }}: {{ count }}
-  </li>
-</ul>
+      <canvas ref="chartCanvas"></canvas>
     </div>
   </div>
 </template>

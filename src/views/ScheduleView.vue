@@ -1,6 +1,7 @@
 <script setup>
 import TaskOverviewData from '@/components/TaskOverviewData.vue';
 import SearchBar from '@/components/SearchBar.vue';
+import FilterIcon from '../assets/icons/sliders-solid.svg';
 </script>
 
 <template>
@@ -14,7 +15,10 @@ import SearchBar from '@/components/SearchBar.vue';
             <!-- Navigation øverst -->
             <div class="task-overview__information__nav">
             <SearchBar />
-                <p class="p2">Filtre</p>
+            <div class="filter-container">
+              <img :src="FilterIcon" alt="Filter" class="filter-container__icon">
+              <p class="p1">Filtre</p>
+            </div>
             </div>
 
             <!-- Indhold opdelt i tre kolonner -->
@@ -75,5 +79,17 @@ import SearchBar from '@/components/SearchBar.vue';
     color: v.$white;
     height: 75%;
     width: 25%;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+
+
+  &__icon {
+    width: 1.5em;
+    height: 1.5em;
+  }
 }
 </style>

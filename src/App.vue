@@ -1,18 +1,18 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-import ProfileBar from '@/components/ProfileBar.vue'
-import NavBar from '@/components/NavBar.vue'
-import PageFooter from './components/PageFooter.vue'
+import ProfileBar from '@/components/ProfileBar.vue';
+import NavBar from '@/components/NavBar.vue';
+import PageFooter from './components/PageFooter.vue';
 
-const route = useRoute()
-const layout = ref('default')
+const route = useRoute();
+const layout = ref('default');
 
 // Reager på ændring i route meta
 watch(() => route.meta.layout, (newLayout) => {
-  layout.value = newLayout || 'default'
-}, { immediate: true })
+  layout.value = newLayout || 'default';
+}, { immediate: true });
 </script>
 
 <template>

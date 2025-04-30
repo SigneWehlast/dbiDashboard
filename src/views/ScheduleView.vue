@@ -2,12 +2,30 @@
 import TaskOverviewData from '@/components/TaskOverviewData.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import FilterIcon from '../assets/icons/sliders-solid.svg';
+import PlusIcon from '../assets/icons/plus-solid.svg';
+import { ref } from 'vue';
+
+const isDropdownOpen = ref(false);
+
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value;
+};
 </script>
 
 <template>
     <div class="schedule-overview">
     <h1>Skemaer</h1>
-    <button class="p2 btn-skema">+ Nyt Skema</button>
+    <div class="dropdown">
+      <div class="dropdown__icon-container" @click="toggleDropdown">
+        <img :src="PlusIcon" alt="Plus" class="dropdown__icon">
+        <p class="p1 p-white">Nyt Skema</p>
+      </div>
+      <div class="dropdown__content" :style="{ display: isDropdownOpen ? 'flex' : 'none' }">
+        <p class="p1 p-white">Skemabibliotek</p>
+        <p class="p1 p-white">Nyt skema</p>
+      </div>
+    </div>
+
     </div>
 
     <div class="task-overview">
@@ -34,7 +52,7 @@ import FilterIcon from '../assets/icons/sliders-solid.svg';
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
 
-.task-overview{
+.task-overview {
   background-color: v.$white;
   border-radius: 1.5em;
   display: flex;
@@ -65,20 +83,44 @@ import FilterIcon from '../assets/icons/sliders-solid.svg';
   }
 }
 
-.schedule-overview{
+.dropdown {
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: v.$main-blue;
+  border-radius: 1.5em;
+  padding: 1em 1.5em;
+  gap: 1.5em;
+  margin: 0;
+  cursor: pointer;
+
+  &__icon-container {
     display: flex;
-    justify-content: space-between;
-    padding-bottom: 5em;
-    padding-top: 5em;
+    align-items: center;
+    gap: 1em;
+  }
+
+    &__icon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+
+  &__content {
+    display: none;
+    flex-direction: column;
+    gap: 1.5em;
+  }
 }
 
-.btn-skema{
-    background-color: v.$main-blue;
-    border-style: none;
-    border-radius: 1em;
-    color: v.$white;
-    height: 75%;
-    width: 25%;
+.schedule-overview {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 5em;
+  height: 100%;
 }
 
 .filter-container {

@@ -1,5 +1,18 @@
 <script setup>
+import { onMounted, computed } from 'vue'
+import { useAuthStore } from '@/stores/AuthStore'
+
+const authStore = useAuthStore()
+
+onMounted(() => {
+  authStore.fetchUserCount()
+})
+
+// Computed properties til at hente bruger data fra pinia store
+const user = computed(() => authStore.user)
+const userCount = computed(() => authStore.userCount)
 </script>
+
 <template>
     <table class="users-overview">
         <thead>
@@ -12,10 +25,10 @@
         </thead>
         <tbody>
             <tr>
-                <td class="p1">u</td>
-                <td class="p1">u</td>
-                <td class="p1">u</td>
-                <td class="p1">u</td>
+                <td class="p1">{{ user.firstName }} {{ user.lastName }}</td>
+                <td class="p1">{{ user.email }}</td>
+                <td class="p1">{{ user.companyName }}</td>
+                <td class="p1">{{ user.role }}</td>
             </tr>
         </tbody>
     </table>

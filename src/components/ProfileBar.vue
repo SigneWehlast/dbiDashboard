@@ -4,12 +4,12 @@ import { storeToRefs } from 'pinia';
 import SearchBar from '@/components/SearchBar.vue';
 
 const authStore = useAuthStore();
-const { user } = storeToRefs(authStore);
+const { user, isAuthReady } = storeToRefs(authStore);
 </script>
 
 <template>
   <div class="right-view">
-    <div class="profile-bar">
+    <div v-if="isAuthReady" class="profile-bar">
       <SearchBar />
       <div class="profile-bar__wrapper">
         <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-bar__icon" />
@@ -18,6 +18,9 @@ const { user } = storeToRefs(authStore);
           <p class="profile-bar__wrapper-company">{{ user.companyName }}</p>
         </div>
       </div>
+    </div>
+    <div v-else class="profile-bar">
+      <p>Indlæser brugerdata...</p>
     </div>
   </div>
 </template>
@@ -53,7 +56,7 @@ const { user } = storeToRefs(authStore);
   }
 }
 
-.right-view{
+.right-view {
   display: flex;
   flex-direction: column;
 }

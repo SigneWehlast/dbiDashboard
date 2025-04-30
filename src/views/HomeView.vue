@@ -1,6 +1,10 @@
 <script setup>
-import OverviewWidget from '../components/OverviewWidget.vue';
-import TaskOverview from '../components/TaskOverview.vue';
+import OverviewWidget from "../components/OverviewWidget.vue";
+import TaskOverview from "../components/TaskOverview.vue";
+import DeviationPerMonthWidget from "@/components/DeviationPerMonthWidget.vue";
+import DeadlineExceededWidget from "@/components/DeadlineExceededWidget.vue"
+import UserCounterWidget from "@/components/UserCounterWidget.vue";
+import RepportPerMonthWidget from "@/components/ReportPerMonthWidget.vue";
 
 import { ref, onMounted } from 'vue';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -38,6 +42,16 @@ onMounted(() => {
       <OverviewWidget />
       <TaskOverview />
   </div>
+
+  <div class="home-view__graphtop">
+    <DeviationPerMonthWidget/>
+    <DeadlineExceededWidget />
+  </div>
+
+  <div class="home-view__graphbottom">
+    <UserCounterWidget />
+    <RepportPerMonthWidget />
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -47,4 +61,13 @@ onMounted(() => {
   gap: 2.5em;
 }
 
+.home-view__graphtop{
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-view__graphbottom{
+  display: flex;
+  justify-content: space-between;
+}
 </style>

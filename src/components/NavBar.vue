@@ -99,6 +99,7 @@ const route = useRoute();
 
 <style scoped lang="scss">
 nav {
+
   display: flex;
   flex-direction: column;
   gap: 0.6em;
@@ -110,6 +111,9 @@ nav {
 }
 
 .nav-bar {
+  position: sticky;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 18.75em;
 }

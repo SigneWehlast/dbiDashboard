@@ -53,43 +53,47 @@ watch(tasksDonePerMonth, (newData) => {
       labels,
       datasets: [{
         data,
-        backgroundColor: 'rgba(42,114,146)',
-        borderRadius: 5,
-        borderSkipped: false
+        backgroundColor: 'rgba(42,114,146,0.8)',
+        hoverBackgroundColor: 'rgba(42,114,146,1)',
+        borderRadius: 8,
+        borderSkipped: false,
+        barThickness: 30,
+        maxBarThickness: 40
       }]
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false
         },
         tooltip: {
           enabled: true,
-          backgroundColor: 'rgba(42,114,146)',
+          backgroundColor: 'rgba(42,114,146,0.9)',
           titleColor: 'transparent',
           bodyColor: 'white',
-          borderWidth: 1,
-          caretSize: 3,
+          borderWidth: 0,
+          caretSize: 5,
           caretPadding: 5,
           yAlign: 'bottom',
           xAlign: 'left',
           displayColors: false,
           bodyAlign: 'center',
           padding: {
-            top: 0,
+            top: 8,
             right: 15,
-            bottom: 0,
+            bottom: 8,
             left: 15
           },
           bodyFont: {
-            size: 16,
-            weight: '300',
+            size: 14,
+            weight: '500',
             family: 'D-DIN, sans-serif'
           },
           callbacks: {
             label: function (tooltipItem) {
-              return `   ${tooltipItem.raw}   `;
+              return ` ${tooltipItem.raw} tasks `;
             }
           }
         }
@@ -108,11 +112,13 @@ watch(tasksDonePerMonth, (newData) => {
             display: true,
             rotation: 0,
             align: 'center',
-            padding: 5,
+            padding: 10,
             font: {
-              size: 15,
+              size: 13,
               family: 'D-DIN, sans-serif',
-            }
+              weight: '500'
+            },
+            color: '#666'
           },
           border: {
             display: false
@@ -122,15 +128,28 @@ watch(tasksDonePerMonth, (newData) => {
           beginAtZero: true,
           max: 7,
           grid: {
-            display: false
+            display: true,
+            drawBorder: false,
+            color: 'rgba(0,0,0,0.05)'
           },
           ticks: {
-            display: false
+            display: true,
+            padding: 10,
+            font: {
+              size: 12,
+              family: 'D-DIN, sans-serif',
+              weight: '500'
+            },
+            color: '#666'
           },
           border: {
             display: false
           }
         }
+      },
+      animation: {
+        duration: 1000,
+        easing: 'easeInOutQuart'
       }
     }
   });
@@ -157,19 +176,30 @@ watch(tasksDonePerMonth, (newData) => {
   height: 25rem;
   width: 60%;
   border-radius: 1.5em;
+  display: flex;
+  flex-direction: column;
 }
 
 .top-section {
   display: flex;
   justify-content: space-between;
   width: 90%;
-  padding: 2em;
+  padding: 1.5em 2em;
 }
 
 .content{
   display: flex;
   justify-content: center;
-  padding-left: 2rem;
-  padding-right: 2em;
+  padding: 0 2em 1.5em 2em;
+  flex: 1;
+  position: relative;
+  height: 100%;
+  min-height: 0;
+}
+
+.content canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100%;
 }
 </style>

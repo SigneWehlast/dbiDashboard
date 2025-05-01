@@ -6,7 +6,7 @@ import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip }
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 
 const taskStore = useTaskStore();
-const chartCanvas = ref(null);
+const chartGrafik = ref(null);
 let chartInstance = null;
 
 onMounted(() => {
@@ -47,7 +47,7 @@ watch(tasksDonePerMonth, (newData) => {
   if (chartInstance) chartInstance.destroy();
 
   // Vores Chart.js style
-  chartInstance = new Chart(chartCanvas.value, {
+  chartInstance = new Chart(chartGrafik.value, {
     type: 'bar',
     data: {
       labels,
@@ -144,7 +144,7 @@ watch(tasksDonePerMonth, (newData) => {
       <p class="p1">...</p> <!--Indsæt icon her-->
     </div>
     <div class="content">
-      <canvas ref="chartCanvas"></canvas>
+      <canvas ref="chartGrafik"></canvas>
     </div>
   </div>
 </template>

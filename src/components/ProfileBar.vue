@@ -1,10 +1,14 @@
 <script setup>
+import { ref } from 'vue';
 import { useAuthStore } from '@/stores/AuthStore';
 import { storeToRefs } from 'pinia';
 import SearchBar from '@/components/SearchBar.vue';
 
 const authStore = useAuthStore();
 const { user, isAuthReady } = storeToRefs(authStore);
+
+// Simuleret antal notifikationer
+const notificationCount = ref(1);
 </script>
 
 <template>
@@ -12,7 +16,12 @@ const { user, isAuthReady } = storeToRefs(authStore);
     <div v-if="isAuthReady" class="profile-bar">
       <SearchBar />
       <div class="profile-bar__wrapper">
-        <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-bar__icon" />
+        <div class="notification-icon">
+          <img src="../assets/icons/bell-solid.svg" alt="profile icon" class="profile-bar__icon" />
+          <span class="notification-count" v-if="notificationCount > 0">
+            {{ notificationCount }}
+          </span>
+        </div>
         <div class="profile-bar__wrapper-name">
           <h3>{{ user.firstName }} {{ user.lastName }}</h3>
           <p class="profile-bar__wrapper-company">{{ user.companyName }}</p>
@@ -59,5 +68,33 @@ const { user, isAuthReady } = storeToRefs(authStore);
 .right-view {
   display: flex;
   flex-direction: column;
+}
+
+.notification-icon {
+  display: inline-block;
+  position: relative;
+}
+
+.notification-count {
+  background-color: v.$main-blue;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.notification-icon:hover .notification-count {
+  display: inline-block;
+}
+
+.notification-count[data-count="0"] {
+  display: none;
 }
 </style>

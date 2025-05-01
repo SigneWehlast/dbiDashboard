@@ -13,7 +13,6 @@ onMounted(() => {
   taskStore.fetchTasks();
 });
 
-// Definerer månederne i den korrekte rækkefølge
 const monthsOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const tasksDonePerMonth = computed(() => {
@@ -31,21 +30,19 @@ const tasksDonePerMonth = computed(() => {
     counts[label] = (counts[label] || 0) + 1;
   });
 
-  // Opretter et array for at sikre at månederne vises i den rigtige rækkefølge
   const sortedCounts = monthsOrder.reduce((acc, month) => {
-    acc[month] = counts[month] || 0;  // Sætter 0 for måneder uden data
+    acc[month] = counts[month] || 0;
     return acc;
   }, {});
 
   return sortedCounts;
 });
 
-// Opdater chart når data ændrer sig
 watch(tasksDonePerMonth, (newData) => {
   const labels = Object.keys(newData);
   const data = Object.values(newData);
 
-  if (chartInstance) chartInstance.destroy(); // Fjern tidligere instans
+  if (chartInstance) chartInstance.destroy();
 
   // Vores Chart.js style
   chartInstance = new Chart(chartCanvas.value, {

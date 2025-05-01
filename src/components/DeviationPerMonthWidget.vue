@@ -93,7 +93,7 @@ watch(tasksDonePerMonth, (newData) => {
           },
           callbacks: {
             label: function (tooltipItem) {
-              return ` ${tooltipItem.raw} tasks `;
+              return ` ${tooltipItem.raw} Rapporter `;
             }
           }
         }

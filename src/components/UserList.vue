@@ -49,7 +49,7 @@ table {
 }
 
 th, td {
-  padding: 0.75em;
+  padding: 0.75em 0;
 }
 
 .users-overview {

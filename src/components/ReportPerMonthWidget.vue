@@ -159,7 +159,7 @@ watch(tasksDonePerMonth, (newData) => {
 <template>
   <div class="ReportPerMonth">
     <div class="top-section">
-      <p class="p1">Rapporter pr. måned</p>
+      <h3>Rapporter pr. måned</h3>
       <p class="p1">...</p> <!--Indsæt icon her-->
     </div>
     <div class="content" >

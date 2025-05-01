@@ -28,7 +28,7 @@ const totalDeadlines = computed(() =>
 <template>
     <div class="deviation-PerMonth">
       <div class="top-section">
-        <p class="p1">Overskredet deadline</p>
+        <h3>Overskredet deadline</h3>
         <p class="p1">...</p> <!--Indsæt icon her-->
       </div>
       <div class="content">

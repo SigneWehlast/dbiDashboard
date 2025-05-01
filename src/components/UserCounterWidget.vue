@@ -13,7 +13,7 @@ onMounted(() => {
 <template>
   <div class="Counter">
     <div class="top-section">
-      <p class="p1">Tæller</p>
+      <h3>Tæller</h3>
       <p class="p1">...</p> <!--Indsæt icon her-->
     </div>
     <div class="content">

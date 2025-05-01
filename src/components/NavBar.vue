@@ -47,14 +47,16 @@ const route = useRoute();
         </NavBarButton>
       </router-link>
 
-      <NavBarButton
-        :imgSrc="ObjekterIcon"
-        :hoverImgSrc="ObjekterHoverIcon"
-        imgAlt="objekter icon"
-        :isActive="route.path === '/Objects'"
-      >
-        <p class="p1">Objekter</p>
-      </NavBarButton>
+      <router-link class="routerlink" to="/Object">
+        <NavBarButton
+          :imgSrc="ObjekterIcon"
+          :hoverImgSrc="ObjekterHoverIcon"
+          imgAlt="objekter icon"
+          :isActive="route.path === '/Object'"
+        >
+          <p class="p1">Objekter</p>
+        </NavBarButton>
+      </router-link>
 
       <router-link class="routerlink" to="/Report">
         <NavBarButton

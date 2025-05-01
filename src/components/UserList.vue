@@ -14,13 +14,15 @@ const userCount = computed(() => authStore.userCount); //bliver ikke brugt
 </script>
 
 <template>
-    <table class="users-overview">
+  <div class="users-overview">
+    <h3>Brugeroverblik</h3>
+    <table>
         <thead>
             <tr>
-                <th class="h3">Navn</th>
-                <th class="h3">E-mail</th>
-                <th class="h3">Virksomhed</th>
-                <th class="h3">Rolle</th>
+                <th class="p2 heading-bar">Navn</th>
+                <th class="p2 heading-bar">E-mail</th>
+                <th class="p2 heading-bar">Virksomhed</th>
+                <th class="p2 heading-bar">Rolle</th>
             </tr>
         </thead>
         <tbody>
@@ -32,25 +34,28 @@ const userCount = computed(() => authStore.userCount); //bliver ikke brugt
             </tr>
         </tbody>
     </table>
+  </div>
 </template>
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
 
 table {
-    background-color: v.$white;
+  background-color: v.$white;
   border-collapse: collapse;
-  border-left: 1px solid v.$main-blue;
-  border-right: 1px solid v.$main-blue;
   margin-top: 1em;
   text-align: left;
+  border-radius: 1.5em;
   width: 100%;
-
 }
 
 th, td {
-  border-bottom: 1px solid v.$main-blue;
-  border-top: 1px solid v.$main-blue;
   padding: 0.75em;
+}
+
+.users-overview {
+  padding: 4.375em;
+  background-color: v.$white;
+  border-radius: 1.5em;
 }
 
 .h3 {
@@ -62,4 +67,10 @@ th, td {
     margin: 0;
 }
 
+.heading-bar {
+  border-bottom: 1px solid #DADCDC;
+  border-top: 1px solid #DADCDC;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
 </style>

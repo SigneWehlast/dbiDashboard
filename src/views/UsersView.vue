@@ -11,4 +11,11 @@ import UserList from '@/components/UserList.vue';
 
 <style scoped lang="scss">
 
+.user-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5em;
+
+}
 </style>

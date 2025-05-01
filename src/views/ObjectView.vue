@@ -35,4 +35,11 @@ import ObjectList from '@/components/ObjectList.vue';
       justify-content: center;
       }
 }
+
+.object-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5em;
+}
 </style>

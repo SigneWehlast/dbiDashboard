@@ -15,7 +15,7 @@ const userCount = computed(() => authStore.userCount); //bliver ikke brugt
 
 <template>
   <div class="users-overview">
-    <h3>Brugeroverblik</h3>
+    <h3>Bruger overblik</h3>
     <table>
         <thead>
             <tr>

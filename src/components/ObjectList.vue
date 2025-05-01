@@ -1,11 +1,13 @@
 <script setup>
 </script>
 <template>
-    <table class="object-overview">
-        <thead>
-            <tr>
-                <th class="h3">Objekt</th>
-                <th class="h3">Lokation</th>
+    <div class="object-overview">
+        <h3>Objekt overblik</h3>
+        <table>
+            <thead>
+                <tr>
+                <th class="p2 heading-bar">Objekt</th>
+                <th class="p2 heading-bar">Lokation</th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +17,7 @@
             </tr>
         </tbody>
     </table>
+</div>
 </template>
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
@@ -22,18 +25,19 @@
 table {
   background-color: v.$white;
   border-collapse: collapse;
-  border-left: 1px solid v.$main-blue;
-  border-right: 1px solid v.$main-blue;
   margin-top: 1em;
   text-align: left;
   width: 100%;
+}
 
+.object-overview {
+  padding: 4.375em;
+  background-color: v.$white;
+  border-radius: 1.5em;
 }
 
 th, td {
-  border-bottom: 1px solid v.$main-blue;
-  border-top: 1px solid v.$main-blue;
-  padding: 0.75em;
+  padding: 0.75em 0;
 }
 
 .h3 {
@@ -43,6 +47,13 @@ th, td {
   line-height: 1.3;
   letter-spacing: -0.01em;
   margin: 0;
+}
+
+.heading-bar {
+  border-bottom: 1px solid #DADCDC;
+  border-top: 1px solid #DADCDC;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
 </style>

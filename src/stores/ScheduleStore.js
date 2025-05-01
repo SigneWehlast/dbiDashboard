@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { db } from '@/configs/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -8,6 +8,26 @@ export const useTaskStore = defineStore('ScheduleStore', () => {
   const tasks = ref([]);
   const isLoading = ref(false);
   const isError = ref(false);
+
+  const overskredneTasks = computed(() =>
+    tasks.value.filter(task => task.status === 'Overskredet')
+  );
+
+  async function showOverskredneNotifications() {
+    if (!('serviceWorker' in navigator)) return;
+    
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (!registration) return;
+
+    for (const task of overskredneTasks.value) {
+      registration.showNotification('Opgave overskredet!', {
+        body: `Titel: ${task.title}\nDeadline: ${task.deadline}\nStatus: ${task.status}`,
+        icon: '/icons/icon-192.png',
+        vibrate: [100, 50, 100],
+        requireInteraction: true
+      });
+    }
+  }
 
   // Funktion til at hente opgaver
   async function fetchTasks() {
@@ -42,8 +62,12 @@ export const useTaskStore = defineStore('ScheduleStore', () => {
               systemComment: doc.data().systemComment || '',
               systemStatus: doc.data().systemStatus || '',
               uid: doc.data().uid || '',
-              createdAt: doc.data().createdAt?.toDate() || null, 
+              createdAt: doc.data().createdAt?.toDate() || null,
             }));
+
+          // Vis notifikationer for overskredne opgaver
+          await showOverskredneNotifications();
+
         } catch (err) {
           console.error('Fejl ved hentning af tasks:', err);
           isError.value = true;
@@ -53,12 +77,13 @@ export const useTaskStore = defineStore('ScheduleStore', () => {
         }
       });
     });
-  };
+  }
 
   return {
     tasks,
     isLoading,
     isError,
-    fetchTasks
+    fetchTasks,
+    overskredneTasks
   };
 });

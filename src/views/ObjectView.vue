@@ -30,7 +30,7 @@ import ObjectList from '@/components/ObjectList.vue';
       border-style: none;
       color: v.$white;
       cursor: pointer;
-      height: 100%;
+      height: 3em;
       padding: 0.5em 1em;
       justify-content: center;
       }

@@ -29,8 +29,9 @@ const totalDeadlines = computed(() =>
   }).length
 );
 
-const totalReports = computed(() => taskStore.tasks.length);
-
+const totalReports = computed(() => 
+  taskStore.tasks.filter(task => task.status === "Udført").length
+);
 // Midlertidige værdier for Rapporter og Objekter
 const totalObjects = computed(() => 0);
 </script>

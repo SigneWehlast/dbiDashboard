@@ -13,8 +13,10 @@ onMounted(() => {
   taskStore.fetchTasks();
 });
 
-const monthsOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
+const monthsOrder = Array.from({ length: 12 }, (_, i) => {
+  const date = new Date(2000, i, 1);
+  return date.toLocaleString('da-DK', { month: 'short' }).replace('.', '').replace(/^./, c => c.toUpperCase());
+});
 const tasksDonePerMonth = computed(() => {
   const counts = {};
 

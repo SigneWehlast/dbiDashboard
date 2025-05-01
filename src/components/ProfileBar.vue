@@ -40,11 +40,13 @@ function toggleDropdown() {
   <div v-if="showDropdown" class="notification-dropdown">
     <p v-if="notificationCount === 0">Ingen overskredne opgaver</p>
     <ul v-else>
-      <p>Dit skema har overskredet deadline</p>
+      <p>Overskredet deadline</p>
       <li v-for="task in overskredneTasks" :key="task.id">
         <strong>{{ task.title }}</strong><br />
         Deadline: {{ task.deadline }}
+        <router-link class="routerlink" to="/Schedule">
         <button>Gå til Skeamer</button>
+        </router-link>
         <hr>
       </li>
     </ul>
@@ -104,7 +106,7 @@ function toggleDropdown() {
 
   .notification-count {
     background-color: v.$main-blue;
-    color: white;
+    color: v.$white;
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -129,9 +131,8 @@ function toggleDropdown() {
     position: absolute;
     top: 2.5em;
     right: 0;
-    background-color: white;
+    background-color: v.$white;
     border-radius: 0.5em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 0.75em;
     width: 220px;
     z-index: 10;

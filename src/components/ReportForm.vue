@@ -87,14 +87,6 @@ function clearFilters() {
           </option>
         </select>
       </label>
-      <label>
-        <p class="p1">Tag</p>
-        <input class="p1" type="text">
-      </label>
-      <label>
-        <p class="p1">Id</p>
-        <input class="p1" type="text">
-      </label>
     </div>
 
     <div class="report-form__checkbox">
@@ -178,6 +170,13 @@ function clearFilters() {
   &__checkbox {
     display: flex;
     flex-direction: column;
+
+    & label {
+      align-items: center;
+      display: flex;
+      gap: 0.5em;
+      height: 2em;
+    }
   }
 
   &__filter {
@@ -212,9 +211,9 @@ label {
   appearance: none;
   border: 2px solid v.$main-blue;
   border-radius: 50%;
-  height: 1.5em;
-  width: 1.5em;
-  margin-top: 1.5em;
+  height: 1.2em;
+  margin: 0;
+  width: 1.2em;
 }
 
 table {

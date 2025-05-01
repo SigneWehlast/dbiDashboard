@@ -2,9 +2,11 @@
 import { ref, onMounted } from 'vue';
 import { useTaskStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
+import { useObjectStore } from '@/stores/ObjectStore';
 
 const taskStore = useTaskStore();
 const authStore = useAuthStore();
+const objectStore = useObjectStore();
 
 const startDate = ref('');
 const endDate = ref('');
@@ -14,7 +16,8 @@ const filteredTasks = ref([]);
 onMounted(async () => {
   await Promise.all([
     taskStore.fetchTasks(),
-    authStore.fetchAllUsers()
+    authStore.fetchAllUsers(),
+    objectStore.fetchObjects()
   ]);
 });
 
@@ -69,7 +72,7 @@ function clearFilters() {
         </select>
       </label>
       <label>
-        <p class="p1">Lokation</p>
+        <p class="p1">Objekter</p>
         <select class="p1">
           <option class="p1">Eksempel</option>
         </select>

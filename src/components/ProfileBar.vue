@@ -45,7 +45,7 @@ function toggleDropdown() {
         <strong>{{ task.title }}</strong><br />
         Deadline: {{ task.deadline }}
         <router-link class="routerlink" to="/Schedule">
-        <button>Gå til Skeamer</button>
+        <button class="Nonifaktion-btn">Gå til Skeamer</button>
         </router-link>
         <hr>
       </li>
@@ -126,6 +126,14 @@ function toggleDropdown() {
   .notification-count[data-count="0"] {
     display: none;
   }
+.Nonifaktion-btn{
+  background-color: v.$main-blue;
+  color: v.$white;
+  border-radius: 1.5em;
+  padding: .2em .5em;
+  border-style: none;
+  cursor: pointer;
+}
 
   .notification-dropdown {
     position: absolute;

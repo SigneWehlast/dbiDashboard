@@ -1,23 +1,29 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useTaskStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
+import { useObjectStore } from '@/stores/ObjectStore';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
 
-const taskStore = useTaskStore(); //fejl i ESLint, fordi den aldrig bruges
+const taskStore = useTaskStore(); 
 const authStore = useAuthStore();
+const objectStore = useObjectStore();
 const title = ref('');
 const date = ref('');
 const errorComment = ref('');
 const errorStatus = ref('');
 const systemComment = ref('');
 const systemStatus = ref('');
+const selectedObject = ref('');
 
+
+onMounted(async () => {
+  await objectStore.fetchObjects();
+});
 
 const saveTemporary = async () => {
   const uid = authStore.user?.uid;
-  console.log('authStore.user:', authStore.user);
   if (!uid) {
     console.error('Bruger ikke logget ind, UID ikke tilgængelig');
     return;
@@ -35,7 +41,7 @@ const saveTemporary = async () => {
       systemStatus: systemStatus.value,
       uid: uid
     });
-    console.log('Data gemt midlertidigt');
+    window.alert("Data igangværende er gemt og sendt.");
   } catch (err) {
     console.error('Fejl ved gemning:', err);
   }
@@ -43,7 +49,6 @@ const saveTemporary = async () => {
 
 const saveAndClose = async () => {
   const uid = authStore.user?.uid;
-  console.log('authStore.user:', authStore.user);
   if (!uid) {
     console.error('Bruger ikke logget ind, UID ikke tilgængelig');
     return;
@@ -59,14 +64,16 @@ const saveAndClose = async () => {
       status: 'Udført',
       systemComment: systemComment.value,
       systemStatus: systemStatus.value,
-      uid: uid
+      uid: uid,
+      object: selectedObject.value
     });
-    console.log('Data gemt og lukket');
+    window.alert("Data gemt og sendt.");
   } catch (err) {
     console.error('Fejl ved gemning:', err);
   }
 };
 </script>
+
 
 <template>
   <div class="schedule-form">
@@ -78,25 +85,36 @@ const saveAndClose = async () => {
       <label class="p1" for="date">Dato</label>
       <input type="date" id="date" v-model="date" />
 
+      <label class="p1" for="object">Vælg objekt</label>
+      <select id="object" v-model="selectedObject">
+        <option value="" disabled selected>Vælg et objekt</option>
+        <option v-for="object in objectStore.objects" :key="object.id" :value="object.id">
+          {{ object.object }} - {{ object.location }}
+        </option>
+      </select>
+
       <p class="p1">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</p>
       <label class="p1">
-        <input class="checkbox-input" type="checkbox" v-model="errorStatus" value="yes" /> Ja
+        <input class="checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
       </label>
       <label class="p1">
-        <input class="checkbox-input" type="checkbox" v-model="errorStatus" value="no" /> Nej
+        <input class="checkbox-input" type="radio" v-model="errorStatus" value="no" /> Nej
       </label>
+
       <label class="p1" for="comment">Kommentar</label>
       <input type="text" v-model="errorComment" />
 
       <p class="p1">Evt. fejlmeldinger er udbedret eller under udbedring?</p>
       <label class="p1">
-        <input class="checkbox-input" type="checkbox" v-model="systemStatus" value="yes" /> Ja
+        <input class="checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
       </label>
       <label class="p1">
-        <input class="checkbox-input" type="checkbox" v-model="systemStatus" value="no" /> Nej
+        <input class="checkbox-input" type="radio" v-model="systemStatus" value="no" /> Nej
       </label>
+
       <label class="p1" for="comment">Kommentar</label>
       <input type="text" v-model="systemComment" />
+
       <div class="schedule-form__button">
         <button class="p1 p-white schedule-form__button__save" type="button" @click="saveAndClose">Gem og luk</button>
         <button class="p1 p-blue schedule-form__button__save-temporary" type="button" @click="saveTemporary">Gem midlertidig</button>

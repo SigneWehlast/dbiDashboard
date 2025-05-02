@@ -1,11 +1,14 @@
 <script setup>
 import { onMounted, computed } from 'vue';
 import { useTaskStore } from '@/stores/ScheduleStore';
+import { useObjectStore } from '@/stores/ObjectStore';
 
 const taskStore = useTaskStore();
+const objectStore = useObjectStore();
 
 onMounted(() => {
   taskStore.fetchTasks();
+  objectStore.fetchObjects();
 });
 
 const todayStr = new Date().toDateString();
@@ -32,8 +35,8 @@ const totalDeadlines = computed(() =>
 const totalReports = computed(() => 
   taskStore.tasks.filter(task => task.status === "Udført").length
 );
-// Midlertidige værdier for Rapporter og Objekter
-const totalObjects = computed(() => 0);
+
+const totalObjects = computed(() => objectStore.objects.length);
 </script>
 
 

@@ -60,7 +60,7 @@ const goToRegister = () => {
             class="input-field p2"
           />
           <button type="submit" class="login-button p2">Log på</button>
-          <p class="forgot-password p1" @click="goToRegister">Glemt adgangskode?</p>
+          <p class="forgot-password p1" @click="goToRegister">Opret bruger</p>
         </form>
       </div>
     </div>

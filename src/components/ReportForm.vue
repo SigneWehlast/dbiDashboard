@@ -15,8 +15,7 @@ const selectedSchedule = ref('');
 const selectedObjectId = ref('');
 const filteredTasks = ref([]);
 
-
-//skemaer
+// Skemaer
 const filterSchedules = computed(() => {
   const titles = taskStore.tasks
     .filter(task => task.status.toLowerCase() === 'udført')
@@ -24,10 +23,12 @@ const filterSchedules = computed(() => {
   return [...new Set(titles)];
 });
 
-//objekter
+// Objekter
 const filterObjects = computed(() => {
-  const names = objectStore.objects.map(obj => obj.object);
-  return [...new Set(names)];
+  return objectStore.objects.map(obj => ({
+    id: obj.id,
+    title: obj.object
+  }));
 });
 
 onMounted(async () => {
@@ -38,7 +39,7 @@ onMounted(async () => {
   ]);
 });
 
-//datoer
+// Filtrering baseret på dato, bruger, skema og objekt
 function filterByDate() {
   filteredTasks.value = [];
 
@@ -106,11 +107,11 @@ function clearFilters() {
           <option class="p1" value="">Alle</option>
           <option
             class="p1"
-            v-for="objectName in filterObjects"
-            :key="objectName"
-            :value="objectName"
+            v-for="object in filterObjects"
+            :key="object.id"
+            :value="object.id"
           >
-            {{ objectName }}
+            {{ object.title }}
           </option>
         </select>
       </label>
@@ -150,9 +151,13 @@ function clearFilters() {
     </div>
 
     <div class="report-form__button">
-      <button class="p1 p-white report-form__button__search" type="button" @click="filterByDate">Søg</button>
+      <button class="p1 p-white report-form__button__search" @click.prevent="filterByDate">
+        Filtrer
+      </button>
       <button class="p1 p-blue report-form__button__white" type="button">Download CSV</button>
-      <button class="p1 p-blue report-form__button__white" type="button" @click="clearFilters">Ryd filter</button>
+      <button class="p1 p-blue report-form__button__white" @click.prevent="clearFilters">
+        Nulstil
+      </button>
     </div>
   </form>
 
@@ -172,7 +177,7 @@ function clearFilters() {
         </tr>
       </tbody>
     </table>
-  </div>
+    </div>
 </template>
 
 <style scoped lang="scss">

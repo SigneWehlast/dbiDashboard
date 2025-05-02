@@ -63,6 +63,7 @@ export const useTaskStore = defineStore('ScheduleStore', () => {
               systemStatus: doc.data().systemStatus || '',
               uid: doc.data().uid || '',
               createdAt: doc.data().createdAt?.toDate() || null,
+              object: doc.data().object || '',
             }));
 
           // Vis notifikationer for overskredne opgaver

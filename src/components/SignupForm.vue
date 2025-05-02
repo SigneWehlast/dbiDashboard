@@ -47,7 +47,7 @@ const handleRegister = async () => {
 };
 
 const goToLogin = () => {
-  router.push('/');
+  router.push('/Login');
 };
 </script>
 

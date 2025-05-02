@@ -23,30 +23,24 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
 <style scoped lang="scss">
 .task-overview {
   align-items: center;
-  background-color: #ffffff;
   border-radius: 1.5em;
   display: flex;
   height: 100%;
   justify-content: center;
-  padding: 4.3em;
-
+  margin: 1.5em 0 1.5em 0;
+  
   &__information {
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
-
+    border-radius: 1.5em;
+    padding: 1.5em 2em;
+    
     &__nav {
       display: flex;
       justify-content: space-between;
-      padding-bottom: 0.6em;
-    }
-
-    &__content {
-      display: flex;
-      flex: 1;
-      flex-direction: row;
     }
   }
 

@@ -63,7 +63,7 @@ onMounted(() => {
 .home-view__overview {
   display: flex;
   flex-direction: column;
-  gap: 2.5em;
+  gap: 2.5em !important;
 }
 
 .home-view__graphtop{

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { defineProps } from 'vue';
 import { useTaskStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
@@ -16,6 +16,8 @@ const props = defineProps({
 });
 
 const store = useTaskStore();
+const sortKey = ref('title');
+const sortOrder = ref('asc');
 
 watch(isAuthReady, (ready) => {
   if (ready) {
@@ -35,7 +37,33 @@ const filteredTasks = computed(() => {
   return store.tasks;
 });
 
-//Tager dato og omskriver til DD/MM/YYYY
+const sortedTasks = computed(() => {
+  const tasks = filteredTasks.value.slice();
+
+  return tasks.sort((a, b) => {
+    let valA = a[sortKey.value]?.toString().toLowerCase() || '';
+    let valB = b[sortKey.value]?.toString().toLowerCase() || '';
+
+    if (sortKey.value === 'deadline') {
+      valA = new Date(a.deadline);
+      valB = new Date(b.deadline);
+    }
+
+    if (valA < valB) return sortOrder.value === 'asc' ? -1 : 1;
+    if (valA > valB) return sortOrder.value === 'asc' ? 1 : -1;
+    return 0;
+  });
+});
+
+function toggleSort(key) {
+  if (sortKey.value === key) {
+    sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
+  } else {
+    sortKey.value = key;
+    sortOrder.value = 'asc';
+  }
+}
+
 function formatDate(dateString) {
   if (!dateString) return '';
   const [year, month, day] = dateString.split('T')[0].split('-');
@@ -44,31 +72,55 @@ function formatDate(dateString) {
 </script>
 
 <template>
-  <div class="task-overview__information__name">
-    <p class="p2 heading-bar">Titel</p>
-    <div v-if="isAuthReady" v-for="task in filteredTasks" :key="task.title">
-      <p class="p1">{{ task.title }}</p>
-    </div>
-    <p v-else class="p1">Indlæser...</p>
-  </div>
+  <div class="task-overview">
+    <div class="task-overview__information__name">
+      <p class="p2 heading-bar" @click="toggleSort('title')">
+        <span class="task-overview__sort-header">
+          Titel
+          <img src="/src/assets/icons/chevron-up-solid.svg" alt="Sorteringspil" class="sort-icon"
+            :class="{ active: sortKey === 'title', rotated: sortKey === 'title' && sortOrder === 'desc' }" />
+        </span>
+      </p>
 
-  <div class="task-overview__information__deadline">
-    <p class="p2 heading-bar">Deadline</p>
-    <div v-if="isAuthReady" v-for="task in filteredTasks" :key="task.deadline">
-      <p class="p1">{{ formatDate(task.deadline) }}</p>
+      <div v-if="isAuthReady" v-for="task in sortedTasks" :key="task.id + '-title'">
+        <p class="p1">{{ task.title }}</p>
+      </div>
+      <p v-else class="p1">Indlæser...</p>
     </div>
-    <p v-else class="p1">Indlæser...</p>
-  </div>
 
-  <div class="task-overview__information__status">
-    <p class="p2 heading-bar">Status</p>
-    <div v-if="isAuthReady" v-for="task in filteredTasks" :key="task.title" class="status-container">
-      <span class="status-indicator"
-            :class="{ 'status-done': task.status === 'Udført', 'status-overdue': task.status === 'Overskredet', 'status-todo': task.status === 'Igangværende' }">
-      </span>
-      <p class="p1">{{ task.status }}</p>
+    <div class="task-overview__information__deadline">
+      <p class="p2 heading-bar" @click="toggleSort('deadline')">
+        <span class="task-overview__sort-header">
+          Deadline
+          <img src="/src/assets/icons/chevron-up-solid.svg" alt="Sorteringspil" class="sort-icon"
+            :class="{ active: sortKey === 'deadline', rotated: sortKey === 'deadline' && sortOrder === 'desc' }" />
+        </span>
+      </p>
+      <div v-if="isAuthReady" v-for="task in sortedTasks" :key="task.id + '-deadline'">
+        <p class="p1">{{ formatDate(task.deadline) }}</p>
+      </div>
+      <p v-else class="p1">Indlæser...</p>
     </div>
-    <p v-else class="p1">Indlæser...</p>
+
+    <div class="task-overview__information__status">
+      <p class="p2 heading-bar" @click="toggleSort('status')">
+        <span class="task-overview__sort-header">
+          Status
+          <img src="/src/assets/icons/chevron-up-solid.svg" alt="Sorteringspil" class="sort-icon"
+            :class="{ active: sortKey === 'status', rotated: sortKey === 'status' && sortOrder === 'desc' }" />
+        </span>
+      </p>
+      <div v-if="isAuthReady" v-for="task in sortedTasks" :key="task.id + '-status'" class="status-container">
+        <span class="status-indicator" :class="{
+          'status-done': task.status === 'Udført',
+          'status-overdue': task.status === 'Overskredet',
+          'status-todo': task.status === 'Igangværende'
+        }">
+        </span>
+        <p class="p1">{{ task.status }}</p>
+      </div>
+      <p v-else class="p1">Indlæser...</p>
+    </div>
   </div>
 </template>
 
@@ -96,6 +148,12 @@ function formatDate(dateString) {
       width: 15%;
     }
   }
+
+  &__sort-header {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em; 
+    }
 }
 
 .status {
@@ -130,5 +188,18 @@ function formatDate(dateString) {
   border-top: 1px solid #DADCDC;
   padding-bottom: 5px;
   padding-top: 5px;
+}
+
+.sort-icon {
+  width: 1em;
+  opacity: 0.3;
+
+  &.active {
+    opacity: 1;
+  }
+
+  &.rotated {
+    transform: rotate(180deg);
+  }
 }
 </style>

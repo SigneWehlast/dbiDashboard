@@ -94,9 +94,7 @@ const toggleDropdown = () => {
   background-color: v.$main-blue;
   border-radius: 1.5em;
   padding: 1em 1.5em;
-  gap: 1.5em;
   width: 160px;
-  margin: 0;
   cursor: pointer;
 
   &__icon-container {
@@ -120,9 +118,8 @@ const toggleDropdown = () => {
 .schedule-overview {
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items:center;
   justify-content: space-between;
-  padding-top: 5em;
   height: 100%;
 }
 

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useTaskStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useObjectStore } from '@/stores/ObjectStore';
@@ -11,7 +11,24 @@ const objectStore = useObjectStore();
 const startDate = ref('');
 const endDate = ref('');
 const selectedUserUid = ref('');
+const selectedSchedule = ref('');
+const selectedObjectId = ref('');
 const filteredTasks = ref([]);
+
+
+//skemaer
+const filterSchedules = computed(() => {
+  const titles = taskStore.tasks
+    .filter(task => task.status.toLowerCase() === 'udført')
+    .map(task => task.title);
+  return [...new Set(titles)];
+});
+
+//objekter
+const filterObjects = computed(() => {
+  const names = objectStore.objects.map(obj => obj.object);
+  return [...new Set(names)];
+});
 
 onMounted(async () => {
   await Promise.all([
@@ -21,6 +38,7 @@ onMounted(async () => {
   ]);
 });
 
+//datoer
 function filterByDate() {
   filteredTasks.value = [];
 
@@ -34,6 +52,8 @@ function filterByDate() {
     if (start && taskDate < start) return false;
     if (end && taskDate > end) return false;
     if (selectedUserUid.value && task.uid !== selectedUserUid.value) return false;
+    if (selectedSchedule.value && task.title !== selectedSchedule.value) return false;
+    if (selectedObjectId.value && task.object !== selectedObjectId.value) return false;
 
     return true;
   });
@@ -46,14 +66,15 @@ function clearFilters() {
   endDate.value = '';
   filteredTasks.value = [];
   selectedUserUid.value = '';
+  selectedSchedule.value = '';
+  selectedObjectId.value = '';
 }
-
 </script>
 
 <template>
   <form class="report-form">
     <div class="report-form__filter">
-      <p class="p1">Vis 50 af {{ filteredTasks.length }} (indsæt ikon)</p>
+      <p class="p1">Vis {{ filteredTasks.length }} (indsæt ikon)</p>
     </div>
 
     <div class="report-form__wrapper">
@@ -67,21 +88,38 @@ function clearFilters() {
       </label>
       <label>
         <p class="p1">Skema</p>
-        <select class="p1">
-          <option class="p1">Eksempel</option>
+        <select class="p1" v-model="selectedSchedule">
+          <option class="p1" value="">Alle</option>
+          <option
+            class="p1"
+            v-for="title in filterSchedules"
+            :key="title"
+            :value="title"
+          >
+            {{ title }}
+          </option>
         </select>
       </label>
       <label>
-        <p class="p1">Objekter</p>
-        <select class="p1">
-          <option class="p1">Eksempel</option>
+        <p class="p1">Objekt</p>
+        <select class="p1" v-model="selectedObjectId">
+          <option class="p1" value="">Alle</option>
+          <option
+            class="p1"
+            v-for="objectName in filterObjects"
+            :key="objectName"
+            :value="objectName"
+          >
+            {{ objectName }}
+          </option>
         </select>
       </label>
       <label>
         <p class="p1">Bruger</p>
         <select class="p1" v-model="selectedUserUid">
           <option class="p1" value="">Alle</option>
-          <option class="p1"
+          <option
+            class="p1"
             v-for="user in authStore.allUsers"
             :key="user.uid"
             :value="user.uid"
@@ -118,14 +156,13 @@ function clearFilters() {
     </div>
   </form>
 
-  <!-- Resultattabel -->
   <div v-if="filteredTasks.length > 0">
     <h2>Fundne rapporter</h2>
-    <table >
+    <table>
       <thead>
         <tr>
-          <th class="h3">Titel</th>
-          <th class="h3">Dato</th>
+          <th class="p2 heading-bar">Titel</th>
+          <th class="p2 heading-bar">Dato</th>
         </tr>
       </thead>
       <tbody>
@@ -145,7 +182,7 @@ function clearFilters() {
   &__button {
     display: flex;
     gap: 1em;
-    margin: 2em 0 2em 0;
+    margin: 2em 0;
 
     &__search {
       background-color: v.$main-blue;
@@ -222,25 +259,20 @@ label {
 table {
   background-color: v.$white;
   border-collapse: collapse;
-  border-left: 1px solid v.$main-blue;
-  border-right: 1px solid v.$main-blue;
   margin-top: 1em;
   text-align: left;
+  border-radius: 1.5em;
   width: 100%;
 }
 
 th, td {
-  border-bottom: 1px solid v.$main-blue;
-  border-top: 1px solid v.$main-blue;
-  padding: 0.75em;
+  padding: 0.75em 0;
 }
 
-.h3 {
-    color: v.$dark-grey;
-    font-size: 25px;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    margin: 0;
+.heading-bar {
+  border-bottom: 1px solid #DADCDC;
+  border-top: 1px solid #DADCDC;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 </style>

@@ -58,15 +58,6 @@ th, td {
   border-radius: 1.5em;
 }
 
-.h3 {
-    color: v.$dark-grey;
-    font-size: 25px;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    margin: 0;
-}
-
 .heading-bar {
   border-bottom: 1px solid #DADCDC;
   border-top: 1px solid #DADCDC;

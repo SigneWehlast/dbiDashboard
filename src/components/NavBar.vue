@@ -122,7 +122,7 @@ nav {
 
 .logo {
   margin-bottom: 2.5em;
-  width: 12.5em;
+  width: 100%; 
 }
 
 .nav-bar {

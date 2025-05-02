@@ -17,8 +17,8 @@ const completedTasks = computed(() =>
   <table>
       <thead>
         <tr>
-          <th class="h3">Skema</th>
-          <th class="h3">Dato</th>
+          <th class="p2 heading-bar">Skema</th>
+          <th class="p2 heading-bar">Dato</th>
         </tr>
       </thead>
       <tbody>
@@ -36,26 +36,20 @@ const completedTasks = computed(() =>
 table {
   background-color: v.$white;
   border-collapse: collapse;
-  border-left: 1px solid v.$main-blue;
-  border-right: 1px solid v.$main-blue;
   margin-top: 1em;
   text-align: left;
+  border-radius: 1.5em;
   width: 100%;
-
 }
 
 th, td {
-  border-bottom: 1px solid v.$main-blue;
-  border-top: 1px solid v.$main-blue;
-  padding: 0.75em;
+  padding: 0.75em 0;
 }
 
-.h3 {
-    color: v.$dark-grey;
-    font-size: 25px;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    margin: 0;
+.heading-bar {
+  border-bottom: 1px solid #DADCDC;
+  border-top: 1px solid #DADCDC;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 </style>

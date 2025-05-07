@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { getDoc, doc, collection, getDocs } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const auth = getAuth();
 
@@ -83,15 +83,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
-  const logout = async () => {
-    try {
-      await signOut(auth);
-      clearUser();
-    } catch (err) {
-      console.error('Fejl ved log ud:', err);
-    }
-  };
-
   onAuthStateChanged(auth, (firebaseUser) => {
     if (firebaseUser) {
       fetchUserData(firebaseUser.uid);
@@ -110,7 +101,6 @@ export const useAuthStore = defineStore('auth', () => {
     clearUser,
     fetchUserData,
     fetchAllUsers,
-    fetchUserCount,
-    logout
+    fetchUserCount
   };
 });

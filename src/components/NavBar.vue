@@ -16,26 +16,14 @@ import BrugereIcon from '../assets/icons/user-group-solid-2.svg';
 import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
 import SignOutIcon from '@/assets/icons/arrow-right-from-bracket-solid.svg';
 import SignOutHoverIcon from '@/assets/icons/arrow-right-from-bracket-solid2.svg';
-
-import { useRoute, useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/AuthStore'; 
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const router = useRouter();
-const authStore = useAuthStore();
-
-function handleLogout() {
-  authStore.logout().then(() => {
-    router.push('/Login');
-  });
-}
 </script>
 
 <template>
   <div class="nav-bar">
-    <router-link class="routerlink" to="/">
-      <img src="../assets/icons/DBI_logo.svg" alt="logo" class="logo">
-    </router-link>
+    <img src="../assets/icons/DBI_logo.svg" alt="logo" class="logo">
     <nav>
       <router-link class="routerlink" to="/">
         <NavBarButton
@@ -110,21 +98,23 @@ function handleLogout() {
         </NavBarButton>
       </router-link>
 
-      <NavBarButton
-        :imgSrc="SignOutIcon"
-        :hoverImgSrc="SignOutHoverIcon"
-        imgAlt="Sign out icon"
-        :isActive="false"
-        @click="handleLogout"
-      >
-        <p class="p1">Log ud</p>
-      </NavBarButton>
+      <router-link class="routerlink" to="/Login">
+        <NavBarButton
+          :imgSrc="SignOutIcon"
+          :hoverImgSrc="SignOutHoverIcon"
+          imgAlt="Sign out icon"
+          :isActive="route.path === '/Login'"
+        >
+          <p class="p1">Log ud</p>
+        </NavBarButton>
+      </router-link>
     </nav>
   </div>
 </template>
 
 <style scoped lang="scss">
 nav {
+
   display: flex;
   flex-direction: column;
   gap: 0.6em;

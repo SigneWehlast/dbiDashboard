@@ -9,7 +9,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: { requireAuth: true }
+      meta: { requiresAuth: true }
     },
     {
       path: '/Login',
@@ -56,7 +56,7 @@ router.beforeEach((to, from, next) => {
   const currentUser = auth.currentUser;
 
   if (requiresAuth && !currentUser) {
-    next('/');
+    next('/login');
   } else {
     next();
   }

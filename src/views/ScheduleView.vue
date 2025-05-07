@@ -38,7 +38,7 @@ const toggleDropdown = () => {
             </div>
             <!-- Indhold opdelt i tre kolonner -->
             <div class="task-overview__information__content">
-              <TaskOverviewData />
+              <TaskOverviewData :onlyToday="true" />
             </div>
         </div>
     </div>

@@ -31,11 +31,16 @@ const filteredTasks = computed(() => {
   if (props.onlyToday) {
     return store.tasks.filter(task => {
       const taskDate = task.deadline?.split('T')[0];
-      return taskDate === today || task.status === 'Overskredet';
+      return (
+        taskDate === today ||
+        task.status === 'Igangværende' ||
+        task.status === 'Overskredet'
+      );
     });
   }
   return store.tasks;
 });
+
 
 const sortedTasks = computed(() => {
   const tasks = filteredTasks.value.slice();

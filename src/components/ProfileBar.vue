@@ -36,20 +36,20 @@ function toggleDropdown() {
     {{ notificationCount }}
   </span>
 
-  <!-- DROPDOWN -->
   <div v-if="showDropdown" class="notification-dropdown">
     <p v-if="notificationCount === 0">Ingen overskredne opgaver</p>
     <ul v-else>
-      <p>Overskredet deadline</p>
-      <li v-for="task in overskredneTasks" :key="task.id">
-        <strong>{{ task.title }}</strong><br />
-        Deadline: {{ task.deadline }}
+      <p class="p1 notification-dropdown__headline">Overskredet deadlines</p>
+      <hr>
+      <li v-for="task in overskredneTasks" :key="task.id" class="notification-item">
         <router-link class="routerlink" to="/Schedule">
-        <button class="Nonifaktion-btn">Gå til Skeamer</button>
+          <p class="notification-dropdown__title">{{ task.title }}</p>
+          <p class="notification-dropdown__deadline">Deadline: {{ task.deadline }}</p>
         </router-link>
         <hr>
       </li>
     </ul>
+
   </div>
 </div>
         <div class="profile-bar__wrapper-name">
@@ -108,15 +108,15 @@ function toggleDropdown() {
     background-color: v.$main-blue;
     color: v.$white;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    line-height: 20px;
     font-size: 12px;
     font-weight: bold;
+    height: 20px;
+    line-height: 20px;
     position: absolute;
-    top: -5px;
     right: -5px;
+    text-align: center;
+    top: -5px;
+    width: 20px;
   }
 
   .notification-icon:hover .notification-count {
@@ -126,40 +126,51 @@ function toggleDropdown() {
   .notification-count[data-count="0"] {
     display: none;
   }
-.Nonifaktion-btn{
-  background-color: v.$main-blue;
-  color: v.$white;
-  border-radius: 1.5em;
-  padding: .2em .5em;
-  border-style: none;
-  cursor: pointer;
 }
 
-  .notification-dropdown {
-    position: absolute;
-    top: 2.5em;
-    right: 0;
+.notification-dropdown {
     background-color: v.$white;
-    border-radius: 0.5em;
+    border: 0.1em solid v.$main-blue;
+    border-radius: 1em;
+    min-width: 17em;
     padding: 0.75em;
-    width: 220px;
+    position: absolute;
+    right: 0;
+    top: 2.5em;
     z-index: 10;
 
     ul {
       list-style: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
 
       li {
-        margin-bottom: 0.75em;
         font-size: 0.9em;
-        line-height: 1.2;
 
-        &:last-child {
-          margin-bottom: 0;
+        &:hover {
+          background-color: rgba(v.$main-blue, 0.2);
         }
       }
     }
+    &__title {
+      color: v.$main-blue;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    &__deadline {
+      color: #FF3838;
+      font-weight: 700;
+    }
   }
-}
+
+  .routerlink {
+    text-decoration: none;
+  }
+
+  hr {
+    background-color: v.$dark-grey;
+    border: none;
+    height: 1px;
+  }
 </style>

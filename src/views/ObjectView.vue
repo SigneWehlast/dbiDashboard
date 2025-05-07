@@ -8,7 +8,7 @@ import PlusIcon from '../assets/icons/plus-solid.svg';
     <div class="object-list-wrapper">
         <div class="object-top-wrapper">
             <h1>Objekter</h1>
-            <button class="object__button p1">         
+            <button class="object__button p1">
                 <img :src="PlusIcon" alt="Plus" class="object__button__icon">
                 Opret objekt</button>
         </div>

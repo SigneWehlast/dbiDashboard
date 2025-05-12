@@ -1,11 +1,11 @@
 <script setup>
 import { onMounted, computed } from 'vue';
-import { useTaskStore } from '@/stores/ScheduleStore';
+import { scheduleStore } from '@/stores/ScheduleStore';
 
-const taskStore = useTaskStore();
+const scheduleStore = scheduleStore();
 
 onMounted(() => {
-  taskStore.fetchTasks(); // Fetch tasks when component is mounted
+  schedule.fetchTasks(); // Fetch tasks when component is mounted
 });
 
 const todayStr = new Date().toDateString();
@@ -18,7 +18,7 @@ function isToday(date) {
 
 // Computed property for overdue deadlines
 const totalDeadlines = computed(() =>
-  taskStore.tasks.filter(task => {
+  schedule.tasks.filter(task => {
     const status = task.status.toLowerCase();
     return (isToday(task.deadline) && status === 'igangværende') || status === 'overskredet';
   }).length

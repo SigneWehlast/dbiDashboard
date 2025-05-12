@@ -1,15 +1,15 @@
 <script setup>
 import { onMounted, computed } from 'vue';
-import { useTaskStore } from '@/stores/ScheduleStore';
+import { scheduleStore } from '@/stores/ScheduleStore';
 
-const taskStore = useTaskStore();
+const scheduleStore = scheduleStore();
 
 onMounted(async () => {
-  await taskStore.fetchTasks();
+  await scheduleStore.fetchTasks();
 });
 
 const completedTasks = computed(() =>
-  taskStore.tasks.filter(task => task.status.toLowerCase() === 'udført')
+  scheduleStore.tasks.filter(task => task.status.toLowerCase() === 'udført')
 );
 </script>
 

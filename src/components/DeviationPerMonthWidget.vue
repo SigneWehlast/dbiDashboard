@@ -1,16 +1,16 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
-import { useTaskStore } from '@/stores/ScheduleStore';
+import { scheduleStore } from '@/stores/ScheduleStore';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip } from 'chart.js';
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 
-const taskStore = useTaskStore();
+const scheduleStore = scheduleStore();
 const chartGrafik = ref(null);
 let chartInstance = null;
 
 onMounted(() => {
-  taskStore.fetchTasks();
+  scheduleStore.fetchTasks();
 });
 
 const monthsOrder = Array.from({ length: 12 }, (_, i) => {
@@ -20,7 +20,7 @@ const monthsOrder = Array.from({ length: 12 }, (_, i) => {
 const tasksDonePerMonth = computed(() => {
   const counts = {};
 
-  taskStore.tasks.forEach(task => {
+  scheduleStore.tasks.forEach(task => {
     if (!task.status || task.status.toLowerCase() !== 'udført') return;
 
     const date = task.deadline;

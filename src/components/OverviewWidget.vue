@@ -1,13 +1,13 @@
 <script setup>
 import { onMounted, computed } from 'vue';
-import { useTaskStore } from '@/stores/ScheduleStore';
+import { scheduleStore } from '@/stores/ScheduleStore';
 import { useObjectStore } from '@/stores/ObjectStore';
 
-const taskStore = useTaskStore();
+const scheduleStore = scheduleStore();
 const objectStore = useObjectStore();
 
 onMounted(() => {
-  taskStore.fetchTasks();
+  scheduleStore.fetchTasks();
   objectStore.fetchObjects();
 });
 
@@ -20,20 +20,20 @@ function isToday(date) {
 }
 
 const totalTasks = computed(() =>
-  taskStore.tasks.filter(task => {
+  scheduleStore.tasks.filter(task => {
     return isToday(task.deadline) || task.status.toLowerCase() === 'overskredet';
   }).length
 );
 
 const totalDeadlines = computed(() =>
-  taskStore.tasks.filter(task => {
+  scheduleStore.tasks.filter(task => {
     const status = task.status.toLowerCase();
     return (isToday(task.deadline) && status === 'igangværende') || status === 'overskredet';
   }).length
 );
 
 const totalReports = computed(() => 
-  taskStore.tasks.filter(task => task.status === "Udført").length
+  scheduleStore.tasks.filter(task => task.status === "Udført").length
 );
 
 const totalObjects = computed(() => objectStore.objects.length);

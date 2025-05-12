@@ -1,10 +1,10 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { useTaskStore } from '@/stores/ScheduleStore';
+import { scheduleStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useObjectStore } from '@/stores/ObjectStore';
 
-const taskStore = useTaskStore();
+const scheduleStore = scheduleStore();
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
 
@@ -17,7 +17,7 @@ const filteredTasks = ref([]);
 
 // Skemaer
 const filterSchedules = computed(() => {
-  const titles = taskStore.tasks
+  const titles = scheduleStore.tasks
     .filter(task => task.status.toLowerCase() === 'udført')
     .map(task => task.title);
   return [...new Set(titles)];
@@ -33,7 +33,7 @@ const filterObjects = computed(() => {
 
 onMounted(async () => {
   await Promise.all([
-    taskStore.fetchTasks(),
+    scheduleStore.fetchTasks(),
     authStore.fetchAllUsers(),
     objectStore.fetchObjects()
   ]);
@@ -46,7 +46,7 @@ function filterByDate() {
   const start = startDate.value ? new Date(startDate.value) : null;
   const end = endDate.value ? new Date(endDate.value) : null;
 
-  const tasksToFilter = taskStore.tasks.filter(task => {
+  const tasksToFilter = scheduleStore.tasks.filter(task => {
     if (task.status.toLowerCase() !== 'udført') return false;
 
     const taskDate = new Date(task.deadline);

@@ -1,18 +1,18 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/AuthStore';
-import { useTaskStore } from '@/stores/ScheduleStore';
+import { scheduleStore } from '@/stores/ScheduleStore';
 import { storeToRefs } from 'pinia';
 import SearchBar from '@/components/SearchBar.vue';
 
 const authStore = useAuthStore();
 const { user, isAuthReady } = storeToRefs(authStore);
 
-const taskStore = useTaskStore();
-const { overskredneTasks } = storeToRefs(taskStore);
+const scheduleStore = scheduleStore();
+const { overskredneTasks } = storeToRefs(scheduleStore);
 
 onMounted(() => {
-  taskStore.fetchTasks();
+  scheduleStore.fetchTasks();
 });
 
 // Antal overskredne

@@ -24,7 +24,6 @@ export default [
   {
     rules: {
       'comma-dangle': ['error', 'never'],
-      'eqeqeq': ['error', 'always'],
       'indent': ['error', 2],
       'no-eval': ['error'],
       'no-trailing-spaces': ['error'],

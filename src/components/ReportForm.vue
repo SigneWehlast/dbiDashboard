@@ -1,10 +1,10 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { scheduleStore } from '@/stores/ScheduleStore';
+import { useScheduleStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useObjectStore } from '@/stores/ObjectStore';
 
-const scheduleStore = scheduleStore();
+const scheduleStore = useScheduleStore();
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
 

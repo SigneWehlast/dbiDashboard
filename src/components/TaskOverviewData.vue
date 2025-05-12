@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 import { defineProps } from 'vue';
-import { scheduleStore } from '@/stores/ScheduleStore';
+import { useScheduleStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
 import { storeToRefs } from 'pinia';
 
@@ -15,7 +15,7 @@ const props = defineProps({
   }
 });
 
-const store = scheduleStore();
+const store = useScheduleStore();
 const sortKey = ref('title');
 const sortOrder = ref('asc');
 

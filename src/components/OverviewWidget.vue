@@ -1,9 +1,9 @@
 <script setup>
 import { onMounted, computed } from 'vue';
-import { scheduleStore } from '@/stores/ScheduleStore';
+import { useScheduleStore } from '@/stores/ScheduleStore';
 import { useObjectStore } from '@/stores/ObjectStore';
 
-const scheduleStore = scheduleStore();
+const scheduleStore = useScheduleStore();
 const objectStore = useObjectStore();
 
 onMounted(() => {

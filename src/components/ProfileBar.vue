@@ -1,14 +1,14 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/AuthStore';
-import { scheduleStore } from '@/stores/ScheduleStore';
+import { useScheduleStore } from '@/stores/ScheduleStore';
 import { storeToRefs } from 'pinia';
 import SearchBar from '@/components/SearchBar.vue';
 
 const authStore = useAuthStore();
 const { user, isAuthReady } = storeToRefs(authStore);
 
-const scheduleStore = scheduleStore();
+const scheduleStore = useScheduleStore();
 const { overskredneTasks } = storeToRefs(scheduleStore);
 
 onMounted(() => {

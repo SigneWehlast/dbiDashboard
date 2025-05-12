@@ -4,7 +4,7 @@ import { db } from '@/configs/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-export const scheduldeStore = defineStore('ScheduleStore', () => {
+export const useScheduleStore = defineStore('ScheduleStore', () => {
   const tasks = ref([]);
   const isLoading = ref(false);
   const isError = ref(false);

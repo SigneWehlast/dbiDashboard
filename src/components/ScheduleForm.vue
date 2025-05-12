@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { scheduleStore } from '@/stores/ScheduleStore';
+import { useScheduleStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useObjectStore } from '@/stores/ObjectStore';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
 
-const scheduleStore = scheduleStore(); 
+const scheduleStore = useScheduleStore(); 
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
 const title = ref('');

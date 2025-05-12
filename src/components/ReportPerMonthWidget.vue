@@ -1,11 +1,11 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
-import { scheduleStore } from '@/stores/ScheduleStore';
+import { useScheduleStore } from '@/stores/ScheduleStore';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip } from 'chart.js';
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 
-const scheduleStore = scheduleStore();
+const scheduleStore = useScheduleStore();
 const chartGrafik = ref(null);
 let chartInstance = null;
 

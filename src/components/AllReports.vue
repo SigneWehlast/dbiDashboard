@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, computed } from 'vue';
-import { scheduleStore } from '@/stores/ScheduleStore';
+import { useScheduleStore } from '@/stores/ScheduleStore';
 
-const scheduleStore = scheduleStore();
+const scheduleStore = useScheduleStore();
 
 onMounted(async () => {
   await scheduleStore.fetchTasks();

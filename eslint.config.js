@@ -23,12 +23,14 @@ export default [
 
   {
     rules: {
+      'brace-style': 'error',
       'comma-dangle': ['error', 'never'],
       'indent': ['error', 2],
-      'no-eval': ['error'],
-      'no-trailing-spaces': ['error'],
-      'no-unused-vars': ['error'],
-      'no-var': ['error'],
+      'no-eval': 'error',
+      'no-multiple-empty-lines': ['error', { 'max': 2, 'maxEOF': 0 }],
+      'no-trailing-spaces': 'error',
+      'no-unused-vars': 'error',
+      'no-var': 'error',
       'prefer-const': ['error'],
       'quotes': ['error', 'single'],
       'semi': ['error', 'always']
@@ -38,5 +40,3 @@ export default [
   js.configs.recommended,
   ...pluginVue.configs['flat/essential']
 ];
-
-

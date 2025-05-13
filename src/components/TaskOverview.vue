@@ -28,7 +28,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
   height: 100%;
   justify-content: center;
   margin: 1.5em 0 1.5em 0;
-  
+
   &__information {
     background-color: #ffffff;
     display: flex;
@@ -37,7 +37,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
     width: 100%;
     border-radius: 1.5em;
     padding: 1.5em 2em;
-    
+
     &__nav {
       display: flex;
       justify-content: space-between;

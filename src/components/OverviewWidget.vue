@@ -32,8 +32,8 @@ const totalDeadlines = computed(() =>
   }).length
 );
 
-const totalReports = computed(() => 
-  scheduleStore.tasks.filter(task => task.status === "Udført").length
+const totalReports = computed(() =>
+  scheduleStore.tasks.filter(task => task.status === 'Udført').length
 );
 
 const totalObjects = computed(() => objectStore.objects.length);

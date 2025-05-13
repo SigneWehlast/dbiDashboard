@@ -15,7 +15,7 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
 
   async function showOverskredneNotifications() {
     if (!('serviceWorker' in navigator)) return;
-    
+
     const registration = await navigator.serviceWorker.getRegistration();
     if (!registration) return;
 
@@ -62,8 +62,7 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
               systemComment: doc.data().systemComment || '',
               systemStatus: doc.data().systemStatus || '',
               uid: doc.data().uid || '',
-              createdAt: doc.data().createdAt?.toDate() || null,
-              object: doc.data().object || '',
+              object: doc.data().object || ''
             }));
 
           // Vis notifikationer for overskredne opgaver

@@ -1,6 +1,6 @@
-import { auth } from '@/configs/firebase';
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import { getAuth } from 'firebase/auth';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,7 +9,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: { requireAuth: true }
+      meta: { requiresAuth: true }
     },
     {
       path: '/Login',
@@ -26,39 +26,45 @@ const router = createRouter({
     {
       path: '/Schedule',
       name: 'Schedule',
-      component: () => import('../views/ScheduleView.vue')
+      component: () => import('../views/ScheduleView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/CompleteSchedule',
       name: 'CompleteSchedule',
-      component: () => import('../views/CompleteSchedule.vue')
+      component: () => import('../views/CompleteSchedule.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/Report',
       name: 'Report',
-      component: () => import('@/views/ReportView.vue')
+      component: () => import('@/views/ReportView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/Users',
       name: 'Users',
-      component: () => import('@/views/UsersView.vue')
+      component: () => import('@/views/UsersView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/Object',
       name: 'Object',
-      component: () => import('@/views/ObjectView.vue')
+      component: () => import('@/views/ObjectView.vue'),
+      meta: { requiresAuth: true }
     }
   ]
 });
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.meta.requiresAuth;
-  const currentUser = auth.currentUser;
+  const currentUser = getAuth().currentUser;
 
   if (requiresAuth && !currentUser) {
-    next('/');
+    next({ name: 'login' });
   } else {
     next();
   }
 });
+
 export default router;

@@ -2,9 +2,11 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { getDoc, doc, collection, getDocs } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from 'vue-router';
 
 const auth = getAuth();
+const router = useRouter();
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref({
@@ -84,13 +86,28 @@ export const useAuthStore = defineStore('auth', () => {
   };
 
   onAuthStateChanged(auth, (firebaseUser) => {
+    console.log('Firebase auth state changed:', firebaseUser);
     if (firebaseUser) {
       fetchUserData(firebaseUser.uid);
     } else {
       clearUser();
+      console.log('User logged out');
+      router.push({ name: 'login' });
     }
     isAuthReady.value = true;
   });
+
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      clearUser();
+      localStorage.clear();
+      sessionStorage.clear();
+      router.push({ name: 'login' });
+    } catch (err) {
+      console.error('Fejl ved logout:', err);
+    }
+  };
 
   return {
     user,
@@ -101,6 +118,7 @@ export const useAuthStore = defineStore('auth', () => {
     clearUser,
     fetchUserData,
     fetchAllUsers,
-    fetchUserCount
+    fetchUserCount,
+    logout
   };
 });

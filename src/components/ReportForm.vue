@@ -286,4 +286,16 @@ th, td {
   padding-bottom: 5px;
   padding-top: 5px;
 }
+
+input[type="date"] {
+  font-family: v.$main-font;
+  font-size: 25px;
+  font-weight: 200;
+  color: v.$dark-grey;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.5);
+}
 </style>

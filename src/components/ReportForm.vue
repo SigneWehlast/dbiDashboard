@@ -219,6 +219,7 @@ function clearFilters() {
     & label {
       align-items: center;
       display: flex;
+      flex-direction: row;
       gap: 0.5em;
       height: 2em;
     }
@@ -237,6 +238,7 @@ input {
   border: 1px solid #e0e0e0;
   padding: 0 1rem;
   background-color: #fafafa;
+  box-sizing: border-box;
 }
 
 select {
@@ -245,19 +247,22 @@ select {
   border: 1px solid #e0e0e0;
   padding: 0 1rem;
   background-color: #fafafa;
+  box-sizing: border-box;
 }
 
 label {
   box-sizing: border-box;
   margin-bottom: 1em;
-  width: calc(33% - 1em);
+  width: calc(33.333% - 0.667em);
+  display: flex;
+  flex-direction: column;
 }
 
 .checkbox-input {
   appearance: none;
   border: 2px solid v.$main-blue;
   border-radius: 50%;
-  height: 1.2em;
+  height: 2.6em;
   margin: 0;
   width: 1.2em;
 }

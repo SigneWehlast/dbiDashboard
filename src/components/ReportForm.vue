@@ -232,18 +232,19 @@ function clearFilters() {
 }
 
 input {
-  border-radius: 0.5em;
-  border: 1px solid v.$main-blue;
   height: 3em;
-  padding: 0;
-  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 0 1rem;
+  background-color: #fafafa;
 }
 
 select {
-  border-radius: 0.5em;
-  border: 1px solid v.$main-blue;
-  height: 3.08em;
-  width: 100%;
+  height: 3em;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 0 1rem;
+  background-color: #fafafa;
 }
 
 label {

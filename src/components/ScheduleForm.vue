@@ -6,7 +6,7 @@ import { useObjectStore } from '@/stores/ObjectStore';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
 
-const scheduleStore = useScheduleStore(); 
+const scheduleStore = useScheduleStore();
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
 const title = ref('');
@@ -41,7 +41,7 @@ const saveTemporary = async () => {
       systemStatus: systemStatus.value,
       uid: uid
     });
-    window.alert("Data igangværende er gemt og sendt.");
+    window.alert('Data igangværende er gemt og sendt.');
   } catch (err) {
     console.error('Fejl ved gemning:', err);
   }
@@ -67,7 +67,7 @@ const saveAndClose = async () => {
       uid: uid,
       object: selectedObject.value
     });
-    window.alert("Data gemt og sendt.");
+    window.alert('Data gemt og sendt.');
   } catch (err) {
     console.error('Fejl ved gemning:', err);
   }

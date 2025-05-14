@@ -158,7 +158,6 @@ const saveAndClose = async () => {
         &__item__date {
         display: flex;
         flex-direction: row;
-        gap: 4em;
         }
 
     }

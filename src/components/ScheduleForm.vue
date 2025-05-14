@@ -1,12 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useScheduleStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useObjectStore } from '@/stores/ObjectStore';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
 
-const scheduleStore = useScheduleStore();
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
 const title = ref('');
@@ -16,7 +14,6 @@ const errorStatus = ref('');
 const systemComment = ref('');
 const systemStatus = ref('');
 const selectedObject = ref('');
-
 
 onMounted(async () => {
   await objectStore.fetchObjects();
@@ -30,8 +27,7 @@ const saveTemporary = async () => {
   }
 
   try {
-    await addDoc(collection(db, 'ScheduleForm'), {
-      id: newDocRef.id,
+    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),
@@ -56,8 +52,7 @@ const saveAndClose = async () => {
   }
 
   try {
-    await addDoc(collection(db, 'ScheduleForm'), {
-      id: newDocRef.id,
+    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),
@@ -79,21 +74,29 @@ const saveAndClose = async () => {
 
 <template>
   <div class="schedule-form">
-    <h3>Overordnet egenkontrol af ABA-anlæg</h3>
     <form class="schedule-form__formular">
+      <div class="schedule-form__formular__item">
+
       <label class="p1" for="title">Titel</label>
-      <input type="text" id="title" v-model="title" />
+      <textarea type="text" id="title" v-model="title" />
 
-      <label class="p1" for="date">Dato</label>
-      <input type="date" id="date" v-model="date" />
+      <div class="schedule-form__formular__item__date">
+      <label class="p1" id="label-date" for="date">Dato
+      <input  type="date" id="date" v-model="date" />
+    </label>
 
-      <label class="p1" for="object">Vælg objekt</label>
+      <label class="p1" id="label-date" for="object">Vælg objekt
       <select id="object" v-model="selectedObject">
         <option value="" disabled selected>Vælg et objekt</option>
         <option v-for="object in objectStore.objects" :key="object.id" :value="object.id">
           {{ object.object }} - {{ object.location }}
         </option>
       </select>
+    </label>
+    </div>
+      </div>
+
+      <div class="schedule-form__formular__item">
 
       <p class="p1">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</p>
       <label class="p1">
@@ -104,7 +107,10 @@ const saveAndClose = async () => {
       </label>
 
       <label class="p1" for="comment">Kommentar</label>
-      <input type="text" v-model="errorComment" />
+      <textarea type="text" v-model="errorComment" />
+      </div>
+
+      <div class="schedule-form__formular__item">
 
       <p class="p1">Evt. fejlmeldinger er udbedret eller under udbedring?</p>
       <label class="p1">
@@ -115,8 +121,8 @@ const saveAndClose = async () => {
       </label>
 
       <label class="p1" for="comment">Kommentar</label>
-      <input type="text" v-model="systemComment" />
-
+      <textarea type="text" v-model="systemComment" />
+      </div>
       <div class="schedule-form__button">
         <button class="p1 p-white schedule-form__button__save" type="button" @click="saveAndClose">Gem og luk</button>
         <button class="p1 p-blue schedule-form__button__save-temporary" type="button" @click="saveTemporary">Gem midlertidig</button>
@@ -136,7 +142,20 @@ const saveAndClose = async () => {
     &__formular {
         display: flex;
         flex-direction: column;
-        gap: 1.5em;
+        gap: 7em;
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+        &__item__date {
+        display: flex;
+        flex-direction: row;
+        gap: 4em;
+        }
+
     }
 
     &__button {
@@ -160,23 +179,86 @@ const saveAndClose = async () => {
     }
 }
 
-label {
-    border-radius: 50%;
-}
-
-.checkbox-input {
-        border: 2px solid #2B7393;
-        border-radius: 50%;
-        height: 1.5em;
-        width: 1.5em;
-    }
-
-input[type="text"] {
+textarea {
     border-color: #2B7393;
     border-radius: 0.5em;
     border-style: solid;
     resize: none;
     height: 6em;
     border-radius: 1.5em;
+    padding: 1.5em;
+    vertical-align: top;
+}
+
+label {
+  box-sizing: border-box;
+  margin-bottom: 1em;
+  width: calc(33.333% - 0.667em);
+  display: flex;
+  gap: .5em;
+  border-radius: 50%;
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkbox-input {
+  appearance: none;
+  border: 2px solid v.$main-blue;
+  border-radius: 50%;
+  height: 2.5em;
+  margin: 0;
+  width: 2.5em;
+    }
+
+
+#date {
+  height: 3em;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 0 1rem;
+  background-color: #fafafa;
+  box-sizing: border-box;
+}
+
+#label-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#object {
+  height: 3em;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 0 1rem;
+  background-color: #fafafa;
+  box-sizing: border-box;
+}
+
+#label-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+input[type="date"] {
+  display: flex;
+  font-family: v.$main-font;
+  font-size: 25px;
+  font-weight: 200;
+  color: v.$dark-grey;
+}
+
+select {
+  display: flex;
+  font-family: v.$main-font;
+  font-size: 25px;
+  font-weight: 200;
+  color: v.$dark-grey;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.5);
 }
 </style>

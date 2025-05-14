@@ -30,7 +30,7 @@ const saveTemporary = async () => {
   }
 
   try {
-    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
+    await addDoc(collection(db, 'ScheduleForm'), {
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),
@@ -56,7 +56,7 @@ const saveAndClose = async () => {
   }
 
   try {
-    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
+    await addDoc(collection(db, 'ScheduleForm'), {
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),
@@ -171,6 +171,18 @@ const saveAndClose = async () => {
             border-radius: 0.5em;
             border-style: none;
             padding: 0.5em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.2);
+                background-color: darken(v.$main-blue, 5%);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
         }
 
         &__save-temporary {
@@ -179,6 +191,18 @@ const saveAndClose = async () => {
             border-radius: 0.5em;
             border-style: solid;
             padding: 0.5em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.1);
+                background-color: rgba(43, 115, 147, 0.05);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
         }
     }
 }
@@ -212,8 +236,30 @@ label {
   height: 2.5em;
   margin: 0;
   width: 2.5em;
-    }
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  background-color: white;
 
+  &:checked {
+    background-color: white;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 1.2em;
+      height: 1.2em;
+      background-color: v.$main-blue;
+      border-radius: 50%;
+    }
+  }
+
+  &:hover {
+    border-color: darken(v.$main-blue, 10%);
+  }
+}
 
 #date {
   height: 3em;

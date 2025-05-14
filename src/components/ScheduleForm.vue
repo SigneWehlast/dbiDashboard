@@ -4,6 +4,9 @@ import { useAuthStore } from '@/stores/AuthStore';
 import { useObjectStore } from '@/stores/ObjectStore';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
@@ -39,6 +42,7 @@ const saveTemporary = async () => {
       uid: uid
     });
     window.alert('Data igangværende er gemt og sendt.');
+    router.push('/Schedule');
   } catch (err) {
     console.error('Fejl ved gemning:', err);
   }
@@ -65,6 +69,7 @@ const saveAndClose = async () => {
       object: selectedObject.value
     });
     window.alert('Data gemt og sendt.');
+    router.push('/Schedule');
   } catch (err) {
     console.error('Fejl ved gemning:', err);
   }

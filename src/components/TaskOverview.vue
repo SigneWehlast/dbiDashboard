@@ -12,9 +12,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
 
             <!-- Indhold opdelt i tre kolonner -->
             <div class="task-overview__information__content">
-              <router-link class="routerlink" to="/Specific/">
               <TaskOverviewData :onlyToday="true" />
-              </router-link>
             </div>
         </div>
     </div>

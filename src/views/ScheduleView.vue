@@ -15,18 +15,20 @@ const toggleDropdown = () => {
 <template>
     <div class="schedule-overview">
     <h1>Skemaer</h1>
-    <div class="dropdown">
-      <div class="dropdown__icon-container" @click="toggleDropdown">
-        <img :src="PlusIcon" alt="Plus" class="dropdown__icon">
-        <p class="p1 p-white">Nyt Skema</p>
+      <div class="dropdown">
+        <div class="dropdown__icon-container" @click="toggleDropdown" :class="{ 'dropdown__icon-container--open': isDropdownOpen }">
+          <img :src="PlusIcon" alt="Plus" class="dropdown__icon">
+          <p class="p1 p-white">Nyt Skema</p>
+        </div>
+        <transition name="dropdown">
+          <div class="dropdown__content" v-show="isDropdownOpen">
+            <p class="p1 p-white">Skemabibliotek</p>
+            <router-link class="routerlink" to="/CompleteSchedule">
+              <p class="p1 p-white">Nyt skema</p>
+            </router-link>
+          </div>
+        </transition>
       </div>
-      <div class="dropdown__content" :style="{ display: isDropdownOpen ? 'flex' : 'none' }">
-        <p class="p1 p-white">Skemabibliotek</p>
-        <router-link class="routerlink" to="/CompleteSchedule">
-        <p class="p1 p-white">Nyt skema</p>
-        </router-link>
-      </div>
-    </div>
 
     </div>
 
@@ -88,6 +90,7 @@ const toggleDropdown = () => {
   background-color: v.$main-blue;
   border-radius: 1.5em;
   padding: 1em 1.5em;
+  margin-top: 1.7em;
   width: 160px;
   cursor: pointer;
 
@@ -95,24 +98,35 @@ const toggleDropdown = () => {
     display: flex;
     align-items: center;
     gap: 1em;
-  }
 
-    &__icon {
-      width: 1.5em;
-      height: 1.5em;
+    p, img {
+      transition: opacity 0.2s ease;
     }
 
+    &--open {
+      p, img {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__icon {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
   &__content {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 1.5em;
+    margin-top: 1.5em;
   }
 }
 
 .schedule-overview {
   position: relative;
   display: flex;
-  align-items:center;
+  align-items: top;
   justify-content: space-between;
   height: 100%;
 }
@@ -130,5 +144,19 @@ const toggleDropdown = () => {
 }
 .routerlink {
   text-decoration: none;
+}
+
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.3s ease;
+  max-height: 200px;
+  opacity: 1;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
 }
 </style>

@@ -17,6 +17,7 @@ const systemComment = ref('');
 const systemStatus = ref('');
 const selectedObject = ref('');
 
+
 onMounted(async () => {
   await objectStore.fetchObjects();
 });
@@ -75,49 +76,50 @@ const saveAndClose = async () => {
 };
 </script>
 
+
 <template>
   <div class="schedule-form">
+    <h3>Overordnet egenkontrol af ABA-anlæg</h3>
     <form class="schedule-form__formular">
-      <div class="schedule-form__formular__item">
-        <div class="schedule-form__formular__item__date">
-          <label class="p1" for="date"
-            >Dato
-            <input type="date" id="date" v-model="date" />
-        </label>
+      <label class="p1" for="title">Titel</label>
+      <input type="text" id="title" v-model="title" />
 
-        <label class="p1" for="object"
-          >Vælg objekt
-          <select id="object" v-model="selectedObject">
-            <option value="" disabled selected>Vælg et objekt</option>
-            <option v-for="object in objectStore.objects" :key="object.id" :value="object.id">
-              {{ object.object }} - {{ object.location }}
-            </option>
-          </select>
-        </label>
-        </div>
-      </div>
+      <label class="p1" for="date">Dato</label>
+      <input type="date" id="date" v-model="date" />
 
-      <div class="schedule-form__formular__item">
-        <p class="p1">Kommentar</p>
-        <textarea type="text" id="title" v-model="title"></textarea>
-      </div>
+      <label class="p1" for="object">Vælg objekt</label>
+      <select id="object" v-model="selectedObject">
+        <option value="" disabled selected>Vælg et objekt</option>
+        <option v-for="object in objectStore.objects" :key="object.id" :value="object.id">
+          {{ object.object }} - {{ object.location }}
+        </option>
+      </select>
 
-      <div class="schedule-form__formular__item">
-        <label class="p1" for="comment">Kommentar</label>
-        <textarea v-model="systemComment"></textarea>
-      </div>
+      <p class="p1">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</p>
+      <label class="p1">
+        <input class="checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
+      </label>
+      <label class="p1">
+        <input class="checkbox-input" type="radio" v-model="errorStatus" value="no" /> Nej
+      </label>
+
+      <label class="p1" for="comment">Kommentar</label>
+      <input type="text" v-model="errorComment" />
+
+      <p class="p1">Evt. fejlmeldinger er udbedret eller under udbedring?</p>
+      <label class="p1">
+        <input class="checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
+      </label>
+      <label class="p1">
+        <input class="checkbox-input" type="radio" v-model="systemStatus" value="no" /> Nej
+      </label>
+
+      <label class="p1" for="comment">Kommentar</label>
+      <input type="text" v-model="systemComment" />
 
       <div class="schedule-form__button">
-        <button class="p1 p-white schedule-form__button__save" type="button" @click="saveAndClose">
-          Gem og luk
-        </button>
-        <button
-          class="p1 p-blue schedule-form__button__save-temporary"
-          type="button"
-          @click="saveTemporary"
-        >
-          Gem midlertidig
-        </button>
+        <button class="p1 p-white schedule-form__button__save" type="button" @click="saveAndClose">Gem og luk</button>
+        <button class="p1 p-blue schedule-form__button__save-temporary" type="button" @click="saveTemporary">Gem midlertidig</button>
       </div>
     </form>
   </div>
@@ -127,115 +129,54 @@ const saveAndClose = async () => {
 @use "@/assets/main.scss" as v;
 
 .schedule-form {
-  background-color: v.$white;
-  border-radius: 1.5em;
-  padding: 4.375rem;
+    background-color: v.$white;
+    border-radius: 1.5em;
+    padding: 4.375rem;
 
-  &__formular {
-    display: flex;
-    flex-direction: column;
-    gap: 4em;
-    margin-top: 4em;
-
-    &__item {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-
-      &__date {
+    &__formular {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        gap: 1.5em;
+    }
+
+    &__button {
+        display: flex;
         gap: 1em;
-      }
-    }
-  }
 
-  &__button {
-    display: flex;
-    gap: 1em;
+        &__save {
+            background-color: v.$main-blue;
+            border-radius: 0.5em;
+            border-style: none;
+            padding: 0.5em;
+        }
 
-    &__save {
-      background-color: v.$main-blue;
-      border-radius: 0.5em;
-      border-style: none;
-      padding: 0.5em;
+        &__save-temporary {
+            background-color: v.$white;
+            border-color: v.$main-blue;
+            border-radius: 0.5em;
+            border-style: solid;
+            padding: 0.5em;
+        }
     }
-
-    &__save-temporary {
-      background-color: v.$white;
-      border-color: v.$main-blue;
-      border-radius: 0.5em;
-      border-style: solid;
-      padding: 0.5em;
-    }
-  }
 }
 
 label {
-  box-sizing: border-box;
-  margin-bottom: 1em;
-  width: calc(33.333% - 0.667em);
-  display: flex;
-  flex-direction: column;
-}
-
-select {
-  height: 3em;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  padding: 0 1rem;
-  background-color: #fafafa;
-  box-sizing: border-box;
-}
-
-input {
-  height: 3em;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  padding: 0 1rem;
-  background-color: #fafafa;
-  box-sizing: border-box;
-}
-
-input[type="date"]
-select[type="object"] {
-  font-family: v.$main-font;
-  font-size: 25px;
-  font-weight: 200;
-  color: v.$dark-grey;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(0.5);
+    border-radius: 50%;
 }
 
 .checkbox-input {
-  appearance: none;
-  border: 2px solid v.$main-blue;
-  border-radius: 50%;
-  height: 2.6em;
-  margin: 0;
-  width: 2.6em;
-}
+        border: 2px solid #2B7393;
+        border-radius: 50%;
+        height: 1.5em;
+        width: 1.5em;
+    }
 
 input[type="text"] {
-  border-color: #2b7393;
-  border-radius: 0.5em;
-  border-style: solid;
-  resize: none;
-  height: 6em;
-  border-radius: 1.5em;
-}
-
-textarea {
-  border-color: #2b7393;
-  border-radius: 0.5em;
-  border-style: solid;
-  resize: none;
-  height: 6em;
-  border-radius: 1.5em;
-  padding: 1.5em;
-  vertical-align: top;
+    border-color: #2B7393;
+    border-radius: 0.5em;
+    border-style: solid;
+    resize: none;
+    height: 6em;
+    border-radius: 1.5em;
 }
 </style>

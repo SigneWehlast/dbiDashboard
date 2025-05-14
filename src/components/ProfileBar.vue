@@ -37,7 +37,7 @@ function toggleDropdown() {
   </span>
 
   <div v-if="showDropdown" class="notification-dropdown">
-    <p v-if="notificationCount === 0">Ingen overskredne opgaver</p>
+    <p class="p1" v-if="notificationCount === 0">Ingen overskredne opgaver</p>
     <ul v-else>
       <p class="p1 notification-dropdown__headline">Overskredet deadlines</p>
       <hr>

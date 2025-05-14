@@ -4,12 +4,14 @@ import { useRoute } from 'vue-router';
 import { useScheduleStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useObjectStore } from '@/stores/ObjectStore';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
+import { useRouter } from 'vue-router';
 
 const scheduleStore = useScheduleStore();
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
+const router = useRouter();
 
 const title = ref('');
 const date = ref('');
@@ -18,16 +20,18 @@ const errorStatus = ref('');
 const systemComment = ref('');
 const systemStatus = ref('');
 const selectedObject = ref('');
+const taskId = ref('');
 
 const route = useRoute();
 
 onMounted(async () => {
-  await scheduleStore.fetchTasks();         
+  await scheduleStore.fetchTasks();
 
-  const taskId = route.params.id;
-  const matchingTask = scheduleStore.tasks.find(task => task.id === taskId);
+  const idFromRoute = route.params.id;
+  const matchingTask = scheduleStore.tasks.find(task => task.id === idFromRoute);
 
   if (matchingTask) {
+    taskId.value = matchingTask.id;
     title.value = matchingTask.title || '';
     date.value = matchingTask.deadline instanceof Date
       ? matchingTask.deadline.toISOString().split('T')[0]
@@ -38,23 +42,22 @@ onMounted(async () => {
     systemComment.value = matchingTask.systemComment || '';
     systemStatus.value = matchingTask.systemStatus || '';
   } else {
-    console.warn('Ingen matching task fundet for id:', taskId);
+    console.warn('Ingen matching task fundet for id:', idFromRoute);
   }
 });
 
 const saveTemporary = async () => {
-  console.log("Gemmer midlertidig...");
   const uid = authStore.user?.uid;
-  if (!uid) {
-    console.error('Bruger ikke logget ind, UID ikke tilgængelig');
+  if (!uid || !taskId.value) {
+    console.error('Bruger ikke logget ind eller taskId mangler');
     return;
   }
 
   try {
-    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
+    const docRef = doc(db, 'ScheduleForm', taskId.value);
+    await updateDoc(docRef, {
       title: title.value,
       deadline: date.value,
-      createdAt: new Date(),
       errorComment: errorComment.value,
       errorStatus: errorStatus.value,
       status: 'Igangværende',
@@ -62,26 +65,25 @@ const saveTemporary = async () => {
       systemStatus: systemStatus.value,
       uid: uid
     });
-    console.log("Dokument oprettet med ID: ", docRef.id);
-    window.alert('Data igangværende er gemt og sendt.');
+    window.alert('Data opdateret (midlertidig).');
+    router.push('/Schedule');
   } catch (err) {
-    console.error('Fejl ved gemning:', err);
+    console.error('Fejl ved opdatering:', err);
   }
 };
 
 const saveAndClose = async () => {
-  console.log("Gemmer og lukker...");
   const uid = authStore.user?.uid;
-  if (!uid) {
-    console.error('Bruger ikke logget ind, UID ikke tilgængelig');
+  if (!uid || !taskId.value) {
+    console.error('Bruger ikke logget ind eller taskId mangler');
     return;
   }
 
   try {
-    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
+    const docRef = doc(db, 'ScheduleForm', taskId.value);
+    await updateDoc(docRef, {
       title: title.value,
       deadline: date.value,
-      createdAt: new Date(),
       errorComment: errorComment.value,
       errorStatus: errorStatus.value,
       status: 'Udført',
@@ -90,13 +92,12 @@ const saveAndClose = async () => {
       uid: uid,
       object: selectedObject.value
     });
-    console.log("Dokument oprettet med ID: ", docRef.id);
-    window.alert('Data gemt og sendt.');
+    window.alert('Data opdateret og sendt.');
+    router.push('/Schedule');
   } catch (err) {
-    console.error('Fejl ved gemning:', err);
+    console.error('Fejl ved opdatering:', err);
   }
 };
-
 </script>
 
 <template>
@@ -123,7 +124,6 @@ const saveAndClose = async () => {
         </label>
       <h3>Kommentar til fejlstatus: {{ errorComment }}</h3>
         <input type="text" v-model="errorComment" />
-      
 
       <h3>Fejlmeldinger udbedret: {{ systemStatus === 'yes' ? 'Ja' : 'Nej' }}</h3>
           <label class="p1">
@@ -174,6 +174,7 @@ const saveAndClose = async () => {
     &__button {
         display: flex;
         gap: 1em;
+        margin-top: 1em;
 
         &__save {
             background-color: v.$main-blue;

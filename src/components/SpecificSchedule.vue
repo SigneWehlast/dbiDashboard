@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import { useScheduleStore } from '@/stores/ScheduleStore';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useObjectStore } from '@/stores/ObjectStore';
@@ -9,6 +10,7 @@ import { db } from '@/configs/firebase';
 const scheduleStore = useScheduleStore();
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
+
 const title = ref('');
 const date = ref('');
 const errorComment = ref('');
@@ -17,13 +19,28 @@ const systemComment = ref('');
 const systemStatus = ref('');
 const selectedObject = ref('');
 
-// Hent de nødvendige data fra Pinia store ved onMounted
+const route = useRoute(); // ← Hent route parametre
+
 onMounted(async () => {
-  await objectStore.fetchObjects();
-  // Forudfyld værdier fra store
-  title.value = scheduleStore.title || '';  // Hent fra store og giv standardværdi hvis tom
-  date.value = scheduleStore.date || '';    // Hent fra store og giv standardværdi hvis tom
-  selectedObject.value = scheduleStore.selectedObject || ''; // Hent objekt-id fra store
+  await objectStore.fetchObjects();         
+  await scheduleStore.fetchTasks();         
+
+  const taskId = route.params.id; // ← Hent ID fra URL
+  const matchingTask = scheduleStore.tasks.find(task => task.id === taskId);
+
+  if (matchingTask) {
+    title.value = matchingTask.title || '';
+    date.value = matchingTask.deadline instanceof Date
+      ? matchingTask.deadline.toISOString().split('T')[0]
+      : matchingTask.deadline || '';
+    selectedObject.value = matchingTask.object || '';
+    errorComment.value = matchingTask.errorComment || '';
+    errorStatus.value = matchingTask.errorStatus || '';
+    systemComment.value = matchingTask.systemComment || '';
+    systemStatus.value = matchingTask.systemStatus || '';
+  } else {
+    console.warn('Ingen matching task fundet for id:', taskId);
+  }
 });
 
 const saveTemporary = async () => {
@@ -77,6 +94,7 @@ const saveAndClose = async () => {
   }
 };
 </script>
+
 
 <template>
     <div class="schedule-form">

@@ -54,7 +54,7 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
      {
-      path: '/Specific',
+      path: '/Specific/',
       name: 'Specific',
       component: () => import('@/views/SpecificView.vue'),
       meta: { requiresAuth: true }

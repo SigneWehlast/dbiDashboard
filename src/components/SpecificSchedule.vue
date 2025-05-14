@@ -19,13 +19,12 @@ const systemComment = ref('');
 const systemStatus = ref('');
 const selectedObject = ref('');
 
-const route = useRoute(); // ← Hent route parametre
+const route = useRoute();
 
 onMounted(async () => {
-  await objectStore.fetchObjects();         
   await scheduleStore.fetchTasks();         
 
-  const taskId = route.params.id; // ← Hent ID fra URL
+  const taskId = route.params.id;
   const matchingTask = scheduleStore.tasks.find(task => task.id === taskId);
 
   if (matchingTask) {
@@ -44,6 +43,7 @@ onMounted(async () => {
 });
 
 const saveTemporary = async () => {
+  console.log("Gemmer midlertidig...");
   const uid = authStore.user?.uid;
   if (!uid) {
     console.error('Bruger ikke logget ind, UID ikke tilgængelig');
@@ -51,7 +51,7 @@ const saveTemporary = async () => {
   }
 
   try {
-    await addDoc(collection(db, 'ScheduleForm'), {
+    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),
@@ -62,6 +62,7 @@ const saveTemporary = async () => {
       systemStatus: systemStatus.value,
       uid: uid
     });
+    console.log("Dokument oprettet med ID: ", docRef.id);
     window.alert('Data igangværende er gemt og sendt.');
   } catch (err) {
     console.error('Fejl ved gemning:', err);
@@ -69,6 +70,7 @@ const saveTemporary = async () => {
 };
 
 const saveAndClose = async () => {
+  console.log("Gemmer og lukker...");
   const uid = authStore.user?.uid;
   if (!uid) {
     console.error('Bruger ikke logget ind, UID ikke tilgængelig');
@@ -76,7 +78,7 @@ const saveAndClose = async () => {
   }
 
   try {
-    await addDoc(collection(db, 'ScheduleForm'), {
+    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),
@@ -88,74 +90,75 @@ const saveAndClose = async () => {
       uid: uid,
       object: selectedObject.value
     });
+    console.log("Dokument oprettet med ID: ", docRef.id);
     window.alert('Data gemt og sendt.');
   } catch (err) {
     console.error('Fejl ved gemning:', err);
   }
 };
+
 </script>
 
-
 <template>
-    <div class="schedule-form">
-      <h3>Overordnet egenkontrol af ABA-anlæg</h3>
-      <form class="schedule-form__formular">
-        
-        <!-- Titel -->
-        <label class="p1" for="title">Titel</label>
-        <input type="text" id="title" v-model="title" readonly /> <!-- Læs kun -->
-  
-        <!-- Dato -->
-        <label class="p1" for="date">Dato</label>
-        <input type="date" id="date" v-model="date" readonly /> <!-- Læs kun -->
-  
-        <!-- Vælg objekt -->
-        <label class="p1" for="object">Vælg objekt</label>
-        <select id="object" v-model="selectedObject" disabled> <!-- Disabled select -->
-          <option value="" disabled selected>Vælg et objekt</option>
-          <option v-for="object in objectStore.objects" :key="object.id" :value="object.id" :selected="object.id === selectedObject">
-            {{ object.object }} - {{ object.location }}
-          </option>
-        </select>
-  
-        <!-- Fejlstatus -->
-        <p class="p1">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</p>
+  <div class="schedule-form">
+    <div class="display-data">
+      <h2>Titel: {{ title }}</h2>
+      <h3>Deadline: {{ date }}</h3>
+
+      <h3>Objekt:
+        {{
+          objectStore.objects.find(obj => obj.id === selectedObject)?.object
+        }} - 
+        {{
+          objectStore.objects.find(obj => obj.id === selectedObject)?.location
+        }}
+      </h3>
+
+      <h3>Alle systemdele er tilkoblet og funktionsdygtige: {{ errorStatus === 'yes' ? 'Ja' : 'Nej' }}</h3>
         <label class="p1">
           <input class="checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
         </label>
         <label class="p1">
           <input class="checkbox-input" type="radio" v-model="errorStatus" value="no" /> Nej
         </label>
-  
-        <!-- Fejlkommentar -->
-        <label class="p1" for="comment">Kommentar</label>
+      <h3>Kommentar til fejlstatus: {{ errorComment }}</h3>
         <input type="text" v-model="errorComment" />
-  
-        <!-- Systemstatus -->
-        <p class="p1">Evt. fejlmeldinger er udbedret eller under udbedring?</p>
-        <label class="p1">
+      
+
+      <h3>Fejlmeldinger udbedret: {{ systemStatus === 'yes' ? 'Ja' : 'Nej' }}</h3>
+          <label class="p1">
           <input class="checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
         </label>
         <label class="p1">
           <input class="checkbox-input" type="radio" v-model="systemStatus" value="no" /> Nej
         </label>
-  
-        <!-- Systemkommentar -->
-        <label class="p1" for="comment">Kommentar</label>
-        <input type="text" v-model="systemComment" />
-  
-        <div class="schedule-form__button">
+      <h3>Kommentar til systemstatus: {{ systemComment }}</h3>
+       <input type="text" v-model="systemComment" />
+    </div>
+
+     <div class="schedule-form__button">
           <button class="p1 p-white schedule-form__button__save" type="button" @click="saveAndClose">Gem og luk</button>
           <button class="p1 p-blue schedule-form__button__save-temporary" type="button" @click="saveTemporary">Gem midlertidig</button>
         </div>
-      </form>
-    </div>
-  </template>
-  
-  
+  </div>
+</template>
 
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
+
+.schedule-form {
+  background-color: v.$white;
+  border-radius: 1.5em;
+  padding: 4.375rem;
+}
+
+.display-data {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  font-size: 1rem;
+  line-height: 1.6;
+}
 
 .schedule-form {
     background-color: v.$white;

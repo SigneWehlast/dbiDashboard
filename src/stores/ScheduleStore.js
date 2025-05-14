@@ -31,53 +31,54 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
 
   // Funktion til at hente opgaver
   async function fetchTasks() {
-    isLoading.value = true;
-    isError.value = false;
+  isLoading.value = true;
+  isError.value = false;
 
-    const auth = getAuth();
+  const auth = getAuth();
 
-    return new Promise((resolve) => {
-      onAuthStateChanged(auth, async (currentUser) => {
-        if (!currentUser) {
-          console.warn('Ingen bruger er logget ind.');
-          isError.value = true;
-          isLoading.value = false;
-          return resolve();
-        }
+  return new Promise((resolve) => {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (!currentUser) {
+        console.warn('Ingen bruger er logget ind.');
+        isError.value = true;
+        isLoading.value = false;
+        return resolve();
+      }
 
-        const uid = currentUser.uid;
+      const uid = currentUser.uid;
 
-        try {
-          const querySnapshot = await getDocs(collection(db, 'ScheduleForm'));
-          tasks.value = querySnapshot.docs
-            .filter(doc => doc.data().uid === uid)
-            .map(doc => ({
-              id: doc.id,
-              title: doc.data().title || '',
-              deadline: doc.data().deadline || '',
-              status: doc.data().status || '',
-              createdAt: doc.data().createdAt?.toDate() || null,
-              errorComment: doc.data().errorComment || '',
-              errorStatus: doc.data().errorStatus || '',
-              systemComment: doc.data().systemComment || '',
-              systemStatus: doc.data().systemStatus || '',
-              uid: doc.data().uid || '',
-              object: doc.data().object || ''
-            }));
+      try {
+        const querySnapshot = await getDocs(collection(db, 'ScheduleForm'));
+        tasks.value = querySnapshot.docs
+          .filter(doc => doc.data().uid === uid)
+          .map(doc => ({
+            id: doc.id,  // Få dokument-ID'et fra Firestore
+            title: doc.data().title || '',
+            deadline: doc.data().deadline || '',
+            status: doc.data().status || '',
+            createdAt: doc.data().createdAt?.toDate() || null,
+            errorComment: doc.data().errorComment || '',
+            errorStatus: doc.data().errorStatus || '',
+            systemComment: doc.data().systemComment || '',
+            systemStatus: doc.data().systemStatus || '',
+            uid: doc.data().uid || '',
+            object: doc.data().object || ''
+          }));
 
-          // Vis notifikationer for overskredne opgaver
-          await showOverskredneNotifications();
+        // Vis notifikationer for overskredne opgaver
+        await showOverskredneNotifications();
 
-        } catch (err) {
-          console.error('Fejl ved hentning af tasks:', err);
-          isError.value = true;
-        } finally {
-          isLoading.value = false;
-          resolve();
-        }
-      });
+      } catch (err) {
+        console.error('Fejl ved hentning af tasks:', err);
+        isError.value = true;
+      } finally {
+        isLoading.value = false;
+        resolve();
+      }
     });
-  }
+  });
+}
+
 
   return {
     tasks,

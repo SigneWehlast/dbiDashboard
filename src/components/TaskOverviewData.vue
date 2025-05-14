@@ -88,8 +88,10 @@ function formatDate(dateString) {
       </p>
 
       <div v-if="isAuthReady" v-for="task in sortedTasks" :key="task.id + '-title'">
-        <p class="p1">{{ task.title }}</p>
-      </div>
+    <router-link :to="`/Specific/${task.id}`"class="p1 routerlink">
+      {{ task.title }}
+    </router-link>     
+    </div>
       <p v-else class="p1">Indlæser...</p>
     </div>
 

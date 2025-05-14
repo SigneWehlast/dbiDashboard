@@ -31,6 +31,7 @@ const saveTemporary = async () => {
 
   try {
     await addDoc(collection(db, 'ScheduleForm'), {
+      id: newDocRef.id,
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),
@@ -56,6 +57,7 @@ const saveAndClose = async () => {
 
   try {
     await addDoc(collection(db, 'ScheduleForm'), {
+      id: newDocRef.id,
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),

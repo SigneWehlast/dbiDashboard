@@ -151,8 +151,4 @@ nav {
 :deep(button:hover) .body-text {
   color: #FFFFFF;
 }
-
-.routerlink {
-  text-decoration: none;
-}
 </style>

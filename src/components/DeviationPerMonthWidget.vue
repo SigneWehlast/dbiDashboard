@@ -157,12 +157,12 @@ watch(tasksDonePerMonth, (newData) => {
 </script>
 
 <template>
-  <div class="ReportPerMonth">
-    <div class="top-section">
-      <h3>Afgivelse pr. måned</h3>
+  <div class="report-permonth">
+    <div class="report-permonth__top-section">
+      <h3>Afvigelser pr. måned</h3>
       <p class="p1">...</p> <!--Indsæt icon her-->
     </div>
-    <div class="content" >
+    <div class="report-permonth__content" >
       <canvas ref="chartGrafik"></canvas>
     </div>
   </div>
@@ -171,35 +171,37 @@ watch(tasksDonePerMonth, (newData) => {
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
 
-.ReportPerMonth{
+.report-permonth{
   background-color: v.$white;
-  height: 25rem;
-  width: 60%;
   border-radius: 1.5em;
   display: flex;
   flex-direction: column;
-}
+  height: 25rem;
+  width: 60%;
 
-.top-section {
+  &__top-section {
   display: flex;
   justify-content: space-between;
-  width: 90%;
   padding: 1.5em 2em;
-}
+  width: 90%;
+  }
 
-.content{
+  &__content {
   display: flex;
-  justify-content: center;
-  padding: 0 2em 1.5em 2em;
   flex: 1;
-  position: relative;
   height: 100%;
+  justify-content: center;
   min-height: 0;
+  padding: 0 2em 1.5em 2em;
+  position: relative;
+
+    & canvas {
+    height: 100% !important;
+    max-height: 100%;
+    width: 100% !important;
+    }
+  }
 }
 
-.content canvas {
-  width: 100% !important;
-  height: 100% !important;
-  max-height: 100%;
-}
+ 
 </style>

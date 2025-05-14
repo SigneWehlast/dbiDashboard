@@ -57,11 +57,4 @@ th, td {
   background-color: v.$white;
   border-radius: 1.5em;
 }
-
-.heading-bar {
-  border-bottom: 1px solid #DADCDC;
-  border-top: 1px solid #DADCDC;
-  padding-bottom: 5px;
-  padding-top: 5px;
-}
 </style>

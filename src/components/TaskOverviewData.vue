@@ -78,7 +78,7 @@ function formatDate(dateString) {
 
 <template>
   <div class="task-overview">
-    <div class="task-overview__information__name">
+    <div class="task-overview__information-name">
       <p class="p2 heading-bar" @click="toggleSort('title')">
         <span class="task-overview__sort-header">
           Titel
@@ -95,7 +95,7 @@ function formatDate(dateString) {
       <p v-else class="p1">Indlæser...</p>
     </div>
 
-    <div class="task-overview__information__deadline">
+    <div class="task-overview__information-deadline">
       <p class="p2 heading-bar" @click="toggleSort('deadline')">
         <span class="task-overview__sort-header">
           Deadline
@@ -109,7 +109,7 @@ function formatDate(dateString) {
       <p v-else class="p1">Indlæser...</p>
     </div>
 
-    <div class="task-overview__information__status">
+    <div class="task-overview__information-status">
       <p class="p2 heading-bar" @click="toggleSort('status')">
         <span class="task-overview__sort-header">
           Status
@@ -134,21 +134,21 @@ function formatDate(dateString) {
 <style scoped lang="scss">
 .task-overview {
   &__information {
-    &__name {
+    &-name {
       display: flex;
       flex-direction: column;
       gap: 1.25em;
       width: 55%;
     }
 
-    &__deadline {
+    &-deadline {
       display: flex;
       gap: 1.25em;
       flex-direction: column;
       width: 30%;
     }
 
-    &__status {
+    &-status {
       display: flex;
       flex-direction: column;
       gap: 1.25em;
@@ -157,8 +157,8 @@ function formatDate(dateString) {
   }
 
   &__sort-header {
-      display: inline-flex;
       align-items: center;
+      display: inline-flex;
       gap: 0.4em; 
     }
 }
@@ -188,13 +188,6 @@ function formatDate(dateString) {
   &-todo {
     background-color: #FFF081;
   }
-}
-
-.heading-bar {
-  border-bottom: 1px solid #DADCDC;
-  border-top: 1px solid #DADCDC;
-  padding-bottom: 5px;
-  padding-top: 5px;
 }
 
 .sort-icon {

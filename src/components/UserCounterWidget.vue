@@ -11,12 +11,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="Counter">
-    <div class="top-section">
+  <div class="user-counter">
+    <div class="user-counter__top-section">
       <h3>Tæller</h3>
       <p class="p1">...</p> <!--Indsæt icon her-->
     </div>
-    <div class="content">
+    <div class="user-counter__content">
       <h2>{{ authStore.userCount }}</h2>
       <p class="p1">Brugere</p>
     </div>
@@ -26,29 +26,29 @@ onMounted(() => {
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
 
-.Counter {
+.user-counter {
+  align-items: center;
   background-color: v.$white;
-  height: 25rem;
-  width: 35%;
   border-radius: 1.5em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
   box-sizing: border-box;
-}
-
-.top-section {
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-}
-
-.content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 7rem;
+  height: 25rem;
+  padding: 2rem;
+  width: 35%;
+
+    &__top-section {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+    }
+
+    &__content {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 7rem;
+    }
 }
 </style>

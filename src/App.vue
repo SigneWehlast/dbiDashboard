@@ -30,17 +30,17 @@ watch(() => route.meta.layout, (newLayout) => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .home-view {
   display: flex;
   gap: 5em;
   width: 100%;
-}
 
-.home-view-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5em;
-  width: 100%;
+  &-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+    width: 100%;
+  }
 }
 </style>

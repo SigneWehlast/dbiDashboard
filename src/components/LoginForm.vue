@@ -42,25 +42,25 @@ const goToRegister = () => {
 
 <template>
     <div class="auth-wrapper">
-      <div class="auth-container">
+      <div class="auth-wrapper__container">
         <h2>Velkommen!</h2>
-        <form @submit.prevent="handleLogin" class="auth-form">
+        <form @submit.prevent="handleLogin" class="auth-wrapper__form">
           <input
             type="email"
             v-model="email"
             placeholder="E-mail"
             required
-            class="input-field p2"
+            class="auth-wrapper__input-field p2"
           />
           <input
             type="password"
             v-model="password"
             placeholder="Kodeord"
             required
-            class="input-field p2"
+            class="auth-wrapper__input-field p2"
           />
-          <button type="submit" class="login-button p2">Log på</button>
-          <p class="forgot-password p1" @click="goToRegister">Opret bruger</p>
+          <button type="submit" class="auth-wrapper__login-button p2">Log på</button>
+          <p class="auth-wrapper__forgot-password p1" @click="goToRegister">Opret bruger</p>
         </form>
       </div>
     </div>
@@ -69,17 +69,14 @@ const goToRegister = () => {
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
 
-.auth {
-
-  &-wrapper {
+.auth-wrapper {
     align-items: center;
     background-color: v.$background-color;
     display: flex;
     height: 100vh;
     justify-content: center;
-  }
 
-  &-container {
+  &__container {
     background: v.$white;
     border-radius: 1.25em;
     box-shadow: 0 0 1.25em rgba(0, 0, 0, 0.05);
@@ -88,33 +85,33 @@ const goToRegister = () => {
     width: 25em;
   }
 
-  &-form {
+  &__form {
     display: flex;
     flex-direction: column;
     gap: 1em;
   }
-}
 
-.input-field {
-  height: 2em;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  padding: 0 1rem;
-  background-color: #fafafa;
-}
+  &__input-field {
+    background-color: #fafafa;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    height: 2em;
+    padding: 0 1rem;
+  }
 
-.login-button {
-  background-color: v.$main-blue;
-  border: none;
-  border-radius: 12px;
-  color: v.$white;
-  cursor: pointer;
-  padding: 14px;
-  transition: background-color 0.3s;
-}
+  &__login-button {
+    background-color: v.$main-blue;
+    border: none;
+    border-radius: 12px;
+    color: v.$white;
+    cursor: pointer;
+    padding: 14px;
+    transition: background-color 0.3s;
+  }
 
-.forgot-password {
-  cursor: pointer;
-  margin-top: 1rem;
+  &__forgot-password {
+    cursor: pointer;
+    margin-top: 1rem;
+  }
 }
 </style>

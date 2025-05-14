@@ -38,20 +38,13 @@ const completedTasks = computed(() =>
 table {
   background-color: v.$white;
   border-collapse: collapse;
+  border-radius: 1.5em;
   margin-top: 1em;
   text-align: left;
-  border-radius: 1.5em;
   width: 100%;
 }
 
 th, td {
   padding: 0.75em 0;
-}
-
-.heading-bar {
-  border-bottom: 1px solid #DADCDC;
-  border-top: 1px solid #DADCDC;
-  padding-bottom: 5px;
-  padding-top: 5px;
 }
 </style>

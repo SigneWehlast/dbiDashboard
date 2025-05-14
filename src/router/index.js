@@ -52,6 +52,12 @@ const router = createRouter({
       name: 'Object',
       component: () => import('@/views/ObjectView.vue'),
       meta: { requiresAuth: true }
+    },
+     {
+      path: '/Specific',
+      name: 'Specific',
+      component: () => import('@/views/SpecificView.vue'),
+      meta: { requiresAuth: true }
     }
   ]
 });

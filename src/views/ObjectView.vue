@@ -8,9 +8,13 @@ import PlusIcon from '../assets/icons/plus-solid.svg';
     <div class="object-list-wrapper">
         <div class="object-top-wrapper">
             <h1>Objekter</h1>
-            <button class="object__button p1">
-                <img :src="PlusIcon" alt="Plus" class="object__button__icon">
-                Opret objekt</button>
+            <div class="dropdown">
+        <div class="dropdown__icon-container" @click="toggleDropdown" :class="{ 'dropdown__icon-container--open': isDropdownOpen }">
+          <img :src="PlusIcon" alt="Plus" class="dropdown__icon">
+          <p class="p1 p-white">Nyt Objekt</p>
+        </div>
+        </div>
+
         </div>
         <ObjectList />
     </div>
@@ -21,6 +25,7 @@ import PlusIcon from '../assets/icons/plus-solid.svg';
 
 .object{
     &-top-wrapper {
+        position: relative;
         display: flex;
         justify-content: space-between;
         flex-direction: row;
@@ -45,6 +50,32 @@ import PlusIcon from '../assets/icons/plus-solid.svg';
         height: 1em;
       }
     }
+}
+
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: v.$main-blue;
+  border-radius: 1.5em;
+  padding: 1em 1.5em;
+  margin-top: 1.7em;
+  width: 160px;
+  cursor: pointer;
+
+  &__icon-container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+
+  &__icon {
+    width: 1.5em;
+    height: 1.5em;
+  }
 }
 
 .object-list-wrapper {

@@ -47,7 +47,6 @@ const toggleDropdown = () => {
 </template>
 
 
-
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
 
@@ -64,7 +63,7 @@ const toggleDropdown = () => {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 90%;
+    width: 100%;
     padding: 1.5em 3em 1em 3em;
 
     &__nav {
@@ -120,6 +119,16 @@ const toggleDropdown = () => {
     flex-direction: column;
     gap: 1.5em;
     margin-top: 1.5em;
+
+    p {
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateX(10px);
+        opacity: 0.8;
+      }
+    }
   }
 }
 

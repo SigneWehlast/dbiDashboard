@@ -6,10 +6,12 @@ import { useAuthStore } from '@/stores/AuthStore';
 import { useObjectStore } from '@/stores/ObjectStore';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
+import { useRouter } from 'vue-router';
 
 const scheduleStore = useScheduleStore();
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
+const router = useRouter();
 
 const title = ref('');
 const date = ref('');
@@ -64,6 +66,7 @@ const saveTemporary = async () => {
       uid: uid
     });
     window.alert('Data opdateret (midlertidig).');
+    router.push('/Schedule');
   } catch (err) {
     console.error('Fejl ved opdatering:', err);
   }
@@ -90,6 +93,7 @@ const saveAndClose = async () => {
       object: selectedObject.value
     });
     window.alert('Data opdateret og sendt.');
+    router.push('/Schedule');
   } catch (err) {
     console.error('Fejl ved opdatering:', err);
   }

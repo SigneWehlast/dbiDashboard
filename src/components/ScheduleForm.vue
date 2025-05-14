@@ -79,31 +79,18 @@ const saveAndClose = async () => {
   <div class="schedule-form">
     <h3>Overordnet egenkontrol af ABA-anlæg</h3>
     <form class="schedule-form__formular">
-      <label class="p1" for="title">Titel</label>
-      <input type="text" id="title" v-model="title" />
-
-      <label class="p1" for="date">Dato</label>
-      <input type="date" id="date" v-model="date" />
-
-      <label class="p1" for="object">Vælg objekt</label>
-      <select id="object" v-model="selectedObject">
-        <option value="" disabled selected>Vælg et objekt</option>
-        <option v-for="object in objectStore.objects" :key="object.id" :value="object.id">
-          {{ object.object }} - {{ object.location }}
-        </option>
-      </select>
-
-      <p class="p1">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</p>
-      <label class="p1">
+      <div class="schedule-form__formular__item">
+        <label class="p1" for="title">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet?</label>
+        <label class="p1">
         <input class="checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
       </label>
       <label class="p1">
         <input class="checkbox-input" type="radio" v-model="errorStatus" value="no" /> Nej
       </label>
-
-      <label class="p1" for="comment">Kommentar</label>
-      <input type="text" v-model="errorComment" />
-
+      <p class="p1">Kommentar</p>
+      <textarea type="text" id="title" v-model="title"></textarea>
+      </div>
+      <div class="schedule-form__formular__item">
       <p class="p1">Evt. fejlmeldinger er udbedret eller under udbedring?</p>
       <label class="p1">
         <input class="checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
@@ -113,7 +100,8 @@ const saveAndClose = async () => {
       </label>
 
       <label class="p1" for="comment">Kommentar</label>
-      <input type="text" v-model="systemComment" />
+      <textarea v-model="systemComment"></textarea>
+    </div>
 
       <div class="schedule-form__button">
         <button class="p1 p-white schedule-form__button__save" type="button" @click="saveAndClose">Gem og luk</button>
@@ -134,7 +122,14 @@ const saveAndClose = async () => {
     &__formular {
         display: flex;
         flex-direction: column;
-        gap: 1.5em;
+        gap: 4em;
+        margin-top: 4em;
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
     }
 
     &__button {
@@ -143,7 +138,7 @@ const saveAndClose = async () => {
 
         &__save {
             background-color: v.$main-blue;
-            border-radius: 0.5em;
+            border-radius: .5em;
             border-style: none;
             padding: 0.5em;
         }
@@ -158,16 +153,21 @@ const saveAndClose = async () => {
     }
 }
 
+
 label {
+  display: flex;
+  gap: .5em;
     border-radius: 50%;
 }
 
 .checkbox-input {
-        border: 2px solid #2B7393;
-        border-radius: 50%;
-        height: 1.5em;
-        width: 1.5em;
-    }
+  appearance: none;
+  border: 2px solid v.$main-blue;
+  border-radius: 50%;
+  height: 2.6em;
+  margin: 0;
+  width: 2.6em;
+}
 
 input[type="text"] {
     border-color: #2B7393;
@@ -176,5 +176,16 @@ input[type="text"] {
     resize: none;
     height: 6em;
     border-radius: 1.5em;
+}
+
+textarea {
+    border-color: #2B7393;
+    border-radius: 0.5em;
+    border-style: solid;
+    resize: none;
+    height: 6em;
+    border-radius: 1.5em;
+    padding: 1.5em;
+    vertical-align: top;
 }
 </style>

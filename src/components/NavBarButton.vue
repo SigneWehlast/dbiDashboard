@@ -54,6 +54,7 @@ button {
   margin: 0;
   padding: 0 2em;
   width: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
     background-color: #A4CBE0;
@@ -66,10 +67,10 @@ button {
   }
 }
 
-
 .button-icon {
   width: 24px;
   height: 24px;
+  transition: transform 0.3s ease;
 }
 
 a.nav-button {

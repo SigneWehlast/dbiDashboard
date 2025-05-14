@@ -68,12 +68,4 @@ th, td {
   letter-spacing: -0.01em;
   margin: 0 0 1em 0;
 }
-
-.heading-bar {
-  border-bottom: 1px solid #DADCDC;
-  border-top: 1px solid #DADCDC;
-  padding-bottom: 5px;
-  padding-top: 5px;
-}
-
 </style>

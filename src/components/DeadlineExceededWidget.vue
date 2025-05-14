@@ -26,12 +26,12 @@ const totalDeadlines = computed(() =>
 </script>
 
 <template>
-    <div class="deviation-PerMonth">
-      <div class="top-section">
+    <div class="deviation-permonth">
+      <div class="deviation-permonth__top-section">
         <h3>Overskredet deadline</h3>
         <p class="p1">...</p> <!--Indsæt icon her-->
       </div>
-      <div class="content">
+      <div class="deviation-permonth__content">
         <h2>{{ totalDeadlines }}</h2>
         <p class="p1">Opgaver</p>
       </div>
@@ -41,29 +41,30 @@ const totalDeadlines = computed(() =>
 <style scoped lang="scss">
 @use "@/assets/main.scss" as v;
 
-.deviation-PerMonth {
+.deviation-permonth {
+  align-items: center;
   background-color: v.$white;
-  height: 25rem;
-  width: 35%;
   border-radius: 1.5em;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  height: 25rem;
   justify-content: flex-start;
-  align-items: center;
   padding: 2rem;
-  box-sizing: border-box;
-}
-  .top-section {
+  width: 35%;
+
+  &__top-section {
   display: flex;
   justify-content: space-between;
   width: 90%;
   }
 
-.content {
+  &__content {
+    align-items: center;
     display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 7rem;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 7rem;
   }
+}
 </style>

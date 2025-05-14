@@ -16,6 +16,7 @@ import BrugereIcon from '../assets/icons/user-group-solid-2.svg';
 import BrugereHoverIcon from '../assets/icons/user-group-solid.svg';
 import SignOutIcon from '@/assets/icons/arrow-right-from-bracket-solid.svg';
 import SignOutHoverIcon from '@/assets/icons/arrow-right-from-bracket-solid2.svg';
+
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useRouter } from 'vue-router';
@@ -109,14 +110,13 @@ const logoutAndRedirect = async () => {
       </router-link>
 
       <NavBarButton
-  :imgSrc="SignOutIcon"
-  :hoverImgSrc="SignOutHoverIcon"
-  imgAlt="Sign out icon"
-  :isActive="route.path === '/Login'"
-  @click="logoutAndRedirect"
->
-  <p class="p1">Log ud</p>
-</NavBarButton>
+        :imgSrc="SignOutIcon"
+        :hoverImgSrc="SignOutHoverIcon"
+        imgAlt="Sign out icon"
+        :isActive="route.path === '/Login'"
+        @click="logoutAndRedirect">
+        <p class="p1">Log ud</p>
+      </NavBarButton>
     </nav>
   </div>
 </template>
@@ -124,7 +124,6 @@ const logoutAndRedirect = async () => {
 
 <style scoped lang="scss">
 nav {
-
   display: flex;
   flex-direction: column;
   gap: 0.6em;
@@ -136,10 +135,10 @@ nav {
 }
 
 .nav-bar {
+  height: 100%;
+  left: 0;
   position: sticky;
   top: 0;
-  left: 0;
-  height: 100%;
   width: 18.75em;
 }
 

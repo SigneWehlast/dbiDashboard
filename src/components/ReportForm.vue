@@ -75,7 +75,7 @@ function clearFilters() {
 <template>
   <form class="report-form">
     <div class="report-form__filter">
-      <p class="p1">Vis {{ filteredTasks.length }} (indsæt ikon)</p>
+      <p class="p1">Vis {{ filteredTasks.length }} rapporter</p>
     </div>
 
     <div class="report-form__wrapper">
@@ -133,29 +133,29 @@ function clearFilters() {
 
     <div class="report-form__checkbox">
       <label class="p1">
-        <input class="checkbox-input" type="checkbox" name="afvigelse" value="afvigelse">
+        <input class="report-form__checkbox-input" type="checkbox" name="afvigelse" value="afvigelse">
         Afvigelse
       </label>
       <label class="p1">
-        <input class="checkbox-input" type="checkbox" name="midlertidige" value="midlertidige">
+        <input class="report-form__checkbox-input" type="checkbox" name="midlertidige" value="midlertidige">
         Midlertidige
       </label>
       <label class="p1">
-        <input class="checkbox-input" type="checkbox" name="kommentar" value="kommentar">
+        <input class="report-form__checkbox-input" type="checkbox" name="kommentar" value="kommentar">
         Kommentar
       </label>
       <label class="p1">
-        <input class="checkbox-input" type="checkbox" name="inkluderer arkiverede" value="inkludere arkiverede">
+        <input class="report-form__checkbox-input" type="checkbox" name="inkluderer arkiverede" value="inkludere arkiverede">
         Inkluderer arkiverede
       </label>
     </div>
 
     <div class="report-form__button">
-      <button class="p1 p-white report-form__button__search" @click.prevent="filterByDate">
+      <button class="p1 p-white report-form__button--search" @click.prevent="filterByDate">
         Filtrer
       </button>
-      <button class="p1 p-blue report-form__button__white" type="button">Download CSV</button>
-      <button class="p1 p-blue report-form__button__white" @click.prevent="clearFilters">
+      <button class="p1 p-blue report-form__button--white" type="button">Download CSV</button>
+      <button class="p1 p-blue report-form__button--white" @click.prevent="clearFilters">
         Nulstil
       </button>
     </div>
@@ -189,7 +189,7 @@ function clearFilters() {
     gap: 1em;
     margin: 2em 0;
 
-    &__search {
+    &--search {
       background-color: v.$main-blue;
       border-radius: 0.5em;
       border-style: none;
@@ -197,7 +197,7 @@ function clearFilters() {
       width: 10%;
     }
 
-    &__white {
+    &--white {
       background-color: v.$white;
       border-color: v.$main-blue;
       border-radius: 0.5em;
@@ -230,41 +230,41 @@ function clearFilters() {
     justify-content: flex-end;
     margin-bottom: 1em;
   }
-}
 
-input {
-  height: 3em;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  padding: 0 1rem;
-  background-color: #fafafa;
-  box-sizing: border-box;
-}
-
-select {
-  height: 3em;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  padding: 0 1rem;
-  background-color: #fafafa;
-  box-sizing: border-box;
-}
-
-label {
-  box-sizing: border-box;
-  margin-bottom: 1em;
-  width: calc(33.333% - 0.667em);
-  display: flex;
-  flex-direction: column;
-}
-
-.checkbox-input {
+  &__checkbox-input {
   appearance: none;
   border: 2px solid v.$main-blue;
   border-radius: 50%;
   height: 2.6em;
   margin: 0;
   width: 1.2em;
+  }
+}
+
+input {
+  background-color: #fafafa;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  height: 3em;
+}
+
+select {
+  background-color: #fafafa;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  height: 3em;
+  padding: 0 1rem;
+}
+
+label {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  width: calc(33.333% - 0.667em);
 }
 
 table {
@@ -280,18 +280,11 @@ th, td {
   padding: 0.75em 0;
 }
 
-.heading-bar {
-  border-bottom: 1px solid #DADCDC;
-  border-top: 1px solid #DADCDC;
-  padding-bottom: 5px;
-  padding-top: 5px;
-}
-
 input[type="date"] {
+  color: v.$dark-grey;
   font-family: v.$main-font;
   font-size: 25px;
   font-weight: 200;
-  color: v.$dark-grey;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {

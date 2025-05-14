@@ -93,39 +93,39 @@ function toggleDropdown() {
     height: 2em;
     width: 2em;
   }
+}
 
-  .right-view {
-    display: flex;
-    flex-direction: column;
-  }
+.right-view {
+  display: flex;
+  flex-direction: column;
+}
 
-  .notification-icon {
-    display: inline-block;
-    position: relative;
-  }
+.notification-icon {
+  display: inline-block;
+  position: relative;
+}
 
-  .notification-count {
-    background-color: v.$main-blue;
-    color: v.$white;
-    border-radius: 50%;
-    font-size: 12px;
-    font-weight: bold;
-    height: 20px;
-    line-height: 20px;
-    position: absolute;
-    right: -5px;
-    text-align: center;
-    top: -5px;
-    width: 20px;
-  }
+.notification-count {
+  background-color: v.$main-blue;
+  color: v.$white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  height: 20px;
+  line-height: 20px;
+  position: absolute;
+  right: -5px;
+  text-align: center;
+  top: -5px;
+  width: 20px;
+}
 
-  .notification-icon:hover .notification-count {
-    display: inline-block;
-  }
+.notification-icon:hover .notification-count {
+  display: inline-block;
+}
 
-  .notification-count[data-count="0"] {
-    display: none;
-  }
+.notification-count[data-count="0"] {
+  display: none;
 }
 
 .notification-dropdown {
@@ -162,10 +162,6 @@ function toggleDropdown() {
       color: #FF3838;
       font-weight: 700;
     }
-  }
-
-  .routerlink {
-    text-decoration: none;
   }
 
   hr {

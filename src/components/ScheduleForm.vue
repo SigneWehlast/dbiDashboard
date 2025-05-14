@@ -10,6 +10,7 @@ const router = useRouter();
 
 const authStore = useAuthStore();
 const objectStore = useObjectStore();
+
 const title = ref('');
 const date = ref('');
 const errorComment = ref('');
@@ -76,61 +77,58 @@ const saveAndClose = async () => {
 };
 </script>
 
-
 <template>
   <div class="schedule-form">
     <form class="schedule-form__formular">
-      <div class="schedule-form__formular__item">
+      <div class="schedule-form__formular-item">
 
-      <label class="p1" for="title">Titel</label>
-      <textarea type="text" id="title" v-model="title" />
+        <label class="p1" for="title">Titel</label>
+        <textarea type="text" id="title" v-model="title"></textarea>
 
-      <div class="schedule-form__formular__item__date">
-      <label class="p1" id="label-date" for="date">Dato
-      <input  type="date" id="date" v-model="date" />
-    </label>
+        <div class="schedule-form__formular-item-date">
+          <label class="p1 schedule-form__label-date" for="date">Dato
+            <input type="date" id="date" v-model="date" />
+          </label>
 
-      <label class="p1" id="label-date" for="object">Vælg objekt
-      <select id="object" v-model="selectedObject">
-        <option value="" disabled selected>Vælg et objekt</option>
-        <option v-for="object in objectStore.objects" :key="object.id" :value="object.id">
-          {{ object.object }} - {{ object.location }}
-        </option>
-      </select>
-    </label>
-    </div>
+          <label class="p1 schedule-form__label-date" for="object">Vælg objekt
+            <select id="object" v-model="selectedObject">
+              <option value="" disabled selected>Vælg et objekt</option>
+              <option v-for="object in objectStore.objects" :key="object.id" :value="object.id">
+                {{ object.object }} - {{ object.location }}
+              </option>
+            </select>
+          </label>
+        </div>
       </div>
 
-      <div class="schedule-form__formular__item">
+      <div class="schedule-form__formular-item">
+        <p class="p1">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</p>
+        <label class="p1">
+          <input class="schedule-form__checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
+        </label>
+        <label class="p1">
+          <input class="schedule-form__checkbox-input" type="radio" v-model="errorStatus" value="no" /> Nej
+        </label>
 
-      <p class="p1">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</p>
-      <label class="p1">
-        <input class="checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
-      </label>
-      <label class="p1">
-        <input class="checkbox-input" type="radio" v-model="errorStatus" value="no" /> Nej
-      </label>
-
-      <label class="p1" for="comment">Kommentar</label>
-      <textarea type="text" v-model="errorComment" />
+        <label class="p1" for="comment">Kommentar</label>
+        <textarea type="text" v-model="errorComment"></textarea>
       </div>
 
-      <div class="schedule-form__formular__item">
-
-      <p class="p1">Evt. fejlmeldinger er udbedret eller under udbedring?</p>
-      <label class="p1">
-        <input class="checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
-      </label>
-      <label class="p1">
-        <input class="checkbox-input" type="radio" v-model="systemStatus" value="no" /> Nej
-      </label>
-
-      <label class="p1" for="comment">Kommentar</label>
-      <textarea type="text" v-model="systemComment" />
+      <div class="schedule-form__formular-item">
+        <p class="p1">Evt. fejlmeldinger er udbedret eller under udbedring?</p>
+        <label class="p1">
+          <input class="schedule-form__checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
+        </label>
+        <label class="p1">
+          <input class="schedule-form__checkbox-input" type="radio" v-model="systemStatus" value="no" /> Nej
+        </label>
+        <label class="p1" for="comment">Kommentar</label>
+        <textarea type="text" v-model="systemComment"></textarea>
       </div>
+
       <div class="schedule-form__button">
-        <button class="p1 p-white schedule-form__button__save" type="button" @click="saveAndClose">Gem og luk</button>
-        <button class="p1 p-blue schedule-form__button__save-temporary" type="button" @click="saveTemporary">Gem midlertidig</button>
+        <button class="p1 p-white schedule-form__button--save" type="button" @click="saveAndClose">Gem og luk</button>
+        <button class="p1 p-blue schedule-form__button--save-temporary" type="button" @click="saveTemporary">Gem midlertidig</button>
       </div>
     </form>
   </div>
@@ -144,29 +142,11 @@ const saveAndClose = async () => {
     border-radius: 1.5em;
     padding: 4.375rem;
 
-    &__formular {
-        display: flex;
-        flex-direction: column;
-        gap: 7em;
-
-        &__item {
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
-        }
-
-        &__item__date {
-        display: flex;
-        flex-direction: row;
-        }
-
-    }
-
     &__button {
         display: flex;
         gap: 1em;
 
-        &__save {
+        &--save {
             background-color: v.$main-blue;
             border-radius: 0.5em;
             border-style: none;
@@ -185,7 +165,7 @@ const saveAndClose = async () => {
             }
         }
 
-        &__save-temporary {
+        &--save-temporary {
             background-color: v.$white;
             border-color: v.$main-blue;
             border-radius: 0.5em;
@@ -270,12 +250,6 @@ label {
   box-sizing: border-box;
 }
 
-#label-date {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 #object {
   height: 3em;
   border-radius: 12px;
@@ -283,12 +257,6 @@ label {
   padding: 0 1rem;
   background-color: #fafafa;
   box-sizing: border-box;
-}
-
-#label-date {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 }
 
 input[type="date"] {

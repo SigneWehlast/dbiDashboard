@@ -102,7 +102,7 @@ const saveAndClose = async () => {
 
 <template>
   <div class="schedule-form">
-    <div class="display-data">
+    <div class="schedule-form__show-data">
       <h2>Titel: {{ title }}</h2>
       <h3>Deadline: {{ date }}</h3>
 
@@ -117,20 +117,20 @@ const saveAndClose = async () => {
 
       <h3>Alle systemdele er tilkoblet og funktionsdygtige: {{ errorStatus === 'yes' ? 'Ja' : 'Nej' }}</h3>
         <label class="p1">
-          <input class="checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
+          <input class="schedule-form__checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
         </label>
         <label class="p1">
-          <input class="checkbox-input" type="radio" v-model="errorStatus" value="no" /> Nej
+          <input class="schedule-form__checkbox-input" type="radio" v-model="errorStatus" value="no" /> Nej
         </label>
       <h3>Kommentar til fejlstatus: {{ errorComment }}</h3>
         <input type="text" v-model="errorComment" />
 
       <h3>Fejlmeldinger udbedret: {{ systemStatus === 'yes' ? 'Ja' : 'Nej' }}</h3>
           <label class="p1">
-          <input class="checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
+          <input class="schedule-form__checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
         </label>
         <label class="p1">
-          <input class="checkbox-input" type="radio" v-model="systemStatus" value="no" /> Nej
+          <input class="schedule-form__checkbox-input" type="radio" v-model="systemStatus" value="no" /> Nej
         </label>
       <h3>Kommentar til systemstatus: {{ systemComment }}</h3>
        <input type="text" v-model="systemComment" />
@@ -150,46 +150,41 @@ const saveAndClose = async () => {
   background-color: v.$white;
   border-radius: 1.5em;
   padding: 4.375rem;
-}
 
-.display-data {
+  &__show-data {
   display: flex;
   flex-direction: column;
   gap: 1.2em;
   font-size: 1rem;
   line-height: 1.6;
-}
+  }
 
-.schedule-form {
-    background-color: v.$white;
-    border-radius: 1.5em;
-    padding: 4.375rem;
+  &__button {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
 
-    &__formular {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5em;
+    &__save {
+        background-color: v.$main-blue;
+        border-radius: 0.5em;
+        border-style: none;
+        padding: 0.5em;
     }
 
-    &__button {
-        display: flex;
-        gap: 1em;
-        margin-top: 1em;
+    &__save-temporary {
+        background-color: v.$white;
+        border-color: v.$main-blue;
+        border-radius: 0.5em;
+        border-style: solid;
+        padding: 0.5em;
+    }
+  }
 
-        &__save {
-            background-color: v.$main-blue;
-            border-radius: 0.5em;
-            border-style: none;
-            padding: 0.5em;
-        }
-
-        &__save-temporary {
-            background-color: v.$white;
-            border-color: v.$main-blue;
-            border-radius: 0.5em;
-            border-style: solid;
-            padding: 0.5em;
-        }
+  &__checkbox-input {
+        border: 2px solid #2B7393;
+        border-radius: 50%;
+        height: 1.5em;
+        width: 1.5em;
     }
 }
 
@@ -197,19 +192,11 @@ label {
     border-radius: 50%;
 }
 
-.checkbox-input {
-        border: 2px solid #2B7393;
-        border-radius: 50%;
-        height: 1.5em;
-        width: 1.5em;
-    }
-
 input[type="text"] {
     border-color: #2B7393;
     border-radius: 0.5em;
     border-style: solid;
-    resize: none;
     height: 6em;
-    border-radius: 1.5em;
+    resize: none;
 }
 </style>

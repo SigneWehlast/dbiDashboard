@@ -3,8 +3,8 @@
 
 <template>
 <div class="Footer-bar">
-<p class="p1">Dansk Brand- og sikringsteknisk institut</p>
-<p class="p1">36 34 90 00 | brandogsikring.dk</p>
+    <p class="p1">Dansk Brand- og sikringsteknisk institut</p>
+    <p class="p1">36 34 90 00 | brandogsikring.dk</p>
 </div>
 </template>
 

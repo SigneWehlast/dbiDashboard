@@ -102,44 +102,58 @@ const saveAndClose = async () => {
 
 <template>
   <div class="schedule-form">
-    <div class="schedule-form__show-data">
-      <h2>Titel: {{ title }}</h2>
-      <h3>Deadline: {{ date }}</h3>
+    <form class="schedule-form__formular">
+      <div class="schedule-form__formular-item">
+        <h3>Alle systemdele er tilkoblet og funktionsdygtige</h3>
+        <label class="p1" for="title"></label>
+        <textarea type="text" id="title" v-model="title"></textarea>
 
-      <h3>Objekt:
-        {{
-          objectStore.objects.find(obj => obj.id === selectedObject)?.object
-        }} - 
-        {{
-          objectStore.objects.find(obj => obj.id === selectedObject)?.location
-        }}
-      </h3>
+        <div class="schedule-form__formular-item-date">
+          <div class="schedule-form__label-date">
+            <p class="p1">Dato:</p>
+            <p class="schedule-form__readonly-text">{{ date }}</p>
+          </div>
 
-      <h3>Alle systemdele er tilkoblet og funktionsdygtige: {{ errorStatus === 'yes' ? 'Ja' : 'Nej' }}</h3>
+          <div class="schedule-form__label-date">
+            <p class="p1">Objekt:</p>
+            <p class="schedule-form__readonly-text">
+              {{ objectStore.objects.find(obj => obj.id === selectedObject)?.object }} -
+              {{ objectStore.objects.find(obj => obj.id === selectedObject)?.location }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-form__formular-item">
+        <h3>Alle systemdele er tilkoblet og funktionsdygtige</h3>
         <label class="p1">
           <input class="schedule-form__checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
         </label>
         <label class="p1">
           <input class="schedule-form__checkbox-input" type="radio" v-model="errorStatus" value="no" /> Nej
         </label>
-      <h3>Kommentar til fejlstatus: {{ errorComment }}</h3>
-        <input type="text" v-model="errorComment" />
 
-      <h3>Fejlmeldinger udbedret: {{ systemStatus === 'yes' ? 'Ja' : 'Nej' }}</h3>
-          <label class="p1">
+        <label class="p1" for="errorComment">Kommentar til fejlstatus</label>
+        <textarea type="text" v-model="errorComment"></textarea>
+      </div>
+
+      <div class="schedule-form__formular-item">
+        <h3>Fejlmeldinger udbedret</h3>
+        <label class="p1">
           <input class="schedule-form__checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
         </label>
         <label class="p1">
           <input class="schedule-form__checkbox-input" type="radio" v-model="systemStatus" value="no" /> Nej
         </label>
-      <h3>Kommentar til systemstatus: {{ systemComment }}</h3>
-       <input type="text" v-model="systemComment" />
-    </div>
+        <label class="p1" for="systemComment">Kommentar til systemstatus</label>
+        <textarea type="text" v-model="systemComment"></textarea>
+      </div>
 
-     <div class="schedule-form__button">
-          <button class="p1 p-white schedule-form__button__save" type="button" @click="saveAndClose">Gem og luk</button>
-          <button class="p1 p-blue schedule-form__button__save-temporary" type="button" @click="saveTemporary">Gem midlertidig</button>
-        </div>
+      <div class="schedule-form__button">
+        <button class="p1 p-white schedule-form__button--save" type="button" @click="saveAndClose">Gem og luk</button>
+        <button class="p1 p-blue schedule-form__button--save-temporary" type="button" @click="saveTemporary">Gem midlertidig</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -147,56 +161,139 @@ const saveAndClose = async () => {
 @use "@/assets/main.scss" as v;
 
 .schedule-form {
-  background-color: v.$white;
-  border-radius: 1.5em;
-  padding: 4.375rem;
+    background-color: v.$white;
+    border-radius: 1.5em;
+    padding: 4.375rem;
 
-  &__show-data {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2em;
-  font-size: 1rem;
-  line-height: 1.6;
-  }
+    &__formular {
+        display: flex;
+        flex-direction: column;
+        gap: 7em;
 
-  &__button {
-    display: flex;
-    gap: 1em;
-    margin-top: 1em;
+        &-item {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
 
-    &__save {
-        background-color: v.$main-blue;
-        border-radius: 0.5em;
-        border-style: none;
-        padding: 0.5em;
+            &-date {
+                display: flex;
+                flex-direction: column;
+            }
+        }
     }
 
-    &__save-temporary {
-        background-color: v.$white;
-        border-color: v.$main-blue;
-        border-radius: 0.5em;
-        border-style: solid;
-        padding: 0.5em;
+    &__label-date {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1em;
     }
-  }
 
-  &__checkbox-input {
-        border: 2px solid #2B7393;
-        border-radius: 50%;
-        height: 1.5em;
-        width: 1.5em;
+    &__readonly-text {
+        font-family: v.$main-font;
+        font-size: 25px;
+        font-weight: 200;
+        color: v.$dark-grey;
+        margin: 0;
+        padding: 0.5em 0;
+    }
+
+    &__button {
+        display: flex;
+        gap: 1em;
+
+        &--save {
+            background-color: v.$main-blue;
+            border-radius: 0.5em;
+            border-style: none;
+            padding: 0.5em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.2);
+                background-color: darken(v.$main-blue, 5%);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+
+        &--save-temporary {
+            background-color: v.$white;
+            border-color: v.$main-blue;
+            border-radius: 0.5em;
+            border-style: solid;
+            padding: 0.5em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.1);
+                background-color: rgba(43, 115, 147, 0.05);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
     }
 }
 
-label {
-    border-radius: 50%;
-}
-
-input[type="text"] {
+textarea {
     border-color: #2B7393;
     border-radius: 0.5em;
     border-style: solid;
-    height: 6em;
     resize: none;
+    height: 6em;
+    border-radius: 1.5em;
+    padding: 1.5em;
+    vertical-align: top;
+}
+
+label {
+    box-sizing: border-box;
+    margin-bottom: 1em;
+    width: calc(33.333% - 0.667em);
+    display: flex;
+    gap: .5em;
+    border-radius: 50%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.schedule-form__checkbox-input {
+    appearance: none;
+    border: 2px solid v.$main-blue;
+    border-radius: 50%;
+    height: 2.5em;
+    margin: 0;
+    width: 2.5em;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    background-color: white;
+
+    &:checked {
+        background-color: white;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 1.2em;
+            height: 1.2em;
+            background-color: v.$main-blue;
+            border-radius: 50%;
+        }
+    }
+
+    &:hover {
+        border-color: darken(v.$main-blue, 10%);
+    }
 }
 </style>

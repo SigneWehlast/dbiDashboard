@@ -31,7 +31,7 @@ const saveTemporary = async () => {
   }
 
   try {
-    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
+    await addDoc(collection(db, 'ScheduleForm'), {
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),
@@ -57,7 +57,7 @@ const saveAndClose = async () => {
   }
 
   try {
-    const docRef = await addDoc(collection(db, 'ScheduleForm'), {
+    await addDoc(collection(db, 'ScheduleForm'), {
       title: title.value,
       deadline: date.value,
       createdAt: new Date(),
@@ -82,7 +82,8 @@ const saveAndClose = async () => {
     <form class="schedule-form__formular">
       <div class="schedule-form__formular-item">
 
-        <label class="p1" for="title">Titel</label>
+        <h3>Titel</h3>
+        <label class="p1" for="title"></label>
         <textarea type="text" id="title" v-model="title"></textarea>
 
         <div class="schedule-form__formular-item-date">
@@ -102,7 +103,7 @@ const saveAndClose = async () => {
       </div>
 
       <div class="schedule-form__formular-item">
-        <p class="p1">Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</p>
+        <h3>Alle systemdele er tilkoblet og fuldt funktionsdygtige og kun aftalte enheder er frakoblet</h3>
         <label class="p1">
           <input class="schedule-form__checkbox-input" type="radio" v-model="errorStatus" value="yes" /> Ja
         </label>
@@ -115,7 +116,7 @@ const saveAndClose = async () => {
       </div>
 
       <div class="schedule-form__formular-item">
-        <p class="p1">Evt. fejlmeldinger er udbedret eller under udbedring?</p>
+        <h3>Evt. fejlmeldinger er udbedret eller under udbedring?</h3>
         <label class="p1">
           <input class="schedule-form__checkbox-input" type="radio" v-model="systemStatus" value="yes" /> Ja
         </label>
@@ -142,6 +143,30 @@ const saveAndClose = async () => {
     border-radius: 1.5em;
     padding: 4.375rem;
 
+    &__formular {
+        display: flex;
+        flex-direction: column;
+        gap: 7em;
+
+        &-item {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            &-date {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+    }
+
+    &__label-date {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5em;
+    }
+
     &__button {
         display: flex;
         gap: 1em;
@@ -151,6 +176,18 @@ const saveAndClose = async () => {
             border-radius: 0.5em;
             border-style: none;
             padding: 0.5em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.2);
+                background-color: darken(v.$main-blue, 5%);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
         }
 
         &--save-temporary {
@@ -159,40 +196,19 @@ const saveAndClose = async () => {
             border-radius: 0.5em;
             border-style: solid;
             padding: 0.5em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.1);
+                background-color: rgba(43, 115, 147, 0.05);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
         }
-    }
-
-    &__formular {
-        display: flex;
-        flex-direction: column;
-        gap: 3em;
-
-        &-item {
-            display: flex;
-            flex-direction: column;
-            gap: 3em;
-        }
-
-        &-item-date {
-        display: flex;
-        flex-direction: row;
-        }
-
-    }
-
-    &__label-date {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    &__checkbox-input {
-      appearance: none;
-      border: 2px solid v.$main-blue;
-      border-radius: 50%;
-      height: 2.5em;
-      margin: 0;
-      width: 2.5em;
     }
 }
 
@@ -208,52 +224,84 @@ textarea {
 }
 
 label {
-  box-sizing: border-box;
-  margin-bottom: 1em;
-  width: calc(33.333% - 0.667em);
-  display: flex;
-  gap: .5em;
-  border-radius: 50%;
-  flex-direction: row;
-  align-items: center;
+    box-sizing: border-box;
+    margin-bottom: 1em;
+    width: calc(33.333% - 0.667em);
+    display: flex;
+    gap: .5em;
+    border-radius: 50%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.schedule-form__checkbox-input {
+    appearance: none;
+    border: 2px solid v.$main-blue;
+    border-radius: 50%;
+    height: 2.5em;
+    margin: 0;
+    width: 2.5em;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    background-color: white;
+
+    &:checked {
+        background-color: white;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 1.2em;
+            height: 1.2em;
+            background-color: v.$main-blue;
+            border-radius: 50%;
+        }
+    }
+
+    &:hover {
+        border-color: darken(v.$main-blue, 10%);
+    }
 }
 
 #date {
-  height: 3em;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  padding: 0 1rem;
-  background-color: #fafafa;
-  box-sizing: border-box;
+    height: 3em;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    padding: 0 1rem;
+    background-color: #fafafa;
+    box-sizing: border-box;
 }
 
 #object {
-  height: 3em;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  padding: 0 1rem;
-  background-color: #fafafa;
-  box-sizing: border-box;
+    height: 3em;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    padding: 0 1rem;
+    background-color: #fafafa;
+    box-sizing: border-box;
 }
 
 input[type="date"] {
-  display: flex;
-  font-family: v.$main-font;
-  font-size: 25px;
-  font-weight: 200;
-  color: v.$dark-grey;
+    display: flex;
+    font-family: v.$main-font;
+    font-size: 25px;
+    font-weight: 200;
+    color: v.$dark-grey;
 }
 
 select {
-  display: flex;
-  font-family: v.$main-font;
-  font-size: 25px;
-  font-weight: 200;
-  color: v.$dark-grey;
+    display: flex;
+    font-family: v.$main-font;
+    font-size: 25px;
+    font-weight: 200;
+    color: v.$dark-grey;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(0.5);
+    cursor: pointer;
+    filter: invert(0.5);
 }
 </style>

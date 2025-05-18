@@ -13,7 +13,6 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
     tasks.value.filter(task => task.status === 'Overskredet')
   );
 
-  // Brug Notification API direkte (uden service worker)
   async function showOverskredneNotifications(tasksList) {
     if (!('Notification' in window)) {
       console.warn('Browseren understøtter ikke Notification API.');

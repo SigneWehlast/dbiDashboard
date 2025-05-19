@@ -104,9 +104,7 @@ const saveAndClose = async () => {
   <div class="schedule-form">
     <form class="schedule-form__formular">
       <div class="schedule-form__formular-item">
-        <h3>Alle systemdele er tilkoblet og funktionsdygtige</h3>
-        <label class="p1" for="title"></label>
-        <textarea type="text" id="title" v-model="title"></textarea>
+        <h3> {{ title }}</h3>
 
         <div class="schedule-form__formular-item-date">
           <div class="schedule-form__label-date">

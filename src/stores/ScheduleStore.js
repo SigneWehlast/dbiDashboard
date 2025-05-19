@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { db } from '@/configs/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export const useScheduleStore = defineStore('ScheduleStore', () => {
@@ -42,7 +42,32 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
     }
   }
 
-  // Funktion til at hente opgaver
+  async function checkAndUpdateTaskStatuses(uid) {
+    const today = new Date();
+
+    try {
+      const querySnapshot = await getDocs(collection(db, 'ScheduleForm'));
+
+      const updates = querySnapshot.docs.map(async (taskDoc) => {
+        const task = taskDoc.data();
+
+        if (task.uid === uid && task.status !== 'Udført' && task.deadline) {
+          const deadlineDate = new Date(task.deadline);
+
+          if (deadlineDate < today) {
+            await updateDoc(doc(db, 'ScheduleForm', taskDoc.id), {
+              status: 'Overskredet',
+            });
+          }
+        }
+      });
+
+      await Promise.all(updates);
+    } catch (err) {
+      console.error('Fejl ved opdatering af overskredne opgaver:', err);
+    }
+  }
+
   async function fetchTasks() {
     isLoading.value = true;
     isError.value = false;
@@ -61,6 +86,8 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
         const uid = currentUser.uid;
 
         try {
+          await checkAndUpdateTaskStatuses(uid);
+
           const querySnapshot = await getDocs(collection(db, 'ScheduleForm'));
           tasks.value = querySnapshot.docs
             .filter(doc => doc.data().uid === uid)
@@ -78,7 +105,6 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
               object: doc.data().object || ''
             }));
 
-          // Vis notifikation for én overskredet opgave
           await showOverskredneNotifications(tasks.value);
 
         } catch (err) {

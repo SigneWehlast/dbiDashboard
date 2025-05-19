@@ -1,35 +1,77 @@
 # dbiDashboard
 
-This template should help get you started developing with Vue 3 in Vite.
+Dette projekt er et udsnit af en optimeret webapplikation til DBI Egenkontrollen.
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Funktioner på webapplikationen:
 
-## Customize configuration
+- Log ind / opret en bruger
+- Se skemaer
+- Oprette skemaer
+- Se rapporter
+- Se brugere
 
-See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+## Installation
 
-```sh
-npm install
-```
+For at installere dbiDashboard:
 
-### Compile and Hot-Reload for Development
+1. Klon repository: https://github.com/SigneWehlast/dbiDashboard
+2. Gå ind i filen: 'cd dbiDashboard'
+3. Installer med 'npm install'
+4. Build projektet: 'npm run build'
+5. Kør i developer mode: 'npm run dev'
 
-```sh
-npm run dev
-```
 
-### Compile and Minify for Production
+## Development
 
-```sh
-npm run build
-```
+Hvis du vil udvikle på dbiDashboard, skal du:
 
-### Lint with [ESLint](https://eslint.org/)
+1. Lav en kopi af dbiDashboard projektet
+2. Lav en ny branch
+3. Lav ændringer
+4. Test dine ændringer (eksempel på test er kommandoen npx eslint (på hele projektet) eller npx eslint src/filnavnet.js)
+5. Commit ændringerne
+6. Push ændringerne
+7. Send pull request
 
-```sh
-npm run lint
-```
+
+## Teknologier og værktøjer anvendt i dbiDashboard
+
+- Chart.js (npm install chart.js)
+- ESLint (npm init @eslint/config@latest)
+- Firebase (npm install firebase)
+- Pinia (npm install pinia)
+- Sass (npm install -D sass)
+- Vue.js (npm install vue@latest)
+
+
+## Opbygning af projekt
+
+src/
+- assets/
+    - icons
+    - main.scss
+- components/ <!-- Alle komponenterne -->
+- configs/
+    - firebase.js
+- router
+    - index.js
+- stores
+    - AuthStore.js
+    - ObjectStore.js
+    - ScheduleStore.js
+- utils
+    - firebaseUtils.js
+- views/ <!-- Alle views --> 
+- app.vue
+- main.js
+
+
+## Design team
+
+- Johannes, Nikoline og Peter
+
+## Developer team
+
+- Kasper Nielsen, Kristoffer Madsen og Signe Wehlast

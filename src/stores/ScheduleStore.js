@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { db } from '@/configs/firebase';
-import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { collection,getDocs, updateDoc, doc, query, where } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export const useScheduleStore = defineStore('ScheduleStore', () => {
@@ -46,12 +46,13 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
     const today = new Date();
 
     try {
-      const querySnapshot = await getDocs(collection(db, 'ScheduleForm'));
+      const q = query(collection(db, 'ScheduleForm'), where('userId', '==', uid));
+      const querySnapshot = await getDocs(q);
 
       const updates = querySnapshot.docs.map(async (taskDoc) => {
         const task = taskDoc.data();
 
-        if (task.uid === uid && task.status !== 'Udført' && task.deadline) {
+        if (task.status !== 'Udført' && task.deadline) {
           const deadlineDate = new Date(task.deadline);
 
           if (deadlineDate < today) {
@@ -88,22 +89,23 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
         try {
           await checkAndUpdateTaskStatuses(uid);
 
-          const querySnapshot = await getDocs(collection(db, 'ScheduleForm'));
-          tasks.value = querySnapshot.docs
-            .filter(doc => doc.data().uid === uid)
-            .map(doc => ({
-              id: doc.id,
-              title: doc.data().title || '',
-              deadline: doc.data().deadline || '',
-              status: doc.data().status || '',
-              createdAt: doc.data().createdAt?.toDate() || null,
-              errorComment: doc.data().errorComment || '',
-              errorStatus: doc.data().errorStatus || '',
-              systemComment: doc.data().systemComment || '',
-              systemStatus: doc.data().systemStatus || '',
-              uid: doc.data().uid || '',
-              object: doc.data().object || ''
-            }));
+          const q = query(collection(db, 'ScheduleForm'), where('uid', '==', uid));
+          const querySnapshot = await getDocs(q);
+
+          tasks.value = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            title: doc.data().title || '',
+            deadline: doc.data().deadline || '',
+            status: doc.data().status || '',
+            createdAt: doc.data().createdAt?.toDate() || null,
+            errorComment: doc.data().errorComment || '',
+            errorStatus: doc.data().errorStatus || '',
+            systemComment: doc.data().systemComment || '',
+            systemStatus: doc.data().systemStatus || '',
+            uid: doc.data().uid || '',
+            userId: doc.data().userId || '',
+            object: doc.data().object || ''
+          }));
 
           await showOverskredneNotifications(tasks.value);
 

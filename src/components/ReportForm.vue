@@ -232,12 +232,35 @@ function clearFilters() {
   }
 
   &__checkbox-input {
-  appearance: none;
-  border: 2px solid v.$main-blue;
-  border-radius: 50%;
-  height: 2.6em;
-  margin: 0;
-  width: 1.2em;
+    appearance: none;
+    border: 2px solid v.$main-blue;
+    border-radius: 50%;
+    height: 2.5em;
+    margin: 0;
+    width: 2.5em;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    background-color: white;
+
+    &:checked {
+      background-color: white;
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 1.2em;
+        height: 1.2em;
+        background-color: v.$main-blue;
+        border-radius: 50%;
+      }
+    }
+
+    &:hover {
+      border-color: darken(v.$main-blue, 10%);
+    }
   }
 }
 

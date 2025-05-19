@@ -42,7 +42,6 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
     }
   }
 
-  // 🔄 NY: Funktion til at opdatere status hvis deadline er overskredet
   async function checkAndUpdateTaskStatuses(uid) {
     const today = new Date();
 
@@ -52,7 +51,6 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
       const updates = querySnapshot.docs.map(async (taskDoc) => {
         const task = taskDoc.data();
 
-        // Brugerens egne opgaver og ikke allerede 'Udført'
         if (task.uid === uid && task.status !== 'Udført' && task.deadline) {
           const deadlineDate = new Date(task.deadline);
 
@@ -70,7 +68,6 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
     }
   }
 
-  // Funktion til at hente opgaver
   async function fetchTasks() {
     isLoading.value = true;
     isError.value = false;
@@ -89,7 +86,6 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
         const uid = currentUser.uid;
 
         try {
-          // 🆕 Tjek og opdater opgaver med overskredne deadlines
           await checkAndUpdateTaskStatuses(uid);
 
           const querySnapshot = await getDocs(collection(db, 'ScheduleForm'));

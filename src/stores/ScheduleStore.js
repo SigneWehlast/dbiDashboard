@@ -46,7 +46,7 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
     const today = new Date();
 
     try {
-      const q = query(collection(db, 'ScheduleForm'), where('userId', '==', uid));
+      const q = query(collection(db, 'ScheduleForm'), where('uid', '==', uid));
       const querySnapshot = await getDocs(q);
 
       const updates = querySnapshot.docs.map(async (taskDoc) => {

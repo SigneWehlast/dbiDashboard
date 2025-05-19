@@ -18,18 +18,6 @@ objectStore.fetchObjects();
         </tr>
       </thead>
       <tbody>
-        <tr v-if="objectStore.isLoading">
-          <td colspan="2" class="p1">Indlæser...</td>
-        </tr>
-
-        <tr v-else-if="objectStore.isError">
-          <td colspan="2" class="p1">Kunne ikke hente data.</td>
-        </tr>
-
-        <tr v-if="!objectStore.isLoading && !objectStore.isError && objectStore.objects.length === 0">
-          <td colspan="2" class="p1">Ingen objekter fundet.</td>
-        </tr>
-
         <tr v-for="object in objectStore.objects" :key="object.id">
           <td class="p1">{{ object.object }}</td>
           <td class="p1">{{ object.location }}</td>

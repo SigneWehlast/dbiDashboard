@@ -166,7 +166,7 @@ const saveAndClose = async () => {
     &__formular {
         display: flex;
         flex-direction: column;
-        gap: 7em;
+        gap: 4em;
 
         &-item {
             display: flex;
@@ -253,14 +253,13 @@ textarea {
 }
 
 label {
-    box-sizing: border-box;
-    margin-bottom: 1em;
-    width: calc(33.333% - 0.667em);
-    display: flex;
-    gap: .5em;
-    border-radius: 50%;
-    flex-direction: row;
     align-items: center;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: .5em;
+    margin-bottom: 1em;
 }
 
 .schedule-form__checkbox-input {
@@ -279,14 +278,14 @@ label {
         background-color: white;
         &::after {
             content: '';
-            position: absolute;
+            background-color: v.$main-blue;
+            border-radius: 50%;
+            height: 1.2em;
             left: 50%;
+            position: absolute;
             top: 50%;
             transform: translate(-50%, -50%);
             width: 1.2em;
-            height: 1.2em;
-            background-color: v.$main-blue;
-            border-radius: 50%;
         }
     }
 

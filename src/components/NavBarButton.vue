@@ -59,7 +59,7 @@ button {
   &:hover {
     background-color: v.$button-hover;
     color: v.$white;
-    
+
     :deep(.p1) {
       color: v.$white;
     }

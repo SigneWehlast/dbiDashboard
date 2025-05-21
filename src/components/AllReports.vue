@@ -28,7 +28,7 @@ const completedTasks = computed(() =>
         <tr v-for="task in completedTasks" :key="task.id">
           <router-link :to="`/Specific/${task.id}`" class="p1 routerlink">
           {{ task.title }}
-          </router-link>               
+          </router-link>
           <td class="p1">{{ task.deadline }}</td>
         </tr>
       </tbody>

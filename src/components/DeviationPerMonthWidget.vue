@@ -209,6 +209,4 @@ watch(tasksDonePerMonth, (newData) => {
     }
   }
 }
-
- 
 </style>

@@ -17,7 +17,7 @@ const handleLogin = async () => {
   }
 
   try {
-    //firebase email og password 
+    //firebase email og password
     const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
     const user = userCredential.user;
 

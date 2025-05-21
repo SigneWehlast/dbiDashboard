@@ -91,9 +91,9 @@ function formatDate(dateString) {
       </p>
 
       <div v-if="isAuthReady" v-for="task in sortedSchedules" :key="task.id + '-title'">
-    <router-link :to="`/Specific/${task.id}`"class="p1 routerlink">
+    <router-link :to="`/Specific/${task.id}`" class="p1 routerlink">
       {{ task.title }}
-    </router-link>     
+    </router-link>
     </div>
       <p v-else class="p1">Indlæser...</p>
     </div>
@@ -164,7 +164,7 @@ function formatDate(dateString) {
   &__sort-header {
       align-items: center;
       display: inline-flex;
-      gap: 0.4em; 
+      gap: 0.4em;
     }
 }
 

@@ -53,7 +53,7 @@ const router = createRouter({
       component: () => import('@/views/ObjectView.vue'),
       meta: { requiresAuth: true }
     },
-     {
+    {
       path: '/Specific/:id',
       name: 'Specific',
       props: true,

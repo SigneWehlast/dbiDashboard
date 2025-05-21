@@ -43,7 +43,7 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
 
           if (deadlineDate < today) {
             await updateDoc(doc(db, 'ScheduleForm', taskDoc.id), {
-              status: 'Overskredet',
+              status: 'Overskredet'
             });
           }
         }

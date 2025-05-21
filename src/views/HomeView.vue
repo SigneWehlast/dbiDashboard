@@ -15,6 +15,7 @@ const firstName = ref('');
 const lastName = ref('');
 
 onMounted(() => {
+  //Tjekker hvilken bruger, der er logget ind
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       const uid = user.uid;
@@ -26,10 +27,10 @@ onMounted(() => {
         firstName.value = data.firstName || '';
         lastName.value = data.lastName || '';
       } else {
-        console.log('No such user document!');
+        console.log('Ingen bruger fundet');
       }
     } else {
-      console.log('User not logged in');
+      console.log('Ingen bruger logget ind');
     }
   });
 });

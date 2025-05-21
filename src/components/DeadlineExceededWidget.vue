@@ -5,18 +5,19 @@ import { useScheduleStore } from '@/stores/ScheduleStore';
 const scheduleStore = useScheduleStore();
 
 onMounted(() => {
-  scheduleStore.fetchTasks(); // Fetch tasks when component is mounted
+  scheduleStore.fetchTasks();
 });
 
 const todayStr = new Date().toDateString();
 
+//tjekker om datoen er i dag
 function isToday(date) {
   if (!date) return false;
   const d = date instanceof Date ? date : date.toDate?.() || new Date(date);
   return d.toDateString() === todayStr;
 }
 
-// Computed property for overdue deadlines
+//skriver antal af overskredne deadlines + igangværende, hvis det er i dag
 const totalDeadlines = computed(() =>
   scheduleStore.tasks.filter(task => {
     const status = task.status.toLowerCase();
@@ -29,7 +30,7 @@ const totalDeadlines = computed(() =>
     <div class="deviation-permonth">
       <div class="deviation-permonth__top-section">
         <h3>Overskredet deadline</h3>
-        <p class="p1">...</p> <!--Indsæt icon her-->
+        <p class="p1">...</p>
       </div>
       <div class="deviation-permonth__content">
         <h2>{{ totalDeadlines }}</h2>

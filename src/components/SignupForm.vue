@@ -13,6 +13,7 @@ const lastName = ref('');
 const companyName = ref('');
 const router = useRouter();
 
+//hvis begge password ikke stemmer overens
 const handleRegister = async () => {
   if (password.value !== confirmPassword.value) {
     alert('Adgangskoderne stemmer ikke overens.');
@@ -20,6 +21,7 @@ const handleRegister = async () => {
   }
 
   try {
+    //opretter brugeren i Firestore
     console.log('Starter brugeroprettelse...');
     const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
     const user = userCredential.user;
@@ -102,8 +104,8 @@ const goToLogin = () => {
     color: v.$dark-grey;
     display: flex;
     flex-direction: column;
-    width: 40%;
     padding: 1.5em;
+    width: 40%;
     text-align: center;
 
     &__input-group {
@@ -122,7 +124,7 @@ const goToLogin = () => {
       width: 100%;
 
       &:hover {
-        background-color: #A4CBE0;
+        background-color: v.$button-hover;
         color: v.$dark-grey;
       }
     }
@@ -130,9 +132,9 @@ const goToLogin = () => {
 }
 
 label {
+  display: block;
   font-size: 14px;
   margin-bottom: 0.3em;
-  display: block;
 }
 
 input {
@@ -145,10 +147,10 @@ input {
 }
 
 .toggle-text {
-  margin-top: 1em;
+  color: v.$dark-grey;
   cursor: pointer;
   font-size: 14px;
-  color: v.$dark-grey;
+  margin-top: 1em;
 }
 
 </style>

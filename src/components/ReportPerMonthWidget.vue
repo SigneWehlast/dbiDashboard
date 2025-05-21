@@ -160,7 +160,7 @@ watch(tasksDonePerMonth, (newData) => {
   <div class="report-permonth">
     <div class="report-permonth__top-section">
       <h3>Rapporter pr. måned</h3>
-      <p class="p1">...</p> <!--Indsæt icon her-->
+      <p class="p1">...</p>
     </div>
     <div class="report-permonth__content" >
       <canvas ref="chartGrafik"></canvas>

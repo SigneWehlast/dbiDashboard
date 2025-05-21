@@ -9,39 +9,25 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
   const isLoading = ref(false);
   const isError = ref(false);
 
-  const overskredneTasks = computed(() =>
+  const overdueTasks = computed(() =>
     tasks.value.filter(task => task.status === 'Overskredet')
   );
 
-  async function showOverskredneNotifications(tasksList) {
-    if (!('Notification' in window)) {
-      console.warn('Browseren understøtter ikke Notification API.');
-      return;
-    }
+  //viser skeamer, der er overskredet i notifikationerne
+  async function showOverdueNotifications(tasksList) {
+    const overdue = tasksList.filter(t => t.status === 'Overskredet');
 
-    let permission = Notification.permission;
-    if (permission === 'default') {
-      permission = await Notification.requestPermission();
-    }
-
-    if (permission !== 'granted') {
-      console.warn('Notifikationstilladelse ikke givet.');
-      return;
-    }
-
-    const overskredne = tasksList.filter(t => t.status === 'Overskredet');
-
-    if (overskredne.length > 0) {
-      const task = overskredne[0];
+    if (overdue.length > 0) {
+      const task = overdue[0];
 
       new Notification('Opgave overskredet!', {
         body: `Titel: ${task.title}\nDeadline: ${task.deadline}\nStatus: ${task.status}`,
-        icon: '/icons/icon-192.png',
         requireInteraction: true
       });
     }
   }
 
+  //skift til overskredet, når en opgave ikke er udført den dag
   async function checkAndUpdateTaskStatuses(uid) {
     const today = new Date();
 
@@ -75,6 +61,7 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
 
     const auth = getAuth();
 
+    //tjekke om brugeren er logget ind
     return new Promise((resolve) => {
       onAuthStateChanged(auth, async (currentUser) => {
         if (!currentUser) {
@@ -86,6 +73,7 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
 
         const uid = currentUser.uid;
 
+        //henter dataen fra skemaerne fra Firestore til den bruger, der er på skemaerne
         try {
           await checkAndUpdateTaskStatuses(uid);
 
@@ -107,7 +95,7 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
             object: doc.data().object || ''
           }));
 
-          await showOverskredneNotifications(tasks.value);
+          await showOverdueNotifications(tasks.value);
 
         } catch (err) {
           console.error('Fejl ved hentning af tasks:', err);
@@ -125,6 +113,6 @@ export const useScheduleStore = defineStore('ScheduleStore', () => {
     isLoading,
     isError,
     fetchTasks,
-    overskredneTasks
+    overdueTasks
   };
 });

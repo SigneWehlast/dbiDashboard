@@ -10,7 +10,7 @@ onMounted(() => {
 
 // Computed properties til at hente bruger data fra pinia store
 const user = computed(() => authStore.user);
-const userCount = computed(() => authStore.userCount); //bliver ikke brugt
+
 </script>
 
 <template>
@@ -42,9 +42,9 @@ const userCount = computed(() => authStore.userCount); //bliver ikke brugt
 table {
   background-color: v.$white;
   border-collapse: collapse;
+  border-radius: 1.5em;
   margin-top: 1em;
   text-align: left;
-  border-radius: 1.5em;
   width: 100%;
 }
 
@@ -53,8 +53,8 @@ th, td {
 }
 
 .users-overview {
-  padding: 4.375em;
   background-color: v.$white;
   border-radius: 1.5em;
+  padding: 4.375em;
 }
 </style>

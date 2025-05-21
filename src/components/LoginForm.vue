@@ -9,6 +9,7 @@ const email = ref('');
 const password = ref('');
 const router = useRouter();
 
+//hvis ingen email eller password
 const handleLogin = async () => {
   if (!email.value || !password.value) {
     alert('Indtast venligst email og adgangskode');
@@ -16,6 +17,7 @@ const handleLogin = async () => {
   }
 
   try {
+    //firebase email og password 
     const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
     const user = userCredential.user;
 
@@ -92,11 +94,12 @@ const goToRegister = () => {
   }
 
   &__input-field {
-    background-color: #fafafa;
+    background-color: v.$background-input;
     border-radius: 12px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid v.$border-input;
     height: 2em;
     padding: 0 1rem;
+    color: v.$dark-grey;
   }
 
   &__login-button {

@@ -6,17 +6,20 @@ import { storeToRefs } from 'pinia';
 import SearchBar from '@/components/SearchBar.vue';
 
 const authStore = useAuthStore();
+//gør at user og isAuthReady også er refs i denne fil
 const { user, isAuthReady } = storeToRefs(authStore);
 
 const scheduleStore = useScheduleStore();
-const { overskredneTasks } = storeToRefs(scheduleStore);
+
+//gør at overdueTasks også er refs i denne fil
+const { overdueTasks } = storeToRefs(scheduleStore);
 
 onMounted(() => {
   scheduleStore.fetchTasks();
 });
 
-// Antal overskredne
-const notificationCount = computed(() => overskredneTasks.value.length);
+// Antal overskredne skemaer vises i notifikationer
+const notificationCount = computed(() => overdueTasks.value.length);
 
 // Dropdown-visning
 const showDropdown = ref(false);
@@ -41,7 +44,7 @@ function toggleDropdown() {
     <ul v-else>
       <p class="p1 notification-dropdown__headline">Overskredet deadlines</p>
       <hr>
-      <li v-for="task in overskredneTasks" :key="task.id" class="notification-item">
+      <li v-for="task in overdueTasks" :key="task.id" class="notification-item">
         <router-link class="routerlink" to="/Schedule">
           <p class="notification-dropdown__title">{{ task.title }}</p>
           <p class="notification-dropdown__deadline">Deadline: {{ task.deadline }}</p>
@@ -107,8 +110,8 @@ function toggleDropdown() {
 
 .notification-count {
   background-color: v.$main-blue;
-  color: v.$white;
   border-radius: 50%;
+  color: v.$white;
   font-size: 12px;
   font-weight: bold;
   height: 20px;
@@ -159,7 +162,7 @@ function toggleDropdown() {
     }
 
     &__deadline {
-      color: #FF3838;
+      color: v.$deadline;
       font-weight: 700;
     }
   }

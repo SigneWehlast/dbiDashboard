@@ -3,6 +3,7 @@ import { useObjectStore } from '@/stores/ObjectStore';
 
 const objectStore = useObjectStore();
 
+//henter alle objekter fra object store
 objectStore.fetchObjects();
 </script>
 
@@ -39,9 +40,9 @@ table {
 }
 
 .object-overview {
-  padding: 4.375em;
   background-color: v.$white;
   border-radius: 1.5em;
+  padding: 4.375em;
 }
 
 th, td {

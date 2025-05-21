@@ -6,6 +6,7 @@ import { useObjectStore } from '@/stores/ObjectStore';
 const scheduleStore = useScheduleStore();
 const objectStore = useObjectStore();
 
+//henter skemaer og objekter, når siden er indlæst
 onMounted(() => {
   scheduleStore.fetchTasks();
   objectStore.fetchObjects();
@@ -13,18 +14,21 @@ onMounted(() => {
 
 const todayStr = new Date().toDateString();
 
+//tjekker om datoen er i dag
 function isToday(date) {
   if (!date) return false;
   const d = date instanceof Date ? date : date.toDate?.() || new Date(date);
   return d.toDateString() === todayStr;
 }
 
+//finder alle skemaer, der er overskredet
 const totalTasks = computed(() =>
   scheduleStore.tasks.filter(task => {
     return isToday(task.deadline) || task.status.toLowerCase() === 'overskredet';
   }).length
 );
 
+//skriver antal af overskredne deadlines + igangværende, hvis det er i dag
 const totalDeadlines = computed(() =>
   scheduleStore.tasks.filter(task => {
     const status = task.status.toLowerCase();
@@ -32,10 +36,12 @@ const totalDeadlines = computed(() =>
   }).length
 );
 
+//alle udførte rapporter
 const totalReports = computed(() =>
   scheduleStore.tasks.filter(task => task.status === 'Udført').length
 );
 
+//alle objekter
 const totalObjects = computed(() => objectStore.objects.length);
 </script>
 
@@ -90,8 +96,8 @@ const totalObjects = computed(() => objectStore.objects.length);
 }
 
 .divider {
+  background-color: v.$header-color;
   height: 5em;
   width: 0.06em;
-  background-color: #DADCDC;
 }
 </style>

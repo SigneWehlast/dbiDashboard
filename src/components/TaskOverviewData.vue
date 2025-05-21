@@ -8,6 +8,7 @@ import { storeToRefs } from 'pinia';
 const authStore = useAuthStore();
 const { isAuthReady } = storeToRefs(authStore);
 
+//prop som bruges i taskoverview, så der kun ses skemaer fra i dag
 const props = defineProps({
   onlyToday: {
     type: Boolean,
@@ -19,6 +20,7 @@ const store = useScheduleStore();
 const sortKey = ref('title');
 const sortOrder = ref('asc');
 
+//holder øje med nye skemaer
 watch(isAuthReady, (ready) => {
   if (ready) {
     store.fetchTasks();
@@ -27,39 +29,39 @@ watch(isAuthReady, (ready) => {
 
 const today = new Date().toISOString().split('T')[0];
 
-const filteredTasks = computed(() => {
+//henter skemaer der er i dag, er igangværende og overskredet
+const filteredSchedules = computed(() => {
   if (props.onlyToday) {
     return store.tasks.filter(task => {
       const taskDate = task.deadline?.split('T')[0];
       return (
-        taskDate === today ||
-        task.status === 'Igangværende' ||
-        task.status === 'Overskredet'
+        taskDate === today || task.status === 'Igangværende' || task.status === 'Overskredet'
       );
     });
   }
   return store.tasks;
 });
 
-
-const sortedTasks = computed(() => {
-  const tasks = filteredTasks.value.slice();
+//sorterer
+const sortedSchedules = computed(() => {
+  const tasks = filteredSchedules.value.slice();
 
   return tasks.sort((a, b) => {
-    let valA = a[sortKey.value]?.toString().toLowerCase() || '';
-    let valB = b[sortKey.value]?.toString().toLowerCase() || '';
+    let itemA = a[sortKey.value]?.toString().toLowerCase() || '';
+    let itemB = b[sortKey.value]?.toString().toLowerCase() || '';
 
     if (sortKey.value === 'deadline') {
-      valA = new Date(a.deadline);
-      valB = new Date(b.deadline);
+      itemA = new Date(a.deadline);
+      itemB = new Date(b.deadline);
     }
 
-    if (valA < valB) return sortOrder.value === 'asc' ? -1 : 1;
-    if (valA > valB) return sortOrder.value === 'asc' ? 1 : -1;
+    if (itemA < itemB) return sortOrder.value === 'asc' ? -1 : 1;
+    if (itemA > itemB) return sortOrder.value === 'asc' ? 1 : -1;
     return 0;
   });
 });
 
+//funktionen den kører når der sorteres
 function toggleSort(key) {
   if (sortKey.value === key) {
     sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
@@ -69,6 +71,7 @@ function toggleSort(key) {
   }
 }
 
+//laver datoen om til dd/mm/åå
 function formatDate(dateString) {
   if (!dateString) return '';
   const [year, month, day] = dateString.split('T')[0].split('-');
@@ -87,7 +90,7 @@ function formatDate(dateString) {
         </span>
       </p>
 
-      <div v-if="isAuthReady" v-for="task in sortedTasks" :key="task.id + '-title'">
+      <div v-if="isAuthReady" v-for="task in sortedSchedules" :key="task.id + '-title'">
     <router-link :to="`/Specific/${task.id}`"class="p1 routerlink">
       {{ task.title }}
     </router-link>     
@@ -103,7 +106,7 @@ function formatDate(dateString) {
             :class="{ active: sortKey === 'deadline', rotated: sortKey === 'deadline' && sortOrder === 'desc' }" />
         </span>
       </p>
-      <div v-if="isAuthReady" v-for="task in sortedTasks" :key="task.id + '-deadline'">
+      <div v-if="isAuthReady" v-for="task in sortedSchedules" :key="task.id + '-deadline'">
         <p class="p1">{{ formatDate(task.deadline) }}</p>
       </div>
       <p v-else class="p1">Indlæser...</p>
@@ -117,7 +120,7 @@ function formatDate(dateString) {
             :class="{ active: sortKey === 'status', rotated: sortKey === 'status' && sortOrder === 'desc' }" />
         </span>
       </p>
-      <div v-if="isAuthReady" v-for="task in sortedTasks" :key="task.id + '-status'" class="status-container">
+      <div v-if="isAuthReady" v-for="task in sortedSchedules" :key="task.id + '-status'" class="status-container">
         <span class="status-indicator" :class="{
           'status-done': task.status === 'Udført',
           'status-overdue': task.status === 'Overskredet',
@@ -132,6 +135,8 @@ function formatDate(dateString) {
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/main.scss" as v;
+
 .task-overview {
   &__information {
     &-name {
@@ -178,15 +183,15 @@ function formatDate(dateString) {
   }
 
   &-done {
-    background-color: #5AEA62;
+    background-color: v.$done;
   }
 
   &-overdue {
-    background-color: #FF3838;
+    background-color: v.$deadline;
   }
 
   &-todo {
-    background-color: #FFF081;
+    background-color: v.$todo;
   }
 }
 

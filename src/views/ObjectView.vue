@@ -25,50 +25,50 @@ import PlusIcon from '../assets/icons/plus-solid.svg';
 
 .object{
     &-top-wrapper {
-        position: relative;
+        align-items: center;
         display: flex;
         justify-content: space-between;
         flex-direction: row;
-        align-items: center;
+        position: relative;
     }
 
     &__button {
+      align-items: center;
       background-color: v.$main-blue;
       border-radius: 1em;
       border-style: none;
       color: v.$white;
       cursor: pointer;
-      height: 3em;
-      padding: 0.5em 1em;
-      justify-content: center;
       display: flex;
-      align-items: center;
       gap: 0.5em;
+      height: 3em;
+      justify-content: center;
+      padding: 0.5em 1em;
 
     &__icon {
-        width: 1em;
         height: 1em;
+        width: 1em;
       }
     }
 }
 
 
 .dropdown {
-  position: absolute;
-  right: 0;
+  background-color: v.$main-blue;
+  border-radius: 1.5em;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: v.$main-blue;
-  border-radius: 1.5em;
-  padding: 1em 1.5em;
   margin-top: 1.7em;
+  padding: 1em 1.5em;
+  position: absolute;
+  right: 0;
   width: 160px;
-  cursor: pointer;
 
   &__icon-container {
-    display: flex;
     align-items: center;
+    display: flex;
     gap: 1em;
   }
 
@@ -81,7 +81,7 @@ import PlusIcon from '../assets/icons/plus-solid.svg';
 .object-list-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 2.5em;
+  justify-content: center;
 }
 </style>

@@ -17,6 +17,8 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/main.scss" as v;
+
 .task-overview {
   align-items: center;
   border-radius: 1.5em;
@@ -26,7 +28,7 @@ import TaskOverviewData from '@/components/TaskOverviewData.vue';
   margin: 1em 0 1em 0;
 
   &__information {
-    background-color: #ffffff;
+    background-color: v.$white;
     display: flex;
     flex-direction: column;
     width: 100%;

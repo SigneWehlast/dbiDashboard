@@ -8,6 +8,7 @@ import { useRouter } from 'vue-router';
 const auth = getAuth();
 const router = useRouter();
 
+//dataen der er på brugeren i Firestore
 export const useAuthStore = defineStore('auth', () => {
   const user = ref({
     companyName: '',
@@ -27,6 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = userData;
   };
 
+  //bruges når brugeren logger ud
   const clearUser = () => {
     user.value = {
       companyName: '',
@@ -39,6 +41,7 @@ export const useAuthStore = defineStore('auth', () => {
     };
   };
 
+  //henter dataen på brugeren
   const fetchUserData = async (uid) => {
     try {
       const userRef = doc(db, 'users', uid);
@@ -62,6 +65,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
+  //henter alle brugere
   const fetchAllUsers = async () => {
     try {
       const usersRef = collection(db, 'users');
@@ -75,6 +79,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
+  //henter antallet af brugere
   const fetchUserCount = async () => {
     try {
       const usersRef = collection(db, 'users');
@@ -85,6 +90,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
+  //holder øje med om brugeren er logget ind
   onAuthStateChanged(auth, (firebaseUser) => {
     console.log('Firebase auth state changed:', firebaseUser);
     if (firebaseUser) {

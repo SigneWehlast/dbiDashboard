@@ -14,7 +14,7 @@ onMounted(() => {
   <div class="user-counter">
     <div class="user-counter__top-section">
       <h3>Tæller</h3>
-      <p class="p1">...</p> <!--Indsæt icon her-->
+      <p class="p1">...</p>
     </div>
     <div class="user-counter__content">
       <h2>{{ authStore.userCount }}</h2>

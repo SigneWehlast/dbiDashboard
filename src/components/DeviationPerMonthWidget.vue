@@ -3,6 +3,7 @@ import { ref, onMounted, computed, watch } from 'vue';
 import { useScheduleStore } from '@/stores/ScheduleStore';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip } from 'chart.js';
 
+//registrerer at man kan bruge chart.js
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 
 const scheduleStore = useScheduleStore();
@@ -13,10 +14,13 @@ onMounted(() => {
   scheduleStore.fetchTasks();
 });
 
+//laver mpneder og forkorter dem
 const monthsOrder = Array.from({ length: 12 }, (_, i) => {
   const date = new Date(2000, i, 1);
   return date.toLocaleString('da-DK', { month: 'short' }).replace('.', '').replace(/^./, c => c.toUpperCase());
 });
+
+//filtrerer at det kun er udførte skemaer
 const tasksDonePerMonth = computed(() => {
   const counts = {};
 
@@ -26,12 +30,14 @@ const tasksDonePerMonth = computed(() => {
     const date = task.deadline;
     if (!date) return;
 
+    //sørger for at deadlines bliver konverteret til den rigtige dato og måned
     const d = date instanceof Date ? date : date.toDate?.() || new Date(date);
     const month = d.toLocaleString('da-DK', { month: 'short' }).replace('.', '');
     const label = month.charAt(0).toUpperCase() + month.slice(1);
     counts[label] = (counts[label] || 0) + 1;
   });
 
+  //finder hvor mange skemaer, der er hver måned
   const sortedCounts = monthsOrder.reduce((acc, month) => {
     acc[month] = counts[month] || 0;
     return acc;
@@ -40,6 +46,7 @@ const tasksDonePerMonth = computed(() => {
   return sortedCounts;
 });
 
+//holder øje med ændringer
 watch(tasksDonePerMonth, (newData) => {
   const labels = Object.keys(newData);
   const data = Object.values(newData);

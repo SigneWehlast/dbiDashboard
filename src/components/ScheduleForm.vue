@@ -23,6 +23,7 @@ onMounted(async () => {
   await objectStore.fetchObjects();
 });
 
+//gemmer et skema på brugeren
 const saveTemporary = async () => {
   const uid = authStore.user?.uid;
   if (!uid) {
@@ -30,6 +31,7 @@ const saveTemporary = async () => {
     return;
   }
 
+  //det der udfyldes i skemaet og sendes ind i Firestore med igangværende
   try {
     await addDoc(collection(db, 'ScheduleForm'), {
       title: title.value,
@@ -49,6 +51,7 @@ const saveTemporary = async () => {
   }
 };
 
+//det der udfyldes i skemaet og sendes ind i Firestore med udført
 const saveAndClose = async () => {
   const uid = authStore.user?.uid;
   if (!uid) {
@@ -161,9 +164,9 @@ const saveAndClose = async () => {
     }
 
     &__label-date {
+        align-items: flex-start;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         gap: 0.5em;
     }
 
@@ -180,9 +183,9 @@ const saveAndClose = async () => {
             cursor: pointer;
 
             &:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.2);
                 background-color: darken(v.$main-blue, 5%);
+                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.2);
+                transform: translateY(-2px);
             }
 
             &:active {
@@ -195,14 +198,14 @@ const saveAndClose = async () => {
             border-color: v.$main-blue;
             border-radius: 0.5em;
             border-style: solid;
+            cursor: pointer;
             padding: 0.5em;
             transition: all 0.3s ease;
-            cursor: pointer;
 
             &:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.1);
                 background-color: rgba(43, 115, 147, 0.05);
+                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.1);
+                transform: translateY(-2px);
             }
 
             &:active {
@@ -244,10 +247,10 @@ label {
     cursor: pointer;
     position: relative;
     transition: all 0.2s ease;
-    background-color: white;
+    background-color: v.$white;
 
     &:checked {
-        background-color: white;
+        background-color: v.$white;
         &::after {
             content: '';
             position: absolute;
@@ -269,18 +272,18 @@ label {
 #date {
     height: 3em;
     border-radius: 12px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid v.$border-input;
     padding: 0 1rem;
-    background-color: #fafafa;
+    background-color: v.$background-input;
     box-sizing: border-box;
 }
 
 #object {
     height: 3em;
     border-radius: 12px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid v.$border-input;
     padding: 0 1rem;
-    background-color: #fafafa;
+    background-color: v.$background-input;
     box-sizing: border-box;
 }
 

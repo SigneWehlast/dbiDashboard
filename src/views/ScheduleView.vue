@@ -1,7 +1,6 @@
 <script setup>
 import TaskOverviewData from '@/components/TaskOverviewData.vue';
 import SearchBar from '@/components/SearchBar.vue';
-import FilterIcon from '../assets/icons/sliders-solid.svg';
 import PlusIcon from '../assets/icons/plus-solid.svg';
 import { ref } from 'vue';
 
@@ -34,11 +33,9 @@ const toggleDropdown = () => {
 
     <div class="task-overview">
         <div class="task-overview__information">
-            <!-- Navigation øverst -->
             <div class="task-overview__information__nav">
             <SearchBar />
             </div>
-            <!-- Indhold opdelt i tre kolonner -->
             <div class="task-overview__information__content">
               <TaskOverviewData :onlyToday="true" />
             </div>
@@ -51,11 +48,11 @@ const toggleDropdown = () => {
 @use "@/assets/main.scss" as v;
 
 .task-overview {
+  border-radius: 1.5em;
   display: flex;
   height: 100%;
   justify-content: center;
   width: 100%;
-  border-radius: 1.5em;
 
   &__information {
     border-radius: 1.5em;
@@ -63,8 +60,8 @@ const toggleDropdown = () => {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 100%;
     padding: 1.5em 3em 1em 3em;
+    width: 100%;
 
     &__nav {
       display: flex;
@@ -81,21 +78,21 @@ const toggleDropdown = () => {
 }
 
 .dropdown {
-  position: absolute;
-  right: 0;
+  background-color: v.$main-blue;
+  border-radius: 1.5em;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: v.$main-blue;
-  border-radius: 1.5em;
-  padding: 1em 1.5em;
   margin-top: 1.7em;
+  padding: 1em 1.5em;
+  position: absolute;
+  right: 0;
   width: 160px;
-  cursor: pointer;
 
   &__icon-container {
-    display: flex;
     align-items: center;
+    display: flex;
     gap: 1em;
 
     p, img {
@@ -110,8 +107,8 @@ const toggleDropdown = () => {
   }
 
   &__icon {
-    width: 1.5em;
     height: 1.5em;
+    width: 1.5em;
   }
 
   &__content {
@@ -121,34 +118,34 @@ const toggleDropdown = () => {
     margin-top: 1.5em;
 
     p {
-      transition: transform 0.2s ease, opacity 0.2s ease;
       cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
 
       &:hover {
-        transform: translateX(10px);
         opacity: 0.8;
+        transform: translateX(10px);
       }
     }
   }
 }
 
 .schedule-overview {
-  position: relative;
-  display: flex;
   align-items: top;
-  justify-content: space-between;
+  display: flex;
   height: 100%;
+  justify-content: space-between;
+  position: relative;
 }
 
 .filter-container {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 1.5em;
 
 
   &__icon {
-    width: 1.5em;
     height: 1.5em;
+    width: 1.5em;
   }
 }
 .routerlink {
@@ -157,15 +154,15 @@ const toggleDropdown = () => {
 
 .dropdown-enter-active,
 .dropdown-leave-active {
-  transition: all 0.3s ease;
   max-height: 200px;
   opacity: 1;
+  transition: all 0.3s ease;
 }
 
 .dropdown-enter-from,
 .dropdown-leave-to {
+  margin-top: 0;
   max-height: 0;
   opacity: 0;
-  margin-top: 0;
 }
 </style>

@@ -2,12 +2,15 @@
 import { onMounted, computed } from 'vue';
 import { useScheduleStore } from '@/stores/ScheduleStore';
 
+//bruger schedule store
 const scheduleStore = useScheduleStore();
 
+//henter alle skemaerne
 onMounted(async () => {
   await scheduleStore.fetchTasks();
 });
 
+//filtrerer og viser kun de skemaer, der er udført
 const completedTasks = computed(() =>
   scheduleStore.tasks.filter(task => task.status.toLowerCase() === 'udført')
 );

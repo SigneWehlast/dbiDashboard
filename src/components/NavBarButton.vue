@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
+//props der anvendes i navbar
 defineProps({
   imgSrc: {
     type: String,
@@ -43,7 +44,7 @@ const isHovered = ref(false);
 
 button {
   align-items: center;
-  background-color: #F4F5F5;
+  background-color: v.$background-color;
   border: none;
   border-radius: 25px;
   color: v.$dark-grey;
@@ -56,20 +57,28 @@ button {
   width: 100%;
 
   &:hover {
-    background-color: #A4CBE0;
+    background-color: v.$button-hover;
     color: v.$white;
+    
+    :deep(.p1) {
+      color: v.$white;
+    }
   }
 
   &.active {
     background-color: v.$main-blue;
     color: v.$white;
+
+    :deep(.p1) {
+      color: v.$white;
+    }
   }
 }
 
 
 .button-icon {
-  width: 24px;
   height: 24px;
+  width: 24px;
 }
 
 a.nav-button {

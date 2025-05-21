@@ -20,41 +20,44 @@ const errorStatus = ref('');
 const systemComment = ref('');
 const systemStatus = ref('');
 const selectedObject = ref('');
-const taskId = ref('');
+const scheduleId = ref('');
 
 const route = useRoute();
 
 onMounted(async () => {
   await scheduleStore.fetchTasks();
 
+  //finder skemaet der passer på det id, der er klikket på
   const idFromRoute = route.params.id;
-  const matchingTask = scheduleStore.tasks.find(task => task.id === idFromRoute);
+  const matchingSchedule = scheduleStore.tasks.find(task => task.id === idFromRoute);
 
-  if (matchingTask) {
-    taskId.value = matchingTask.id;
-    title.value = matchingTask.title || '';
-    date.value = matchingTask.deadline instanceof Date
-      ? matchingTask.deadline.toISOString().split('T')[0]
-      : matchingTask.deadline || '';
-    selectedObject.value = matchingTask.object || '';
-    errorComment.value = matchingTask.errorComment || '';
-    errorStatus.value = matchingTask.errorStatus || '';
-    systemComment.value = matchingTask.systemComment || '';
-    systemStatus.value = matchingTask.systemStatus || '';
+  //laver det til reaktive værdier, som kan ændres
+  if (matchingSchedule) {
+    scheduleId.value = matchingSchedule.id;
+    title.value = matchingSchedule.title || '';
+    date.value = matchingSchedule.deadline instanceof Date
+      ? matchingSchedule.deadline.toISOString().split('T')[0]
+      : matchingSchedule.deadline || '';
+    selectedObject.value = matchingSchedule.object || '';
+    errorComment.value = matchingSchedule.errorComment || '';
+    errorStatus.value = matchingSchedule.errorStatus || '';
+    systemComment.value = matchingSchedule.systemComment || '';
+    systemStatus.value = matchingSchedule.systemStatus || '';
   } else {
-    console.warn('Ingen matching task fundet for id:', idFromRoute);
+    console.warn('Ingen skemaer fundet for id:', idFromRoute);
   }
 });
 
+//gemmer midlertidigt og sender til Firestore med status som igangværende
 const saveTemporary = async () => {
   const uid = authStore.user?.uid;
-  if (!uid || !taskId.value) {
+  if (!uid || !scheduleId.value) {
     console.error('Bruger ikke logget ind eller taskId mangler');
     return;
   }
 
   try {
-    const docRef = doc(db, 'ScheduleForm', taskId.value);
+    const docRef = doc(db, 'ScheduleForm', scheduleId.value);
     await updateDoc(docRef, {
       title: title.value,
       deadline: date.value,
@@ -72,15 +75,16 @@ const saveTemporary = async () => {
   }
 };
 
+//Gemmer i Firestore med status som udført
 const saveAndClose = async () => {
   const uid = authStore.user?.uid;
-  if (!uid || !taskId.value) {
+  if (!uid || !scheduleId.value) {
     console.error('Bruger ikke logget ind eller taskId mangler');
     return;
   }
 
   try {
-    const docRef = doc(db, 'ScheduleForm', taskId.value);
+    const docRef = doc(db, 'ScheduleForm', scheduleId.value);
     await updateDoc(docRef, {
       title: title.value,
       deadline: date.value,
@@ -188,10 +192,10 @@ const saveAndClose = async () => {
     }
 
     &__readonly-text {
+        color: v.$dark-grey;
         font-family: v.$main-font;
         font-size: 25px;
         font-weight: 200;
-        color: v.$dark-grey;
         margin: 0;
         padding: 0.5em 0;
     }
@@ -204,14 +208,15 @@ const saveAndClose = async () => {
             background-color: v.$main-blue;
             border-radius: 0.5em;
             border-style: none;
+            cursor: pointer;
             padding: 0.5em;
             transition: all 0.3s ease;
-            cursor: pointer;
 
             &:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.2);
                 background-color: darken(v.$main-blue, 5%);
+                box-shadow: 0 4px 12px rgba(43, 115, 147, 0.2);
+                transform: translateY(-2px);
+
             }
 
             &:active {
@@ -224,9 +229,9 @@ const saveAndClose = async () => {
             border-color: v.$main-blue;
             border-radius: 0.5em;
             border-style: solid;
+            cursor: pointer;
             padding: 0.5em;
             transition: all 0.3s ease;
-            cursor: pointer;
 
             &:hover {
                 transform: translateY(-2px);
@@ -242,13 +247,12 @@ const saveAndClose = async () => {
 }
 
 textarea {
-    border-color: #2B7393;
+    border-color: v.$main-blue;
     border-radius: 0.5em;
     border-style: solid;
-    resize: none;
     height: 6em;
-    border-radius: 1.5em;
     padding: 1.5em;
+    resize: none;
     vertical-align: top;
 }
 
@@ -264,18 +268,18 @@ label {
 
 .schedule-form__checkbox-input {
     appearance: none;
+    background-color: v.$white;
     border: 2px solid v.$main-blue;
     border-radius: 50%;
+    cursor: pointer;
     height: 2.5em;
     margin: 0;
-    width: 2.5em;
-    cursor: pointer;
     position: relative;
     transition: all 0.2s ease;
-    background-color: white;
+    width: 2.5em;
 
     &:checked {
-        background-color: white;
+        background-color: v.$white;
         &::after {
             content: '';
             background-color: v.$main-blue;

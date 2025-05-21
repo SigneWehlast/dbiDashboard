@@ -4,6 +4,13 @@ $dark-grey: #707070;
 $main-blue: #2B7393;
 $paragraph-grey: #D1D3D4;
 $white: #ffffff;
+$header-color: #DADCDC;
+$background-input: #fafafa;
+$border-input: #e0e0e0;
+$button-hover: #A4CBE0;
+$deadline: #FF3838;
+$done: #5AEA62;
+$todo: #FFF081;
 
 
 //font
@@ -73,8 +80,8 @@ body {
 }
 
 .heading-bar {
-  border-bottom: 1px solid #DADCDC;
-  border-top: 1px solid #DADCDC;
+  border-bottom: 1px solid $header-color;
+  border-top: 1px solid $header-color;
   padding-bottom: 5px;
   padding-top: 5px;
 }

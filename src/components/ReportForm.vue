@@ -15,7 +15,7 @@ const selectedSchedule = ref('');
 const selectedObjectId = ref('');
 const filteredTasks = ref([]);
 
-// Skemaer
+// alle udførte skemaer vises i filtreringen
 const filterSchedules = computed(() => {
   const titles = scheduleStore.tasks
     .filter(task => task.status.toLowerCase() === 'udført')
@@ -23,7 +23,7 @@ const filterSchedules = computed(() => {
   return [...new Set(titles)];
 });
 
-// Objekter
+// filtrering af objekter
 const filterObjects = computed(() => {
   return objectStore.objects.map(obj => ({
     id: obj.id,
@@ -233,6 +233,7 @@ function clearFilters() {
 
   &__checkbox-input {
     appearance: none;
+    background-color: v.$white;
     border: 2px solid v.$main-blue;
     border-radius: 50%;
     height: 2.5em;
@@ -241,10 +242,9 @@ function clearFilters() {
     cursor: pointer;
     position: relative;
     transition: all 0.2s ease;
-    background-color: white;
 
     &:checked {
-      background-color: white;
+      background-color: v.$white;
       &::after {
         content: '';
         position: absolute;
@@ -265,18 +265,18 @@ function clearFilters() {
 }
 
 input {
-  background-color: #fafafa;
+  background-color: v.$background-input;
   border-radius: 12px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid v.$border-input;
   padding: 0 1rem;
   box-sizing: border-box;
   height: 3em;
 }
 
 select {
-  background-color: #fafafa;
+  background-color: v.$background-input;
   border-radius: 12px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid v.$border-input;
   box-sizing: border-box;
   height: 3em;
   padding: 0 1rem;

@@ -15,6 +15,7 @@ export const useObjectStore = defineStore('ObjectStore', () => {
 
     const auth = getAuth();
 
+    //tjekker om en bruger er logget ind, før dataen vises
     return new Promise((resolve) => {
       onAuthStateChanged(auth, async (currentUser) => {
         if (!currentUser) {
@@ -25,6 +26,7 @@ export const useObjectStore = defineStore('ObjectStore', () => {
         }
 
         try {
+          //henter dataen fra Firestore
           const querySnapshot = await getDocs(collection(db, 'objects'));
           objects.value = querySnapshot.docs.map(doc => ({
             id: doc.id,

@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-import ProfileBar from '@/components/ProfileBar.vue';
+import PageHeader from '@/components/PageHeader.vue';
 import NavBar from '@/components/NavBar.vue';
 import PageFooter from './components/PageFooter.vue';
 
@@ -19,7 +19,7 @@ watch(() => route.meta.layout, (newLayout) => {
    <div v-if="layout !== 'empty'" class="home-view">
     <NavBar />
     <div class="home-view-container">
-      <ProfileBar />
+      <PageHeader />
       <RouterView />
       <PageFooter />
     </div>

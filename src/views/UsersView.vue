@@ -14,8 +14,7 @@ import UserList from '@/components/UserList.vue';
 .user-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 2.5em;
-
+  justify-content: center;
 }
 </style>

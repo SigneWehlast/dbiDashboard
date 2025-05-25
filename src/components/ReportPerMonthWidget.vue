@@ -3,20 +3,27 @@ import { ref, onMounted, computed, watch } from 'vue';
 import { useScheduleStore } from '@/stores/ScheduleStore';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip } from 'chart.js';
 
+//registrerer komponenter i chart.js
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 
+//henter data fra pinia store
 const scheduleStore = useScheduleStore();
 const chartGrafik = ref(null);
 let chartInstance = null;
 
+//henter alle skemaer til brugeren, når komponentet hentes
 onMounted(() => {
   scheduleStore.fetchTasks();
 });
 
+//Laver liste over måneder på dansk
 const monthsOrder = Array.from({ length: 12 }, (_, i) => {
   const date = new Date(2000, i, 1);
   return date.toLocaleString('da-DK', { month: 'short' }).replace('.', '').replace(/^./, c => c.toUpperCase());
 });
+
+//finder antal skemaer der er markeret med udføt hver måned
+//opdateres automatisk, når den data den afhænger af, ændrer sig
 const tasksDonePerMonth = computed(() => {
   const counts = {};
 
@@ -26,12 +33,14 @@ const tasksDonePerMonth = computed(() => {
     const date = task.deadline;
     if (!date) return;
 
+    //finder antallet af skemaer i hver måned
     const d = date instanceof Date ? date : date.toDate?.() || new Date(date);
     const month = d.toLocaleString('da-DK', { month: 'short' }).replace('.', '');
     const label = month.charAt(0).toUpperCase() + month.slice(1);
     counts[label] = (counts[label] || 0) + 1;
   });
 
+  //sorterer og sikrer at alle måneder er med
   const sortedCounts = monthsOrder.reduce((acc, month) => {
     acc[month] = counts[month] || 0;
     return acc;
@@ -40,6 +49,7 @@ const tasksDonePerMonth = computed(() => {
   return sortedCounts;
 });
 
+//holder øje med ændringer
 watch(tasksDonePerMonth, (newData) => {
   const labels = Object.keys(newData);
   const data = Object.values(newData);

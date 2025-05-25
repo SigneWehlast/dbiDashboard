@@ -27,10 +27,10 @@ onMounted(() => {
         firstName.value = data.firstName || '';
         lastName.value = data.lastName || '';
       } else {
-        console.log('Ingen bruger fundet');
+        console.log('User not found');
       }
     } else {
-      console.log('Ingen bruger logget ind');
+      console.log('No user logged in');
     }
   });
 });

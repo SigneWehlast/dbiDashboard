@@ -44,7 +44,7 @@ onMounted(async () => {
     systemComment.value = matchingSchedule.systemComment || '';
     systemStatus.value = matchingSchedule.systemStatus || '';
   } else {
-    console.warn('Ingen skemaer fundet for id:', idFromRoute);
+    console.warn('No schedules found for id:', idFromRoute);
   }
 });
 
@@ -52,7 +52,7 @@ onMounted(async () => {
 const saveTemporary = async () => {
   const uid = authStore.user?.uid;
   if (!uid || !scheduleId.value) {
-    console.error('Bruger ikke logget ind eller taskId mangler');
+    console.error('User not logged in og schedule id not found');
     return;
   }
 
@@ -68,10 +68,10 @@ const saveTemporary = async () => {
       systemStatus: systemStatus.value,
       uid: uid
     });
-    window.alert('Data opdateret (midlertidig).');
+    window.alert('Data updated');
     router.push('/Schedule');
   } catch (err) {
-    console.error('Fejl ved opdatering:', err);
+    console.error('Error while updating', err);
   }
 };
 
@@ -79,7 +79,7 @@ const saveTemporary = async () => {
 const saveAndClose = async () => {
   const uid = authStore.user?.uid;
   if (!uid || !scheduleId.value) {
-    console.error('Bruger ikke logget ind eller taskId mangler');
+    console.error('User not logged in or schedule id not found');
     return;
   }
 
@@ -96,10 +96,10 @@ const saveAndClose = async () => {
       uid: uid,
       object: selectedObject.value
     });
-    window.alert('Data opdateret og sendt.');
+    window.alert('data updated and send');
     router.push('/Schedule');
   } catch (err) {
-    console.error('Fejl ved opdatering:', err);
+    console.error('error while updating', err);
   }
 };
 </script>

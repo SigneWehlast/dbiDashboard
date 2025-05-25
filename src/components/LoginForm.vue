@@ -12,7 +12,7 @@ const router = useRouter();
 //hvis ingen email eller password
 const handleLogin = async () => {
   if (!email.value || !password.value) {
-    alert('Indtast venligst email og adgangskode');
+    alert('Enter email and password');
     return;
   }
 
@@ -24,16 +24,16 @@ const handleLogin = async () => {
     // Hent brugerens data
     const userDoc = await getDoc(doc(db, 'users', user.uid));
     if (userDoc.exists()) {
-      console.log('Brugerdata:', userDoc.data());
+      console.log('Userdata:', userDoc.data());
     } else {
-      console.error('Brugerdokument ikke fundet!');
+      console.error('Userdata not found');
     }
 
     alert('Login succesfuld!');
     router.push('/');
   } catch (error) {
-    console.error('Fejl ved login:', error);
-    alert('Fejl: ' + error.message);
+    console.error('Error with login:', error);
+    alert('Error: ' + error.message);
   }
 };
 

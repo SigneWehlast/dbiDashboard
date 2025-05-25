@@ -16,17 +16,16 @@ const router = useRouter();
 //hvis begge password ikke stemmer overens
 const handleRegister = async () => {
   if (password.value !== confirmPassword.value) {
-    alert('Adgangskoderne stemmer ikke overens.');
+    alert('Passwords are not the same');
     return;
   }
 
   try {
     //opretter brugeren i Firestore
-    console.log('Starter brugeroprettelse...');
     const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
     const user = userCredential.user;
 
-    console.log('Bruger oprettet:', user.uid);
+    console.log('User created', user.uid);
 
     // Gem brugerdata i Firestore
     await setDoc(doc(db, 'users', user.uid), {
@@ -38,13 +37,13 @@ const handleRegister = async () => {
       createdAt: new Date()
     });
 
-    console.log('Brugerdata gemt i Firestore');
+    console.log('User saved in Firestore');
 
-    alert('Bruger oprettet!');
+    alert('User created');
     router.push('/');
   } catch (error) {
-    console.error('Fejl ved registrering:', error);
-    alert('Fejl: ' + error.message);
+    console.error('Error in registration:', error);
+    alert('Error: ' + error.message);
   }
 };
 

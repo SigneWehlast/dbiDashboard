@@ -27,7 +27,7 @@ onMounted(async () => {
 const saveTemporary = async () => {
   const uid = authStore.user?.uid;
   if (!uid) {
-    console.error('Bruger ikke logget ind, UID ikke tilgængelig');
+    console.error('User not logged in');
     return;
   }
 
@@ -44,10 +44,10 @@ const saveTemporary = async () => {
       systemStatus: systemStatus.value,
       uid: uid
     });
-    window.alert('Data igangværende er gemt og sendt.');
+    window.alert('Data sent');
     router.push('/Schedule');
   } catch (err) {
-    console.error('Fejl ved gemning:', err);
+    console.error('Error while saving', err);
   }
 };
 
@@ -55,7 +55,7 @@ const saveTemporary = async () => {
 const saveAndClose = async () => {
   const uid = authStore.user?.uid;
   if (!uid) {
-    console.error('Bruger ikke logget ind, UID ikke tilgængelig');
+    console.error('User not logged in');
     return;
   }
 
@@ -72,10 +72,10 @@ const saveAndClose = async () => {
       uid: uid,
       object: selectedObject.value
     });
-    window.alert('Data gemt og sendt.');
+    window.alert('Data saved and send');
     router.push('/Schedule');
   } catch (err) {
-    console.error('Fejl ved gemning:', err);
+    console.error('Error while saving', err);
   }
 };
 </script>

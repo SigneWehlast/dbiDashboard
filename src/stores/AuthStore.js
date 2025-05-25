@@ -8,7 +8,8 @@ import { useRouter } from 'vue-router';
 const auth = getAuth();
 const router = useRouter();
 
-//dataen der er på brugeren i Firestore
+//funktionen eksporteres + der oprettes et pinia store
+//reaktiv variabel til info om bruger
 export const useAuthStore = defineStore('auth', () => {
   const user = ref({
     companyName: '',
@@ -46,8 +47,10 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const userRef = doc(db, 'users', uid);
       const userSnap = await getDoc(userRef);
+      //hvis der er en bruger hentes dataen
       if (userSnap.exists()) {
         const userData = userSnap.data();
+        //dataen gemmes på user
         setUser({
           firstName: userData.firstName,
           lastName: userData.lastName,
@@ -58,16 +61,17 @@ export const useAuthStore = defineStore('auth', () => {
           createdAt: userData.createdAt
         });
       } else {
-        console.error('Bruger ikke fundet i databasen');
+        console.error('User not found');
       }
     } catch (err) {
-      console.error('Fejl ved hentning af brugerdata:', err);
+      console.error('Error while getting user data:', err);
     }
   };
 
-  //henter alle brugere
+  //henter alle brugere til bruger siden
   const fetchAllUsers = async () => {
     try {
+      //mapper brugerne til et objekt med uid og navn og gemmer det  i allUsers
       const usersRef = collection(db, 'users');
       const querySnapshot = await getDocs(usersRef);
       allUsers.value = querySnapshot.docs.map(doc => ({
@@ -75,11 +79,11 @@ export const useAuthStore = defineStore('auth', () => {
         fullName: `${doc.data().firstName} ${doc.data().lastName}`
       }));
     } catch (err) {
-      console.error('Fejl ved hentning af alle brugere:', err);
+      console.error('Error whilte getting all users:', err);
     }
   };
 
-  //henter antallet af brugere
+  //henter antallet af brugere til widget
   const fetchUserCount = async () => {
     try {
       const usersRef = collection(db, 'users');
@@ -100,13 +104,17 @@ export const useAuthStore = defineStore('auth', () => {
       console.log('User logged out');
       router.push({ name: 'login' });
     }
+    //login er tjekket
     isAuthReady.value = true;
   });
 
+  //bruges når en bruger logger ud
   const logout = async () => {
     try {
       await signOut(auth);
+      //kald clearuser
       clearUser();
+      //fjern brugeren fra localstorage og session
       localStorage.clear();
       sessionStorage.clear();
       router.push({ name: 'login' });

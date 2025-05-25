@@ -14,7 +14,7 @@ onMounted(() => {
   scheduleStore.fetchTasks();
 });
 
-//laver mpneder og forkorter dem
+//laver måneder og forkorter dem
 const monthsOrder = Array.from({ length: 12 }, (_, i) => {
   const date = new Date(2000, i, 1);
   return date.toLocaleString('da-DK', { month: 'short' }).replace('.', '').replace(/^./, c => c.toUpperCase());

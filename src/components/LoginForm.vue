@@ -29,7 +29,7 @@ const handleLogin = async () => {
       console.error('Userdata not found');
     }
 
-    alert('Login succesfuld!');
+    alert('Login succesful!');
     router.push('/');
   } catch (error) {
     console.error('Error with login:', error);
@@ -37,7 +37,7 @@ const handleLogin = async () => {
   }
 };
 
-const goToRegister = () => {
+const goToSignup = () => {
   router.push('/Signup');
 };
 </script>
@@ -62,7 +62,7 @@ const goToRegister = () => {
             class="auth-wrapper__input-field p2"
           />
           <button type="submit" class="auth-wrapper__login-button p2">Log på</button>
-          <p class="auth-wrapper__forgot-password p1" @click="goToRegister">Opret bruger</p>
+          <p class="auth-wrapper__forgot-password p1" @click="goToSignup">Opret bruger</p>
         </form>
       </div>
     </div>

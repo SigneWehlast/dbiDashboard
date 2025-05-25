@@ -14,7 +14,7 @@ const companyName = ref('');
 const router = useRouter();
 
 //hvis begge password ikke stemmer overens
-const handleRegister = async () => {
+const handleSignup = async () => {
   if (password.value !== confirmPassword.value) {
     alert('Passwords are not the same');
     return;
@@ -56,7 +56,7 @@ const goToLogin = () => {
   <div class="auth">
     <div class="auth-container">
       <h2>Opret bruger</h2>
-      <form @submit.prevent="handleRegister">
+      <form @submit.prevent="handleSignup">
         <div class="auth-container__input-group">
           <label for="firstName">Fornavn:</label>
           <input type="text" v-model="firstName" required />

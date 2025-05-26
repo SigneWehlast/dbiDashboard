@@ -42,7 +42,8 @@ const saveTemporary = async () => {
       status: 'Igangværende',
       systemComment: systemComment.value,
       systemStatus: systemStatus.value,
-      uid: uid
+      uid: uid,
+      object: selectedObject.value
     });
     window.alert('Data sent');
     router.push('/Schedule');

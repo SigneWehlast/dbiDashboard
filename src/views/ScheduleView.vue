@@ -88,7 +88,7 @@ const toggleDropdown = () => {
   padding: 1em 1.5em;
   position: absolute;
   right: 0;
-  width: 160px;
+  width: 170px;
 
   &__icon-container {
     align-items: center;
